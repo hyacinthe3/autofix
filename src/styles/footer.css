@@ -1,0 +1,31 @@
+.ftco-footer {
+    background: #222; /* Example */
+    color: white;
+    padding: 40px 0;
+  }
+  
+  .ftco-footer .ftco-heading-2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .ftco-footer a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .ftco-footer a:hover {
+    text-decoration: underline;
+  }
+  .line{
+    height: 30px;
+    width: 100%;
+    background: linear-gradient(to right, #222 30%, white 50%, #222 70%);
+}
+.line h3{
+    margin-top: 20px;
+}
+.tire{
+    margin-top: -10px;
+}
