@@ -1,0 +1,32 @@
+/* Navbar fixed at top */
+#ftco-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Add space for content below the fixed navbar */
+  body {
+    padding-top: 80px; /* Adjust this based on the height of your navbar */
+  }
+  
+  /* Transparent background and white text when at the top of the page */
+  .navbar.bg-transparent {
+    background-color: transparent !important;
+    color: white !important;
+  }
+  
+  /* White background and black text when scrolled */
+  .navbar.bg-white {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  /* Shadow when scrolled */
+  .navbar.bg-white.shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

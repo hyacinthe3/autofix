@@ -1,0 +1,72 @@
+/* Make sure the html and body fill the viewport */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero section with background image */
+.hero-wrap {
+  position: relative;
+  width: 98.5vw; /* Full viewport width */
+  height: 100vh; /* Full screen height */
+  background-size: cover;
+  background-position: center center;
+  margin: 0; /* Remove any margin */
+  padding: 0; /* Remove any padding */
+  /* margin-top: -48px;
+  margin-left: -10%;
+ */
+}
+
+/* Overlay to darken the background */
+.hero-wrap .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the parent */
+  height: 100%; /* Full height of the parent */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1;
+}
+
+/* Breadcrumbs and heading should appear above the overlay */
+.hero-wrap .breadcrumbs {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  margin-top: 0; /* Remove extra margin */
+}
+
+.hero-wrap h1 {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-size: 3rem;
+  margin-top: 0;
+}
+
+/* Ensure the container aligns well */
+.hero-wrap .container {
+  position: relative;
+  z-index: 2;
+  padding-top: 0; /* Remove extra padding */
+  margin: 0; /* Remove extra margin */
+}
+.bread{
+  margin-right: 70%;
+}
+  /* Custom orange button */
+.btn-orange {
+    background-color: orange !important;
+    border-color: orange !important;
+    color: white; /* Ensure the text is white */
+  }
+  
+  .btn-orange:hover {
+    background-color: darkorange !important; /* Darken the color on hover */
+    border-color: darkorange !important;
+  }
+  
+  

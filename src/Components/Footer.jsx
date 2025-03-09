@@ -87,11 +87,6 @@ export default function Footer() {
                   </li>
                   <li>
                     <a href="#" className="py-2 d-block">
-                      Best Price Guarantee
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="py-2 d-block">
                       Privacy & Cookies Policy
                     </a>
                   </li>

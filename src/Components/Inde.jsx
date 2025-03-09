@@ -31,24 +31,7 @@ const Inde = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-                <div className="container">
-                    <a className="navbar-brand" href="#">Auto<span>Fix</span></a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="oi oi-menu"></span> Menu
-                    </button>
-
-                    <div className="collapse navbar-collapse" id="ftco-nav">
-                        <ul className="navbar-nav mr-auto"> {/* Ensuring items are aligned left */}
-                            <li className="nav-item active"><a href="#" className="nav-link">Home</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link">About</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link">Request</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
+           
             <div
                 className="hero-wrap"
                 style={{
@@ -90,30 +73,7 @@ const Inde = () => {
                                 your repair needs
                             </div>
 
-                            {/* <form action="#" className="request-form ftco-animate">
-                                <h2>personal information</h2>
-                                <div className="form-group">
-                                    <label htmlFor="pickup-location" className="label">First Name</label>
-                                    <input type="text" className="form-control" placeholder="" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="dropoff-location" className="label">Last Name</label>
-                                    <input type="text" className="form-control" placeholder="" />
-                                </div>
-                                <div className="d-flex">
-                                    <div className="form-group mr-2">
-                                        <label htmlFor="pickup-date" className="label">Phone Number</label>
-                                        <input type="number" className="form-control" id="pickup-date" placeholder="" />
-                                    </div>
-                                    <div className="form-group ml-2">
-                                        <label htmlFor="dropoff-date" className="label">Email</label>
-                                        <input type="email" className="form-control" id="dropoff-date" placeholder="" />
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <input type="submit" value="Send Request" className="btn btn-primary py-3 px-4" />
-                                </div>
-                            </form> */}
+                           
                         </div>
                     </div>
                 </div>
@@ -130,113 +90,34 @@ const Inde = () => {
                                         <div className="col-lg align-items-end">
                                             <div className="form-group">
                                                 <label htmlFor="#">Car Model</label>
-                                                <div className="form-field">
-                                                    <div className="select-wrap">
-                                                        <div className="icon"><span className="ion-ios-arrow-down"></span></div>
-                                                        <select name="" id="" className="form-control">
-                                                            <option value="">Car Model</option>
-                                                            <option value="">Model 1</option>
-                                                            <option value="">Model 2</option>
-                                                            <option value="">Model 3</option>
-                                                            <option value="">Model 4</option>
-                                                            <option value="">Model 5</option>
-                                                            <option value="">Model 6</option>
-                                                            <option value="">Model 7</option>
-                                                            <option value="">Model 8</option>
-                                                            <option value="">Model 9</option>
-                                                            <option value="">Model 10</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
 
                                         <div className="col-lg align-items-end">
                                             <div className="form-group">
                                                 <label htmlFor="#">Plate number</label>
-                                                <div className="form-field">
-                                                    <div className="select-wrap">
-                                                        <div className="icon"><span className="ion-ios-arrow-down"></span></div>
-                                                        <input type="text" className='form-control' />
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
 
                                         <div className="col-lg align-items-end">
                                             <div className="form-group">
-                                                <label htmlFor="#">Category</label>
-                                                <div className="form-field">
-                                                    <div className="select-wrap">
-                                                        <div className="icon"><span className="ion-ios-arrow-down"></span></div>
-                                                        <select name="" id="" className="form-control">
-                                                            <option value="">Car color</option>
-                                                            <option value="">Brand 1</option>
-                                                            <option value="">Brand 2</option>
-                                                            <option value="">Brand 3</option>
-                                                            <option value="">Brand 4</option>
-                                                            <option value="">Brand 5</option>
-                                                            <option value="">Brand 6</option>
-                                                            <option value="">Brand 7</option>
-                                                            <option value="">Brand 8</option>
-                                                            <option value="">Brand 9</option>
-                                                            <option value="">Brand 10</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                <label htmlFor="#">Breakdown Category</label>
+                                               
                                             </div>
                                         </div>
                                         <div className="col-lg align-items-end">
                                             <div className="form-group">
                                                 <label htmlFor="#">Year Model</label>
-                                                <div className="form-field">
-                                                    <div className="select-wrap">
-                                                        <div className="icon"><span className="ion-ios-arrow-down"></span></div>
-                                                        <select name="" id="" className="form-control">
-                                                            <option value="">Year Model</option>
-                                                            <option value="">2019</option>
-                                                            <option value="">2018</option>
-                                                            <option value="">2017</option>
-                                                            <option value="">2016</option>
-                                                            <option value="">2015</option>
-                                                            <option value="">2014</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                               
                                             </div>
                                         </div>
 
-                                        {/* <div className="col-lg align-items-end">
-                    <div className="form-group">
-                      <label htmlFor="#">Price Limit</label>
-                      <div className="form-field">
-                        <div className="select-wrap">
-                          <div className="icon"><span className="ion-ios-arrow-down"></span></div>
-                          <select name="" id="" className="form-control">
-                            <option value="">$1</option>
-                            <option value="">$50</option>
-                            <option value="">$100</option>
-                            <option value="">$200</option>
-                            <option value="">$300</option>
-                            <option value="">$400</option>
-                            <option value="">$500</option>
-                            <option value="">$600</option>
-                            <option value="">$700</option>
-                            <option value="">$800</option>
-                            <option value="">$900</option>
-                            <option value="">$1000</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
+                                       
 
                                         <div className="col-lg align-self-end">
-                                            <div className="form-group"><br />
-                                                <div className="form-field">
-                                                    <input type="submit" value="Search" className="form-control btn btn-primary" />
-                                                </div>
-                                            </div>
+                                        Then   Submit your Request
                                         </div>
                                     </div>
                                 </form>

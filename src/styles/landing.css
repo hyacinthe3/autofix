@@ -1,0 +1,84 @@
+/* General Page Styling */
+.landing-container {
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+  }
+  
+ 
+  .hero-section {
+    background-image: url('/assets/bg_2.jpg'); /* Path to your image */
+    background-size: cover;
+    background-position: center;
+    min-height: 400px; /* Adjust height as needed */
+  }
+  
+  .hero-overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  }
+  
+  .hero-section .container {
+    position: relative; /* Ensure the content sits on top of the overlay */
+    z-index: 2;
+  }
+  
+  
+  /* Features Section */
+  .features-section {
+    padding: 60px 0;
+  }
+  
+  .feature-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+  }
+  
+  .feature-card i {
+    font-size: 2rem;
+    color: #ff6a00;
+  }
+  
+  .feature-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Testimonials Section */
+  .testimonials-section {
+    /* background: linear-gradient(135deg, #eb863e, #fabb5c); */
+    background-color: #4b4a4a;
+    padding: 50px 0;
+    color: white;
+    text-align: center;
+  }
+  
+  .testimonial-text {
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+  
+  /* Call-to-Action Section */
+  .cta-section {
+    padding: 50px 0;
+    background: white;
+    text-align: center;
+  }
+  
+  .btn i {
+    margin-right: 8px;
+  }
+
+  .btn-warning {
+    background-color:  #faa236; /* Dark orange */
+    border-radius: 3px;
+  }
+  
+  .btn-warning:hover {
+    background-color: #faa236; /* Even darker orange on hover */
+    border-color: #faa236;
+  }
+  
+  

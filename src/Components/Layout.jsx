@@ -1,15 +1,16 @@
-import {Outlet} from 'react-router-dom'
-import React from 'react'
-import Inde from './inde'
-import Footer from './Footer'
+import { Outlet } from 'react-router-dom';
+import React from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
+
 const Layout = () => {
   return (
     <div>
-        <Inde/>
-        <Outlet/>
-        <Footer/>
+      <Navbar />
+      <Outlet /> 
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
