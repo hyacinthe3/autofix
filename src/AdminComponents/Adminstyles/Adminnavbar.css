@@ -1,0 +1,98 @@
+/* Navbar Styles */
+.navbar {
+  width: 69rem; /* Default width when sidebar is expanded */
+  transition: width 0.3s ease;
+  background-color: white;
+}
+
+.navbar.collapsed {
+  width: 79.5rem; /* Expanded width when sidebar is collapsed */
+}
+
+.navbar .navbar-nav {
+  padding-left: 0;
+  margin-left: auto;
+}
+
+/* Make the input always visible and not disappear */
+.form-control {
+  transition: width 0.3s ease, visibility 0.3s ease;
+  width: 100%; /* Ensure the search input takes full width */
+  visibility: visible; /* Keep it visible at all times */
+}
+
+/* Search icon visibility remains intact */
+.collapsed-search .input-group-text {
+  visibility: visible; /* Keep the search icon visible when collapsed */
+}
+
+/* Container for the search input */
+.navbar .input-group {
+  max-width: 400px; /* Optional: Limit the max width of the search input */
+  width: 100%; /* Allow input to take up full width in its container */
+}
+
+/* Ensure the placeholder is visible */
+.collapsed-search .form-control::placeholder {
+  visibility: visible; /* Keep the placeholder text visible */
+}
+
+/* Navbar items */
+.navbar-nav .nav-link {
+  display: flex;
+  align-items: center;
+}
+
+/* Profile and navbar items adjustments */
+.navbar-nav .nav-link span {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.navbar-nav .nav-link img {
+  max-width: 30px;
+  max-height: 30px;
+}
+
+/* Badge for notifications */
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+/* Optional: Adjust margins or padding if needed */
+.navbar .navbar-nav .nav-link {
+  padding-right: 20px;
+}
+
+.navbar .navbar-nav .nav-link .me-2 {
+  margin-right: 10px;
+}
+/* styles/navbar.css */
+
+/* Custom styling for notifications and messages popover */
+.notification-popover {
+  margin-top: 20px;
+  max-width: 300px;
+  min-width: 250px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.message-popover {
+  margin-top: 20px;
+  max-width: 300px;
+  min-width: 250px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notification-item, .message-item {
+  padding: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.notification-item:last-child, .message-item:last-child {
+  border-bottom: none;
+}

@@ -56,3 +56,14 @@ html, body {
   .bread2{
     margin-right: 70%;
   }
+
+  /* Remove blue border on focus */
+input:focus, button:focus, textarea:focus, select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+.form-control:focus {
+  border-color: #ccc !important; /* Change this to your desired border color */
+  box-shadow: none !important;
+}

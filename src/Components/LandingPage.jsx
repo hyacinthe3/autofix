@@ -15,9 +15,14 @@ const LandingPage = () => {
           Stranded due to a car breakdown? Our platform connects you with professional mechanics nearby <br />
           Get immediate car repair assistance anywhere, anytime! Quick, reliable, and hassle-free.
         </p>
-        <Link to="/register">
-          <button className="btn btn-warning btn-lg"><i className="fas fa-user-plus"></i> Get Started Now</button>
-        </Link>
+        <div className="d-flex justify-content-center mt-4">
+            <Link to="/register" className="btn btn-warning me-3">
+              <i className="fas fa-car"></i> Register as Driver
+            </Link>
+            <Link to="/MechanicRegistrationForm" className="btn btn-outline-light">
+              <i className="fas fa-tools"></i> Register as Mechanic
+            </Link>
+          </div>
       </div>
     </div>
       {/* Features Section */}
@@ -64,12 +69,25 @@ const LandingPage = () => {
       <div className="cta-section text-center">
         <h2 className="fw-bold"><i className="fas fa-road"></i> Join Thousands of Happy Drivers</h2>
         <p className="lead">Sign up now and never worry about breakdowns again!</p>
-        <Link to="/register">
-        <button className="btn btn-warning btn-lg"><i className="fas fa-user-plus"></i> Register Now</button>
-        </Link>
+        <div className="d-flex justify-content-center mt-4">
+            <Link to="/register" className="btn btn-warning me-3">
+              <i className="fas fa-car"></i> Register as Driver
+            </Link>
+            <Link to="/MechanicRegistrationForm" className="btn btn-warning me-3">
+              <i className="fas fa-car"></i> Register as Mechanic
+            </Link>
+            
+          </div>
       </div>
     </div>
   );
 };
 
 export default LandingPage;
+
+
+
+
+
+
+

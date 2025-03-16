@@ -1,0 +1,64 @@
+.dash{
+  background-color: rgb(248, 248, 248);
+  width: 69rem;
+  margin-left: auto;
+  height: auto;
+  align-items: center;
+
+}
+/* Dashboard Styles */
+.dash {
+  transition: margin-left 0.3s ease;
+  margin-left: 250px; /* Default width with sidebar expanded */
+}
+
+.dash.expanded {
+  margin-left: 80px; /* When sidebar is collapsed */
+}
+
+.board-container {
+  width: 95%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  gap: 20px;
+
+}
+
+.board-item {
+  /* background: #b8bec4; */
+  border: 1px solid rgb(56, 42, 163);
+  color:#343a40;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 2px 2px 2px rgb(157, 150, 213);
+}
+/* Default Light Mode Styles */
+.light-mode {
+  background-color: white;
+  color: black;
+}
+
+.light-mode .board-item {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode .board-item {
+  background-color: #333;
+  border: 1px solid #444;
+}
+
+.dark-mode .mode-btn {
+  background-color: #444;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}

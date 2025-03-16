@@ -1,32 +1,44 @@
-/* Navbar fixed at top */
-#ftco-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  /* Add space for content below the fixed navbar */
-  body {
-    padding-top: 80px; /* Adjust this based on the height of your navbar */
-  }
-  
-  /* Transparent background and white text when at the top of the page */
-  .navbar.bg-transparent {
-    background-color: transparent !important;
-    color: white !important;
-  }
-  
-  /* White background and black text when scrolled */
-  .navbar.bg-white {
-    background-color: white !important;
-    color: black !important;
-  }
-  
-  /* Shadow when scrolled */
-  .navbar.bg-white.shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
+/* Ensure the navbar items are spaced properly */
+.custom-nav-list {
+  display: flex;
+  gap: 20px; /* Adjust the gap between items */
+}
+
+/* Optionally, you can also add margin to the nav items */
+.custom-nav-item {
+  margin-right: 20px; /* Optional: You can adjust this value */
+}
+
+/* Remove margin-right from the last item */
+.custom-nav-item:last-child {
+  margin-right: 0;
+}
+/* Style for active navbar link */
+.navbar-nav .nav-item .nav-link.active {
+  background-color:none; /* Blue background */
+  color: white; /* White text color */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Add some padding for better visuals */
+}
+
+/* Optional: Add hover effect for active link */
+.navbar-nav .nav-item .nav-link.active:hover {
+  background-color:none; /* Darker blue for hover effect */
+  border: none;
+  border-bottom:solid  #e46a07 2px;
+}
+/* Style for active navbar link */
+.navbar-nav .nav-item .nav-link.active {
+  background-color:none; /* Darker blue for hover effect */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Add some padding for better visuals */
+  border: none;
+  border-bottom:solid  #e46a07 2px;
+}
+
+/* Optional: Add hover effect for active link */
+.navbar-nav .nav-item .nav-link.active:hover {
+  background-color: none; /* Darker blue for hover effect */
+  border: none;
+  border-bottom:solid  #e46a07 2px;
+}

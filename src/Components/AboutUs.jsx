@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/AboutUs.css"; // Ensure you have a CSS file for styling
 import bg_2 from "../assets/bg_2.jpg"
+import aboutfix from "../assets/aboutfix.png"
 const AboutUs = () => {
   return (
     <div>
@@ -11,7 +12,7 @@ const AboutUs = () => {
         style={{ backgroundImage: `url(${bg_2})` }}
         data-stellar-background-ratio="0.5"
       >
-        <div className="overlay d-flex align-items-center justify-content-center">
+        <div className="overlayindex d-flex align-items-center justify-content-center">
           <div className="container text-center text-white">
             <h1 className="display-4">About Us</h1>
             <p className="lead">Connecting Drivers with Mechanics for Emergency Repairs</p>
@@ -23,7 +24,7 @@ const AboutUs = () => {
       <section className="container my-5">
         <div className="row align-items-center">
           <div className="col-md-6">
-            <img src="images/about-image.jpg" alt="About Us" className="img-fluid rounded shadow" />
+            <img src={aboutfix} alt="About Us" className="img-fluid rounded shadow" width={400} height={400}/>
           </div>
           <div className="col-md-6">
             <h2 className="mb-4">Who We Are</h2>

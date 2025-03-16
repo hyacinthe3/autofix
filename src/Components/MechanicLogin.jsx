@@ -6,16 +6,16 @@ import { useForm } from 'react-hook-form';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { FaCar } from 'react-icons/fa'; // Car icon
 import { Link } from 'react-router-dom'; // Import Link here
-const LoginForm = () => {
+const MechanicLoginForm = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
         try {
-            const { userEmail, userPassword } = data;
+            const { MechanicEmail, MechanicPassword } = data;
             const response = await axios.post(
-                'http://localhost:5000/login',
-                { userEmail, userPassword },
+                'http://localhost:5000/mechanic/MechanicLogin',
+                { MechanicEmail, MechanicPassword },
                 { headers: { "Content-Type": "application/json" } }
             );
     
@@ -36,7 +36,7 @@ const LoginForm = () => {
             if (userRole === "admin") {
                 navigate("/Dashboard");
             } else {
-                navigate("/home");
+                navigate("/dashboard");
             }
         } catch (error) {
             console.log("Login error:", error.response ? error.response.data : error.message);
@@ -53,7 +53,7 @@ const LoginForm = () => {
                         <Card className="shadow-lg p-4 rounded-4 car-theme-card">
                             <Card.Body>
                                 <h3 className="text-center car-theme-title">
-                                    <FaCar className="me-2" /> Driver Login
+                                    <FaCar className="me-2" /> Mechanic Login
                                 </h3>
                                 <p className="text-center car-theme-subtitle">
                                     Welcome back! Please log in to continue.
@@ -65,7 +65,7 @@ const LoginForm = () => {
                                         <Form.Control
                                             type="email"
                                             placeholder="Enter your email"
-                                            {...register('userEmail')}
+                                            {...register('MechanicEmail')}
                                             autoComplete="off"
                                         />
                                     </Form.Group>
@@ -75,7 +75,7 @@ const LoginForm = () => {
                                         <Form.Control
                                             type="password"
                                             placeholder="Enter your password"
-                                            {...register('userPassword')}
+                                            {...register('MechanicPassword')}
                                             autoComplete="new-password"
                                         />
                                     </Form.Group>
@@ -92,7 +92,7 @@ const LoginForm = () => {
                                 <div className="text-center mt-3">
                                     <p>
                                         Don't have an account?{' '}
-                                        <Link to="/DriverRegistrationForm" className="text-danger text-decoration-none">
+                                        <Link to="/MechanicRegistrationForm" className="text-danger text-decoration-none">
                                             Register here
                                         </Link>
                                     </p>
@@ -106,4 +106,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default MechanicLoginForm;

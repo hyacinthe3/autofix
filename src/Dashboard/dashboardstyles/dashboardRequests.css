@@ -1,0 +1,21 @@
+.table-container {
+    width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+  }
+  
+  .table th {
+    background-color: #6f42c1;
+    color: white;
+  }
+  
+  .table td {
+    text-align: center;
+  }
+  
+  .modal-footer button {
+    width: 100px;
+  }
+  

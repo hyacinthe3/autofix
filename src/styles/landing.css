@@ -89,5 +89,57 @@
     background-color: #faa236; /* Even darker orange on hover */
     border-color: #faa236;
   }
+  .overlay {
+    background: rgba(0, 0, 0, 0.5); /* Transparent black overlay */
+    position: absolute;
+  }
+  
+  .features-section {
+    padding: 60px 0;
+  }
+  
+  .feature-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .features-section h2 {
+    color: #d9534f;
+  }
+  
+  .features-section .feature-card h3 {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .testimonials {
+    background: #333;
+    color: white;
+    padding: 40px;
+  }
+  
+  .testimonial-text {
+    font-style: italic;
+  }
+  
+  .btn-warning {
+    background-color: #ff9800;
+    border: none;
+  }
+  
+  .btn-warning:hover {
+    background-color: #e68a00;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
   
   

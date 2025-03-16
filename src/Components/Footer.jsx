@@ -34,30 +34,30 @@ export default function Footer() {
               <div className="ftco-footer-widget mb-4">
                 <h2 className="ftco-heading-2">About Autoroad</h2>
                 <p>
-                  Far far away, behind the word mountains, far  where your car 
+                  Far far away, behind the word mountains, far  where your car
                   break down, there live the expert team.
                 </p>
-<ul
-  className="ftco-footer-social list-unstyled float-md-left float-lft mt-5"
-  style={{ display: 'flex', gap: '20px', justifyContent: 'flex-start', alignItems: 'center' }}
->                  <li className="ftco-animate">
+                <ul
+                  className="ftco-footer-social list-unstyled float-md-left float-lft mt-5"
+                  style={{ display: 'flex', gap: '20px', justifyContent: 'flex-start', alignItems: 'center' }}
+                >                  <li className="ftco-animate">
                     <a href="#">
                       <span className="icon-twitter">
-                        <FaTwitter style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }}/>
+                        <FaTwitter style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }} />
                       </span>
                     </a>
                   </li>
                   <li className="ftco-animate">
                     <a href="#">
                       <span className="icon-facebook">
-                        <TiSocialFacebook style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }}/>
+                        <TiSocialFacebook style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }} />
                       </span>
                     </a>
                   </li>
                   <li className="ftco-animate">
                     <a href="#">
                       <span className="icon-instagram">
-                        <FaInstagramSquare style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }}/>
+                        <FaInstagramSquare style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }} />
                       </span>
                     </a>
                   </li>
@@ -134,22 +134,22 @@ export default function Footer() {
                 <div className="block-23 mb-3">
                   {/* <ul>
                     <li> */}
-                      <a href="#">
-                        <span className="icon icon-phone">
-                          <IoCall />
-                        </span>
-                        <span className="text">+250 785 394 831</span>
-                      </a><br />
-                    {/* </li>
+                  <a href="#">
+                    <span className="icon icon-phone">
+                      <IoCall />
+                    </span>
+                    <span className="text">+250 785 394 831</span>
+                  </a><br />
+                  {/* </li>
 
                     <li> */}
-                      <a href="#">
-                        <span className="icon icon-envelope">
-                          <MdEmail />
-                        </span>
-                        <span className="text">hyacintheihimbazwe@gmail.com</span>
-                      </a>
-                    {/* </li>
+                  <a href="#">
+                    <span className="icon icon-envelope">
+                      <MdEmail />
+                    </span>
+                    <span className="text">hyacintheihimbazwe@gmail.com</span>
+                  </a>
+                  {/* </li>
                   </ul> */}
                 </div>
               </div>

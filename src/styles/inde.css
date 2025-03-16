@@ -23,7 +23,7 @@
     height: 100vh; /* Full viewport height */
   }
   
-  .hero-wrap .overlay {
+  .hero-wrap .overlayindex {
     position: absolute;
     top: 0;
     left: 0;
@@ -78,7 +78,7 @@
   }
   
   /* Overlay for background image transparency */
-  .services-section .overlay {
+  .services-section .overlayindex2 {
     position: absolute;
     top: 0;
     left: 0;

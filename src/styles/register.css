@@ -1,0 +1,124 @@
+/* Custom style for inputs with only bottom border */
+.input-field {
+  
+  border: 1px solid rgb(235, 144, 26); /* Add a bottom border */
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 0;
+}
+
+.input-field:focus {
+  border-color: rgb(235, 144, 26); /* Change bottom border color on focus */
+  box-shadow: none; /* Remove box-shadow */
+}
+/* Full-page background with car-themed design */
+
+/* Styling the card */
+
+/* Title with car theme */
+.car-theme-title {
+  font-weight: bold;
+  color: rgb(235, 144, 26);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Subtitle with modern automotive feel */
+.car-theme-subtitle {
+  font-size: 14px;
+  color: gray;
+}
+
+/* Form fields */
+.form-control {
+  background: none;
+  color: white;
+  border: 1px solid rgb(235, 144, 26);
+}
+
+.form-control::placeholder {
+  color: gray;
+}
+
+/* Submit button */
+.btn-danger {
+  background: rgb(235, 144, 26);
+}
+
+.btn-danger:hover {
+  background: rgb(235, 144, 26);
+}
+
+
+/* Full-page background with car image */
+.register-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url('../assets/car8.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+/* Dark overlay specifically over the background image */
+.register-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);  /* Dark overlay effect */
+}
+
+/* Ensuring form container is above the overlay */
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Car-themed card with semi-transparent look */
+.car-theme-card {
+  background: white;
+  /* background: rgba(0, 0, 0, 0.85); */
+  color: black;
+  border: 1px solid rgb(235, 144, 26);
+  box-shadow: 0px 8px 16px rgb(235, 144, 26);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+}
+
+/* Custom style for inputs with no border-radius */
+.input-field {
+  border-radius: 0px; /* Remove any border-radius */
+  border: 1px solid #ced4da;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+}
+
+.form-control {
+  border-radius: 0px; /* Remove border-radius from form-control */
+  background: none;
+  color: black;
+  border: 1px solid rgb(235, 144, 26);
+  border-radius: 5px;
+}
+
+/* Remove blue border on focus */
+input:focus, button:focus, textarea:focus, select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+.form-control:focus {
+  border-color: #ccc !important; /* Change this to your desired border color */
+  box-shadow: none !important;
+}
+
