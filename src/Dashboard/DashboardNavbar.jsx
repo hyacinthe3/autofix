@@ -1,148 +1,102 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./dashboardstyles/sidebar.css";
-import "./dashboardstyles/dashboardnavbar.css";
-import Settings from "./Settings";
-import { Navbar, Form, FormControl, Nav, Badge, Image, Popover, OverlayTrigger, Modal, Button } from "react-bootstrap";
-import { FaSearch, FaEnvelope, FaBell } from "react-icons/fa";
+import { Navbar, Form, FormControl, Nav, Badge, OverlayTrigger, Popover } from "react-bootstrap";
+import { FaSearch, FaEnvelope, FaBell, FaLayerGroup } from "react-icons/fa";
+import axios from "axios";
 
-const MechanicNavbar = ({ isCollapsed }) => {
-  const [showNotifications, setShowNotifications] = useState(false);
+const AdminNavbar = ({ isCollapsed }) => {
   const [showMessages, setShowMessages] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [messages, setMessages] = useState([]); // Ensure it's initialized as an array
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // Handle API errors
 
-  // Mock data for notifications and messages
-  const notifications = [
-    "Your car repair request has been accepted.",
-    "New mechanic available near you.",
-    "Your service is completed. Ready for pickup.",
-  ];
+  useEffect(() => {
+    fetchRecentMessages();
+  }, []);
 
-  const messages = [
-    { from: "John Doe", message: "Your car service is scheduled for tomorrow." },
-    { from: "Jane Smith", message: "Please confirm your vehicle model." },
-    { from: "Admin", message: "Your mechanic account is verified." },
-  ];
+  const fetchRecentMessages = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/contact/contacts");
 
-  const handleNotificationToggle = () => {
-    setShowNotifications(!showNotifications);
+      // Ensure the response data is an array before setting state
+      if (Array.isArray(response.data)) {
+        setMessages(response.data);
+      } else {
+        setMessages([]); // Fallback to an empty array
+      }
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+      setError("Failed to load messages");
+      setMessages([]); // Ensure it's an empty array in case of error
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleMessageToggle = () => {
     setShowMessages(!showMessages);
   };
 
-  const handleProfileClick = () => {
-    setShowProfileModal(true);
-  };
-
-  const handleCloseProfileModal = () => {
-    setShowProfileModal(false);
-  };
+  // Popover for Messages (Shows name & subject)
+  const messagePopover = (
+    <Popover id="message-popover" className="message-popover">
+      <Popover.Body>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
+        ) : messages.length === 0 ? (
+          <p>No new messages</p>
+        ) : (
+          messages.map((msg, index) => (
+            <div key={index} className="message-item">
+              <strong>{msg.name}</strong>: <p>{msg.subject}</p>
+            </div>
+          ))
+        )}
+      </Popover.Body>
+    </Popover>
+  );
 
   return (
-    <>
-      <Navbar bg="white" expand="lg" className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`}>
-        {/* Search Input */}
-        <Form className={`d-flex me-auto ${isCollapsed ? "collapsed-search" : ""}`}>
-          <div className="input-group">
-            <span className="input-group-text bg-light">
-              <FaSearch />
-            </span>
-            <FormControl type="search" placeholder="Search ..." className="border-0 bg-light" />
-          </div>
-        </Form>
+    <Navbar bg="white" expand="lg" className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`} style={{ width: "100%" }}>
+      {/* Search Input */}
+      <Form className={`d-flex me-auto ${isCollapsed ? "collapsed-search" : ""}`}>
+        <div className="input-group">
+          <span className="input-group-text bg-light">
+            <FaSearch />
+          </span>
+          <FormControl type="search" placeholder="Search ..." className="border-0 bg-light" />
+        </div>
+      </Form>
 
-        {/* Icons & Profile */}
-        <Nav className="ms-auto align-items-center">
-          {/* Envelope Icon with Message Popover */}
-          <Nav.Link href="#" onClick={handleMessageToggle} className="position-relative">
-            <FaEnvelope size={18} />
-            <OverlayTrigger trigger="click" placement="bottom" overlay={
-              <Popover id="message-popover" className="message-popover">
-                <Popover.Body>
-                  {messages.length === 0 ? (
-                    <p>No new messages</p>
-                  ) : (
-                    messages.map((msg, index) => (
-                      <div key={index} className="message-item">
-                        <strong>{msg.from}:</strong> <p>{msg.message}</p>
-                      </div>
-                    ))
-                  )}
-                </Popover.Body>
-              </Popover>
-            } show={showMessages}>
-              <Badge bg="primary" pill className="position-absolute top-0 start-100 translate-middle">3</Badge>
-            </OverlayTrigger>
-          </Nav.Link>
-
-          {/* Bell Icon with Notification Popover */}
-          <Nav.Link href="#" onClick={handleNotificationToggle} className="position-relative">
-            <FaBell size={18} />
-            <OverlayTrigger trigger="click" placement="bottom" overlay={
-              <Popover id="notification-popover" className="notification-popover">
-                <Popover.Body>
-                  {notifications.length === 0 ? (
-                    <p>No new notifications</p>
-                  ) : (
-                    notifications.map((notification, index) => (
-                      <div key={index} className="notification-item">
-                        <p>{notification}</p>
-                      </div>
-                    ))
-                  )}
-                </Popover.Body>
-              </Popover>
-            } show={showNotifications}>
-              <Badge bg="primary" pill className="position-absolute top-0 start-100 translate-middle">4</Badge>
-            </OverlayTrigger>
-          </Nav.Link>
-
-          {/* Profile Icon */}
-          <OverlayTrigger
-            trigger="hover"
-            placement="bottom"
-            overlay={<Popover><Popover.Body>Click to edit profile</Popover.Body></Popover>}
-          >
-            <Nav.Link href="#" className="d-flex align-items-center" onClick={handleProfileClick}>
-              <Image src="https://via.placeholder.com/30" roundedCircle className="me-2" alt="Profile" />
-              {!isCollapsed && <span className="fw-bold">Hizrian</span>}
-            </Nav.Link>
+      {/* Icons & Profile */}
+      <Nav className="ms-auto align-items-center">
+        {/* Envelope Icon with Message Popover */}
+        <Nav.Link href="#" onClick={handleMessageToggle} className="position-relative">
+          <FaEnvelope size={18} />
+          <OverlayTrigger trigger="click" placement="bottom" overlay={messagePopover} show={showMessages}>
+            <Badge bg="success" pill className="position-absolute top-0 start-100 translate-middle">
+              {messages.length}
+            </Badge>
           </OverlayTrigger>
-        </Nav>
-      </Navbar> 
+        </Nav.Link>
 
-      {/* Profile Edit Modal */}
-      <Modal show={showProfileModal} onHide={handleCloseProfileModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Profile</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
+        {/* Bell Icon */}
+        <Nav.Link href="#" className="position-relative">
+          <FaBell size={18} />
+          <Badge bg="success" pill className="position-absolute top-0 start-100 translate-middle">
+            4
+          </Badge>
+        </Nav.Link>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Add Certificates</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Profile Picture</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleCloseProfileModal} style={{ backgroundColor: "blue", borderColor: "blue" }}>Close</Button>
-          <Button variant="primary" style={{ backgroundColor: "blue", borderColor: "blue" }}>Save Changes</Button>
-        </Modal.Footer>
-      </Modal>
-      <Settings/>
-    </>
+        {/* Other Icons */}
+        <Nav.Link href="#">
+          <FaLayerGroup size={18} />
+        </Nav.Link>
+      </Nav>
+    </Navbar>
   );
 };
 
-export default MechanicNavbar;
+export default AdminNavbar;

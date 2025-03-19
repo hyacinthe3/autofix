@@ -15,7 +15,7 @@ html, body {
     margin: 0; /* Remove any margin */
     padding: 0; /* Remove any padding */
     margin-top: -48px;
-    margin-left: -10%;
+    margin-left: -8%;
   }
   
   /* Overlay to darken the background */
@@ -24,7 +24,7 @@ html, body {
     top: 0;
     left: 0;
     width: 100%; /* Full width of the parent */
-    height: 90%; /* Full height of the parent */
+    height: 100%; /* Full height of the parent */
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
     z-index: 1;
   }

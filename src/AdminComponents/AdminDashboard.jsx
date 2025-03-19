@@ -1,19 +1,36 @@
-import React, { useState } from 'react';
-import "./Adminstyles/Admindashboard.css"; // Ensure you have the necessary styles for the dashboard
-// import AdminCharts from "./AdminCharts.js";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import "./Adminstyles/Admindashboard.css"; // Ensure you have the necessary styles
+import "./AdminCharts"
 
-const AdminDashboard = ({ isDarkMode }) => {
+const AdminDashboard = ({ isCollapsed }) => {
+  const [totalGarages, setTotalGarages] = useState(0);
+  const [approvedGarages, setApprovedGarages] = useState(0);
+  const [pendingGarages, setPendingGarages] = useState(0);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/garage/garages")
+      .then(response => {
+        const garages = response.data;
+        setTotalGarages(garages.length);
+        setApprovedGarages(garages.filter(garage => garage.approvalStatus === "approved").length);
+        setPendingGarages(garages.filter(garage => garage.approvalStatus === "pending").length);
+      })
+      .catch(error => console.error("Error fetching garages:", error));
+  }, []);
+
   const dashboardItems = [
-    { id: 1, title: "Clients", value: "2,500" },
-    { id: 2, title: "Earnings", value: "1,200" },
-    { id: 3, title: "Requests", value: "$75K" },
+    { id: 1, title: "Total Garages", value: totalGarages },
+    { id: 2, title: "Approved Garages", value: approvedGarages },
+    { id: 3, title: "Pending Garages", value: pendingGarages },
   ];
 
   return (
-    <div className={`dash ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
-      <br /><center>
-        <h2 style={{ color: isDarkMode ? 'white' : 'lightviolet' }}>Dashboard Overview</h2>
-        <p style={{ color: isDarkMode ? 'lightgray' : 'black' }}>View job statistics, earnings, and updates</p>
+    <div className={`dash ${isCollapsed ? 'collapsed' : ''}`} style={{width:'83.2%'}}>
+      <br />
+      <center>
+       <p> <h2 style={{ color: isCollapsed ? 'lightgray' : 'lightviolet' ,marginLeft:'1%'}}>Dashboard Overview</h2>
+        <p style={{ color: isCollapsed ? 'lightgray' : 'black' }}>View job statistics, earnings, and updates</p></p>
 
         <div className="board-container">
           {dashboardItems.map((item) => (
@@ -24,7 +41,7 @@ const AdminDashboard = ({ isDarkMode }) => {
           ))}
         </div>
       </center>
-      {/* <AdminCharts /> */}
+      {/* <AdminCharts/> */}
     </div>
   );
 };

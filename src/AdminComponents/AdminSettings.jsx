@@ -96,10 +96,6 @@ const AdminSettings = ({ toggleDarkMode, isDarkMode }) => {
             <div className="color-option" onClick={() => changeNavbarColor('#ffc107')} style={{ backgroundColor: '#ffc107' }}></div>
             <div className="color-option" onClick={() => changeNavbarColor('#ffffff')} style={{ backgroundColor: '#ffffff' }}></div> {/* White color option */}
           </div>
-
-          <div className="profile">
-            Change profile <br /><HiUserCircle style={{fontSize:'2.55rem'}}/>
-          </div>
           
         </div>
       )}

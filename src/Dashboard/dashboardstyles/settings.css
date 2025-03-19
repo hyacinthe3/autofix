@@ -68,7 +68,7 @@
     transition: transform 0.3s;
   }
   
-  .color-option:hover {
+  .color-option: {
     transform: scale(1.2);
   }
   .profile{

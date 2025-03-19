@@ -2,6 +2,7 @@
     --sidebar-bg-color: #343a40;
     --navbar-bg-color: #ffffff;
     --sidebar-font-color: white;
+    --sidebar-font-color: rgb(10, 10, 10);
     --sidebar-hover-color: #ddd;
     --navbar-font-color: rgb(70, 67, 67);
     --navbar-hover-color: #161616;
@@ -17,7 +18,7 @@
 }
 
 .sidebar .nav-link:hover {
-    color: var(--sidebar-hover-color);
+    color: var(--sidebar--color);
 }
 
 /* Navbar Styles */

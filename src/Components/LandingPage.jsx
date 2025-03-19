@@ -19,7 +19,7 @@ const LandingPage = () => {
             <Link to="/register" className="btn btn-warning me-3">
               <i className="fas fa-car"></i> Register as Driver
             </Link>
-            <Link to="/MechanicRegistrationForm" className="btn btn-outline-light">
+            <Link to="/GarageRegistrationForm" className="btn btn-outline-light">
               <i className="fas fa-tools"></i> Register as Mechanic
             </Link>
           </div>
@@ -70,10 +70,10 @@ const LandingPage = () => {
         <h2 className="fw-bold"><i className="fas fa-road"></i> Join Thousands of Happy Drivers</h2>
         <p className="lead">Sign up now and never worry about breakdowns again!</p>
         <div className="d-flex justify-content-center mt-4">
-            <Link to="/register" className="btn btn-warning me-3">
+            <Link to="/GarageRegistrationForm" className="btn btn-warning me-3">
               <i className="fas fa-car"></i> Register as Driver
             </Link>
-            <Link to="/MechanicRegistrationForm" className="btn btn-warning me-3">
+            <Link to="/GarageRegister" className="btn btn-warning me-3">
               <i className="fas fa-car"></i> Register as Mechanic
             </Link>
             

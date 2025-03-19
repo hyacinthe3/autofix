@@ -1,6 +1,6 @@
 /* Navbar Styles */
 .navbar {
-  width: 69rem; /* Default width when sidebar is expanded */
+  width: 80rem; /* Default width when sidebar is expanded */
   transition: width 0.3s ease;
   background-color: white;
 }
@@ -95,4 +95,13 @@
 
 .notification-item:last-child, .message-item:last-child {
   border-bottom: none;
+}
+.navbar {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 20px;
+}
+
+.navbar.collapsed {
+  width: calc(100% - 80px); /* Adjust based on sidebar width */
 }

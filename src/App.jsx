@@ -7,8 +7,8 @@ import AboutUs from './Components/AboutUs';
 import LandingPage from './Components/LandingPage';
 import DriverRegistrationForm from './Components/Register';
 import LoginForm from './Components/LoginForm';
-import MechanicRegistrationForm from './Components/MechanicRegister';
-import MechanicLoginForm from './Components/MechanicLogin';
+import GarageLogin from './Components/GarageLogin';
+import GarageRegistrationForm from './Components/GarageRegister';
 
 
 import DashboardLayout from './Dashboard/DashboardLayout'; // Layout will wrap other pages
@@ -19,6 +19,11 @@ import Earnings from './Dashboard/Earnings';
 import Communication from './Dashboard/Communication';
 import FeedBack from './Dashboard/FeedBack';
 import Support from './Dashboard/Support';
+import MechanicRegister from './Dashboard/MechanicRegister';
+import MechanicList from './Dashboard/MechanicList';
+import MechanicUpdate from './Dashboard/MechanicUpdates';
+import GarageList from './AdminComponents/ViewGarages';
+
 
 
 
@@ -32,6 +37,8 @@ import AdminFeedBack from './AdminComponents/AdminFeedBack';
 import AdminSupport from './AdminComponents/AdminSupport';
 import Users from './AdminComponents/Users';
 import Viewdrivers from './AdminComponents/Viewdrivers';
+import ApprovedGarages from './AdminComponents/ApprovedGarages';
+import Messages from './AdminComponents/Messages';
 function App() {
   return (
     <BrowserRouter>
@@ -48,8 +55,8 @@ function App() {
         <Route path="LandingPage" element={<LandingPage />} />
         <Route path="register" element={<DriverRegistrationForm/>}/>
         <Route path="LoginForm" element={<LoginForm/>}/>
-        <Route path='MechanicRegistrationForm'  element={<MechanicRegistrationForm/>}/>
-        <Route path='MechanicLoginForm' element={<MechanicLoginForm/>}/>
+        <Route path='GarageRegistrationForm'  element={<GarageRegistrationForm/>}/>
+        <Route path='GarageLogin' element={<GarageLogin/>}/>
 
 
 
@@ -64,6 +71,9 @@ function App() {
           <Route path='FeedBack' element={<FeedBack/>}/>
           <Route path='support' element={<Support/>}/>
           <Route path='Viewdrivers' element={<Viewdrivers/>}/>
+          <Route path='MechanicRegister' element={<MechanicRegister/>}/>
+          <Route path='MechanicList' element={<MechanicList/>}/>
+          <Route path="/edit-mechanic/:id" element={<MechanicUpdate />} /> 
         </Route>
 
 
@@ -79,6 +89,9 @@ function App() {
           <Route path='AdminFeedBack' element={<AdminFeedBack/>}/>
           <Route path='Adminsupport' element={<AdminSupport/>}/>
           <Route path='users' element={<Users/>}/>
+          <Route path='GarageList' element={<GarageList/>}/>
+          <Route path='ApprovedGarages' element={<ApprovedGarages/>}/>
+          <Route path='Messages' element={<Messages/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

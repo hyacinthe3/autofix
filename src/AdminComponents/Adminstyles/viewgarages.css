@@ -1,0 +1,16 @@
+/* styles.css or your custom CSS file */
+.table-button {
+    width: 80px;
+    color: #fff;
+    border: none; /* Remove default border */
+  }
+  
+  .table-button.edit {
+    background-color: #007bff; /* Primary color */
+    border-color: #007bff; /* Ensure border matches */
+  }
+  
+  .table-button.delete {
+    background-color: #dc3545; /* Danger color */
+    border-color: #dc3545; /* Ensure border matches */
+  }

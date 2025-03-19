@@ -10,7 +10,7 @@ const Dashboard = ({ isDarkMode }) => {
   ];
 
   return (
-    <div className={`dash ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+    <div className={`dash ${isDarkMode ? 'dark-mode' : 'light-mode'}`} style={{width:'83.2%'}}>
       <br /><center>
         <h2 style={{ color: isDarkMode ? 'white' : 'lightviolet' }}>Dashboard Overview</h2>
         <p style={{ color: isDarkMode ? 'lightgray' : 'black' }}>View job statistics, earnings, and updates</p>

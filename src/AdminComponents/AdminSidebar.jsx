@@ -8,7 +8,8 @@ import { IoGitPullRequestSharp } from "react-icons/io5";
 import { GiSatelliteCommunication } from "react-icons/gi";
 import { RiFeedbackFill } from "react-icons/ri";
 import { GrUserManager } from "react-icons/gr";
-import admin from "../assets/admin.jpg";
+import admin from "../assets/admin.jpg";  
+import { LuMessageSquareText } from "react-icons/lu";
 
 const AdminSidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -56,13 +57,10 @@ const AdminSidebar = () => {
             <div className={`submenu ${activeSubmenu === 'user-management' ? 'open' : ''} ${isCollapsed ? "collapsed-submenu" : ""}`}>
               <ul className="nav flex-column ms-4">
                 <li className="nav-item">
-                  <Link to="/users" className="nav-link text-white">View Mechanics</Link>
+                  <Link to="/GarageList" className="nav-link text-white">View Garages</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Viewdrivers" className="nav-link text-white">View Drivers</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/approve-mechanics" className="nav-link text-white">Approve Mechanics</Link>
+                  <Link to="/ApprovedGarages" className="nav-link text-white">Approved Garages</Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/manage-users" className="nav-link text-white">Manage Users</Link>
@@ -113,8 +111,8 @@ const AdminSidebar = () => {
 
           {/* Notifications & Alerts */}
           <li className="nav-item">
-            <Link to="/Adminnotifications" className="nav-link text-white d-flex align-items-center">
-              <GiSatelliteCommunication className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Notifications & Alerts"}
+            <Link to="/Messages" className="nav-link text-white d-flex align-items-center">
+            <LuMessageSquareText className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "My Messages"}
             </Link>
           </li>
 

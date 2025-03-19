@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./dashboardstyles/dashboard.css";
 import { Button, Modal } from 'react-bootstrap';
 
 const DashboardRequests = () => {
-  const requests = [
-    { id: 1, name: 'John Doe', carModel: 'Toyota Corolla', description: 'Engine Failure', location: 'Downtown', phone: '123-456-7890', email: 'johndoe@example.com' },
-    { id: 2, name: 'Jane Smith', carModel: 'Honda Civic', description: 'Flat Tire', location: 'Uptown', phone: '987-654-3210', email: 'janesmith@example.com' },
-    { id: 3, name: 'Michael Johnson', carModel: 'Ford Focus', description: 'Battery Dead', location: 'Midtown', phone: '555-789-1234', email: 'michaelj@example.com' },
-  ];
-
+  const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [accepted, setAccepted] = useState(false);
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
+
+  const fetchRequests = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/requests");
+      setRequests(response.data);
+    } catch (error) {
+      console.error("Error fetching requests:", error);
+    }
+  };
 
   const handleShowModal = (request) => {
     setSelectedRequest(request);
@@ -28,30 +37,25 @@ const DashboardRequests = () => {
         </center>
       </div>
 
-      {/* Table with reduced width */}
+      {/* Table with fetched data */}
       <div className="table-container">
         <table className="table table-bordered table-hover" style={{ width: '80%', margin: 'auto' }}>
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Car Issue</th>
               <th>Car Model</th>
-              <th>Breakdown Issue</th>
+              <th>Location</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {requests.map((request) => (
-              <tr key={request.id}>
-                <td>{request.name}</td>
+              <tr key={request._id}>
+                <td>{request.carIssue}</td>
                 <td>{request.carModel}</td>
-                <td>{request.description}</td>
+                <td>{request.location}</td>
                 <td>
-                  <Button
-                    style={{ backgroundColor: 'bluev' }}
-                    onClick={() => handleShowModal(request)}
-                  >
-                    View
-                  </Button>
+                  <Button variant="primary" onClick={() => handleShowModal(request)}>View</Button>
                 </td>
               </tr>
             ))}
@@ -59,7 +63,7 @@ const DashboardRequests = () => {
         </table>
       </div>
 
-      {/* Modal for showing full request details */}
+      {/* Modal for showing request details */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Request Details</Modal.Title>
@@ -67,9 +71,8 @@ const DashboardRequests = () => {
         <Modal.Body>
           {selectedRequest && (
             <div>
-              <p><strong>Name:</strong> {selectedRequest.name}</p>
+              <p><strong>Car Issue:</strong> {selectedRequest.carIssue}</p>
               <p><strong>Car Model:</strong> {selectedRequest.carModel}</p>
-              <p><strong>Breakdown Issue:</strong> {selectedRequest.description}</p>
               <p><strong>Location:</strong> {selectedRequest.location}</p>
 
               {/* Show Contact Info ONLY IF Accepted */}
@@ -77,8 +80,7 @@ const DashboardRequests = () => {
                 <>
                   <hr />
                   <h5>Contact Details:</h5>
-                  <p><strong>Phone:</strong> {selectedRequest.phone}</p>
-                  <p><strong>Email:</strong> {selectedRequest.email}</p>
+                  <p><strong>Contact:</strong> {selectedRequest.contact}</p>
                 </>
               )}
             </div>
