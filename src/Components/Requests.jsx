@@ -49,7 +49,11 @@ const RequestForm = () => {
       });
 
       if (response.data.success) {
-        setNearestGarages(response.data.nearestGarages);
+        // ✅ Filter only approved garages
+        const approvedGarages = response.data.nearestGarages.filter(
+          (garage) => garage.approvalStatus === "approved"
+        );
+        setNearestGarages(approvedGarages);
       } else {
         setError(response.data.message);
       }
@@ -61,7 +65,7 @@ const RequestForm = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5"><br /><br />
       <h2>Request Emergency Assistance</h2>
 
       {error && <div className="alert alert-danger">{error}</div>}
@@ -107,7 +111,7 @@ const RequestForm = () => {
 
       {nearestGarages.length > 0 && (
         <div className="mt-4">
-          <h4>Nearest Garages</h4>
+          <h4>Nearest Approved Garages</h4>
           <ul className="list-group">
             {nearestGarages.map((garage) => (
               <li key={garage._id} className="list-group-item">
