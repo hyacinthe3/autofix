@@ -4,6 +4,8 @@ import { Notify } from "notiflix";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const GarageRegister = () => {
   const navigate = useNavigate();
@@ -131,8 +133,9 @@ const GarageRegister = () => {
                 </Form.Group>
 
                 {/* ✅ Submit Button */}
-                <Button type="submit" className="mt-3">Register Garage</Button>
+                <center><Button type="submit" className="mt-3">Register Garage</Button></center>
               </Form>
+              <center>Already a member?? <Link to="/GarageLogin">Login Here</Link></center>
             </Card.Body>
           </Card>
         </Col>

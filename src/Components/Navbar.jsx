@@ -59,6 +59,13 @@ const Navbar = () => {
             <li className="nav-item custom-nav-item">
               <Link to="/contact" className={`nav-link text-dark ${getActiveClass("/contact")}`}>Contact</Link>
             </li>
+
+
+            <li className="nav-item custom-nav-item">
+              <Link to="/ViewRequests" className={`nav-link text-dark ${getActiveClass("/ViewRequests")}`}>ViewRequests</Link>
+            </li>
+
+            
             <li className="nav-item custom-nav-item">
               <Link to="/LandingPage" className={`nav-link text-dark ${getActiveClass("/LandingPage")}`}>Landing</Link>
             </li>

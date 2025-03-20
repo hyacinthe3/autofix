@@ -9,6 +9,7 @@ import DriverRegistrationForm from './Components/Register';
 import LoginForm from './Components/LoginForm';
 import GarageLogin from './Components/GarageLogin';
 import GarageRegistrationForm from './Components/GarageRegister';
+import ViewRequests from './Components/ViewRequests';
 
 
 import DashboardLayout from './Dashboard/DashboardLayout'; // Layout will wrap other pages
@@ -49,6 +50,7 @@ function App() {
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<Contact />} />
           <Route path="request" element={<Requests />} />
+          <Route path='ViewRequests'  element={<ViewRequests/>}/>
          
 
         </Route>

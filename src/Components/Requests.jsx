@@ -7,8 +7,10 @@ const RequestForm = () => {
   const [contact, setContact] = useState("");
   const [location, setLocation] = useState(null);
   const [nearestGarages, setNearestGarages] = useState([]);
+  const [selectedGarage, setSelectedGarage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [requestSent, setRequestSent] = useState(false);
 
   // Get user's live location
   useEffect(() => {
@@ -64,8 +66,35 @@ const RequestForm = () => {
     }
   };
 
+  const handleSelectGarage = async (garageId) => {
+    setLoading(true);
+    setRequestSent(false);
+
+    try {
+      const response = await axios.post("http://localhost:5000/requests/assign", {
+        garageId,
+        carIssue,
+        carModel,
+        location,
+        contact,
+      });
+
+      if (response.data.success) {
+        setRequestSent(true);
+        setSelectedGarage(garageId);
+      } else {
+        setError(response.data.message);
+      }
+    } catch (err) {
+      setError("Error assigning request. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="container mt-5"><br /><br />
+    <div className="container mt-5" style={{ width: "50%" }}>
+      <br /><br /><br />
       <h2>Request Emergency Assistance</h2>
 
       {error && <div className="alert alert-danger">{error}</div>}
@@ -104,24 +133,42 @@ const RequestForm = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary" disabled={loading}>
+        <button type="submit" className="btn btn-warning btn-lg" disabled={loading}>
           {loading ? "Sending..." : "Request Assistance"}
         </button>
       </form>
 
+      <br />
+
       {nearestGarages.length > 0 && (
         <div className="mt-4">
           <h4>Nearest Approved Garages</h4>
+          <p>Select a garage to send your request:</p>
           <ul className="list-group">
             {nearestGarages.map((garage) => (
-              <li key={garage._id} className="list-group-item">
-                <strong>{garage.GarageName}</strong>
-                <p>📍 {garage.location.address}</p>
-                <p>📞 {garage.Garagephone}</p>
-                <p>🚗 Distance: {garage.distance.toFixed(2)} km</p>
+              <li key={garage._id} className="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>{garage.GarageName}</strong>
+                  <p>📍 {garage.location.address}</p>
+                  <p>📞 {garage.Garagephone}</p>
+                  <p>🚗 Distance: {garage.distance.toFixed(2)} km</p>
+                </div>
+                <button
+                  className={`btn btn-${selectedGarage === garage._id ? "success" : "primary"}`}
+                  onClick={() => handleSelectGarage(garage._id)}
+                  disabled={loading || selectedGarage === garage._id}
+                >
+                  {selectedGarage === garage._id ? "Request Sent ✅" : "Select & Send Request"}
+                </button>
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {requestSent && (
+        <div className="alert alert-success mt-3">
+          Request sent successfully to the selected garage! 🚗🔧
         </div>
       )}
     </div>

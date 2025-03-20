@@ -1,102 +1,157 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import "./dashboardstyles/dashboard.css";
-import { Button, Modal } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const DashboardRequests = () => {
+const DashboardRequests = ({ isGarage, garageId }) => {
   const [requests, setRequests] = useState([]);
-  const [selectedRequest, setSelectedRequest] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [accepted, setAccepted] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [locations, setLocations] = useState({});
+  const [mechanics, setMechanics] = useState({});
 
   useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/requests/all");
+        setRequests(response.data);
+
+        // Fetch addresses for all requests with coordinates
+        response.data.forEach((request) => {
+          if (request.location?.coordinates) {
+            fetchAddress(request._id, request.location.coordinates);
+          }
+        });
+      } catch (err) {
+        setError("Error fetching requests. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchRequests();
   }, []);
 
-  const fetchRequests = async () => {
+  // Fetch address using reverse geocoding
+  const fetchAddress = async (requestId, coordinates) => {
+    let [lon, lat] = coordinates;
+    console.log(`Fetching address for request ${requestId}: Lat=${lat}, Lon=${lon}`);
+
     try {
-      const response = await axios.get("http://localhost:5000/api/requests");
-      setRequests(response.data);
+      const res = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+      );
+      setLocations((prev) => ({ ...prev, [requestId]: res.data.display_name }));
     } catch (error) {
-      console.error("Error fetching requests:", error);
+      setLocations((prev) => ({ ...prev, [requestId]: "Address not found" }));
     }
   };
 
-  const handleShowModal = (request) => {
-    setSelectedRequest(request);
-    setShowModal(true);
-    setAccepted(false);
+  // Fetch list of mechanics for a garage
+  const fetchMechanics = async (garageId) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/garages/${garageId}/mechanics`);
+      setMechanics((prev) => ({ ...prev, [garageId]: response.data }));
+    } catch (error) {
+      console.error("Error fetching mechanics:", error);
+    }
+  };
+
+  // Assign mechanic to a request
+  const handleAssignMechanic = async (requestId, mechanicId) => {
+    try {
+      const response = await axios.post("http://localhost:5000/requests/assign-mechanic", {
+        requestId,
+        mechanicId,
+      });
+
+      if (response.data.success) {
+        setRequests((prevRequests) =>
+          prevRequests.map((req) =>
+            req._id === requestId ? { ...req, assignedMechanic: response.data.mechanic } : req
+          )
+        );
+      }
+    } catch (err) {
+      setError("Error assigning mechanic. Please try again.");
+    }
   };
 
   return (
-    <div className="dash">
-      <div><br />
-        <center>
-          <h2><font color="lightviolet">Service Requests</font></h2>
-          <p>Manage incoming repair requests.</p>
-        </center>
-      </div>
+    <div className="container mt-5">
+      <h2>{isGarage ? "Incoming Service Requests" : "Your Requests"}</h2>
 
-      {/* Table with fetched data */}
-      <div className="table-container">
-        <table className="table table-bordered table-hover" style={{ width: '80%', margin: 'auto' }}>
-          <thead>
+      {error && <div className="alert alert-danger">{error}</div>}
+      {loading ? (
+        <p>Loading requests...</p>
+      ) : (
+        <table className="table table-bordered mt-3">
+          <thead className="thead-dark">
             <tr>
               <th>Car Issue</th>
               <th>Car Model</th>
+              <th>Contact</th>
               <th>Location</th>
-              <th>Actions</th>
+              <th>Assigned Mechanic</th>
+              {isGarage && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
-            {requests.map((request) => (
-              <tr key={request._id}>
-                <td>{request.carIssue}</td>
-                <td>{request.carModel}</td>
-                <td>{request.location}</td>
-                <td>
-                  <Button variant="primary" onClick={() => handleShowModal(request)}>View</Button>
+            {requests.length > 0 ? (
+              requests.map((request) => (
+                <tr key={request._id}>
+                  <td>{request.carIssue}</td>
+                  <td>{request.carModel}</td>
+                  <td>{request.contact}</td>
+                  <td>📍 {locations[request._id] || "Fetching address..."}</td>
+                  <td>
+                    {request.assignedMechanic ? (
+                      <strong>{request.assignedMechanic.name}</strong>
+                    ) : (
+                      <span className="text-danger">Not Assigned</span>
+                    )}
+                  </td>
+                  {isGarage && (
+                    <td>
+                      {!request.assignedMechanic ? (
+                        <div>
+                          <button
+                            className="btn btn-info btn-sm me-2"
+                            onClick={() => fetchMechanics(garageId)}
+                          >
+                            Load Mechanics
+                          </button>
+                          {mechanics[garageId] && mechanics[garageId].length > 0 && (
+                            <select
+                              className="form-select d-inline w-auto"
+                              onChange={(e) => handleAssignMechanic(request._id, e.target.value)}
+                            >
+                              <option value="">Select Mechanic</option>
+                              {mechanics[garageId].map((mechanic) => (
+                                <option key={mechanic._id} value={mechanic._id}>
+                                  {mechanic.name}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
+                      ) : (
+                        <button className="btn btn-success btn-sm" disabled>
+                          Assigned
+                        </button>
+                      )}
+                    </td>
+                  )}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="text-center">
+                  No requests found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
-      </div>
-
-      {/* Modal for showing request details */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Request Details</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedRequest && (
-            <div>
-              <p><strong>Car Issue:</strong> {selectedRequest.carIssue}</p>
-              <p><strong>Car Model:</strong> {selectedRequest.carModel}</p>
-              <p><strong>Location:</strong> {selectedRequest.location}</p>
-
-              {/* Show Contact Info ONLY IF Accepted */}
-              {accepted && (
-                <>
-                  <hr />
-                  <h5>Contact Details:</h5>
-                  <p><strong>Contact:</strong> {selectedRequest.contact}</p>
-                </>
-              )}
-            </div>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          {!accepted ? (
-            <>
-              <Button variant="success" onClick={() => setAccepted(true)}>Accept</Button>
-              <Button variant="danger" onClick={() => setShowModal(false)}>Reject</Button>
-            </>
-          ) : (
-            <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-          )}
-        </Modal.Footer>
-      </Modal>
+      )}
     </div>
   );
 };
