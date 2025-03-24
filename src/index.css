@@ -56,54 +56,11 @@
     border: 1px solid var(--navbar-font-color);
 }
 
-/* Profile Section */
-.profile-section {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
 
-.profile-img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.profile-name {
-    font-weight: bold;
-    margin-left: 0.5rem;
-}
 
 /* Notifications and Messages */
 .nav-icon {
     position: relative;
 }
 
-.message-popover, .notification-popover {
-    width: 200px;
-    max-height: 300px;
-    overflow-y: auto;
-}
 
-.message-item, .notification-item {
-    margin-bottom: 1rem;
-}
-
-/* Modal Styles */
-.modal-content {
-    background-color: #f8f9fa;
-}
-
-.modal-header .close {
-    color: #007bff;
-}
-
-.btn-close-profile, .btn-save-profile {
-    background-color: blue;
-    border-color: blue;
-}
-
-.btn-close-profile:hover, .btn-save-profile:hover {
-    background-color: darkblue;
-    border-color: darkblue;
-}

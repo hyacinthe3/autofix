@@ -183,3 +183,8 @@
   margin-left: 70px;
 }
 
+.styled-hr {
+  border: 1px solid white; /* Make it visible */
+  width: 15.8rem; /* Full width */
+  opacity: 0.3; /* Ensure full visibility */
+}

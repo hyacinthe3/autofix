@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap";
+import { Notify } from "notiflix";
 
-const DashboardRequests = ({ isGarage, garageId }) => {
+const GarageRequests = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [locations, setLocations] = useState({});
-  const [mechanics, setMechanics] = useState({});
 
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/requests/all");
-        setRequests(response.data);
+        // Get the garageId from localStorage
+        const garageId = localStorage.getItem("garageId");
 
-        // Fetch addresses for all requests with coordinates
-        response.data.forEach((request) => {
-          if (request.location?.coordinates) {
-            fetchAddress(request._id, request.location.coordinates);
-          }
-        });
-      } catch (err) {
-        setError("Error fetching requests. Please try again.");
+        if (!garageId) {
+          Notify.failure("Garage not found. Please log in again.");
+          return;
+        }
+
+        // Fetch requests from the backend for the logged-in garage
+        const response = await axios.get(`http://localhost:5000/requests/garages/${garageId}/requests`);
+        
+        if (response.data.success) {
+          setRequests(response.data.requests); // Set the retrieved requests to state
+        }
+      } catch (error) {
+        console.error("Error fetching requests:", error);
+        setError("Failed to fetch requests.");
+        Notify.failure("Failed to load requests.");
       } finally {
         setLoading(false);
       }
@@ -30,130 +37,45 @@ const DashboardRequests = ({ isGarage, garageId }) => {
     fetchRequests();
   }, []);
 
-  // Fetch address using reverse geocoding
-  const fetchAddress = async (requestId, coordinates) => {
-    let [lon, lat] = coordinates;
-    console.log(`Fetching address for request ${requestId}: Lat=${lat}, Lon=${lon}`);
-
-    try {
-      const res = await axios.get(
-        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-      );
-      setLocations((prev) => ({ ...prev, [requestId]: res.data.display_name }));
-    } catch (error) {
-      setLocations((prev) => ({ ...prev, [requestId]: "Address not found" }));
-    }
-  };
-
-  // Fetch list of mechanics for a garage
-  const fetchMechanics = async (garageId) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/garages/${garageId}/mechanics`);
-      setMechanics((prev) => ({ ...prev, [garageId]: response.data }));
-    } catch (error) {
-      console.error("Error fetching mechanics:", error);
-    }
-  };
-
-  // Assign mechanic to a request
-  const handleAssignMechanic = async (requestId, mechanicId) => {
-    try {
-      const response = await axios.post("http://localhost:5000/requests/assign-mechanic", {
-        requestId,
-        mechanicId,
-      });
-
-      if (response.data.success) {
-        setRequests((prevRequests) =>
-          prevRequests.map((req) =>
-            req._id === requestId ? { ...req, assignedMechanic: response.data.mechanic } : req
-          )
-        );
-      }
-    } catch (err) {
-      setError("Error assigning mechanic. Please try again.");
-    }
-  };
-
   return (
-    <div className="container mt-5">
-      <h2>{isGarage ? "Incoming Service Requests" : "Your Requests"}</h2>
+    <Container className="mt-5">
+      <h3 className="text-center mb-4">Requests Assigned to Your Garage</h3>
 
-      {error && <div className="alert alert-danger">{error}</div>}
       {loading ? (
-        <p>Loading requests...</p>
+        <div className="d-flex justify-content-center">
+          <Spinner animation="border" />
+        </div>
+      ) : error ? (
+        <div className="text-center text-danger">{error}</div>
+      ) : requests.length === 0 ? (
+        <div className="text-center">No requests found.</div>
       ) : (
-        <table className="table table-bordered mt-3">
-          <thead className="thead-dark">
-            <tr>
-              <th>Car Issue</th>
-              <th>Car Model</th>
-              <th>Contact</th>
-              <th>Location</th>
-              <th>Assigned Mechanic</th>
-              {isGarage && <th>Actions</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {requests.length > 0 ? (
-              requests.map((request) => (
-                <tr key={request._id}>
-                  <td>{request.carIssue}</td>
-                  <td>{request.carModel}</td>
-                  <td>{request.contact}</td>
-                  <td>📍 {locations[request._id] || "Fetching address..."}</td>
-                  <td>
-                    {request.assignedMechanic ? (
-                      <strong>{request.assignedMechanic.name}</strong>
-                    ) : (
-                      <span className="text-danger">Not Assigned</span>
-                    )}
-                  </td>
-                  {isGarage && (
-                    <td>
-                      {!request.assignedMechanic ? (
-                        <div>
-                          <button
-                            className="btn btn-info btn-sm me-2"
-                            onClick={() => fetchMechanics(garageId)}
-                          >
-                            Load Mechanics
-                          </button>
-                          {mechanics[garageId] && mechanics[garageId].length > 0 && (
-                            <select
-                              className="form-select d-inline w-auto"
-                              onChange={(e) => handleAssignMechanic(request._id, e.target.value)}
-                            >
-                              <option value="">Select Mechanic</option>
-                              {mechanics[garageId].map((mechanic) => (
-                                <option key={mechanic._id} value={mechanic._id}>
-                                  {mechanic.name}
-                                </option>
-                              ))}
-                            </select>
-                          )}
-                        </div>
-                      ) : (
-                        <button className="btn btn-success btn-sm" disabled>
-                          Assigned
-                        </button>
-                      )}
-                    </td>
-                  )}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="text-center">
-                  No requests found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <Row>
+          {requests.map((request) => (
+            <Col key={request._id} md={6} lg={4} className="mb-4">
+              <Card>
+                <Card.Body>
+                  <Card.Title>{request.carModel}</Card.Title>
+                  <Card.Text>
+                    <strong>Car Issue:</strong> {request.carIssue}
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>Location:</strong> {request.location.address || "Unknown"}
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>Contact:</strong> {request.contact}
+                  </Card.Text>
+                  <Button variant="primary" onClick={() => {/* Handle request action, e.g. accept/reject */}}>
+                    View Details
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       )}
-    </div>
+    </Container>
   );
 };
 
-export default DashboardRequests;
+export default GarageRequests;

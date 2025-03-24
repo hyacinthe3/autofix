@@ -1,65 +1,82 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Form, FormControl, Nav, Badge, OverlayTrigger, Popover } from "react-bootstrap";
-import { FaSearch, FaEnvelope, FaBell, FaLayerGroup } from "react-icons/fa";
+import { Navbar, Form, FormControl, OverlayTrigger, Popover, Button, FormCheck } from "react-bootstrap";
+import { FaSearch, FaSun, FaMoon } from "react-icons/fa";
 import axios from "axios";
 
 const AdminNavbar = ({ isCollapsed }) => {
-  const [showMessages, setShowMessages] = useState(false);
-  const [messages, setMessages] = useState([]); // Ensure it's initialized as an array
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Handle API errors
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+
+  const [settings, setSettings] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Fetch settings from backend
+  const fetchAdminSettings = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:5000/admin/settings");
+      setSettings(response.data);
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching admin settings:", error);
+      setError("Failed to load settings");
+      setSettings(null);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    fetchRecentMessages();
-  }, []);
+    fetchAdminSettings();
+    document.body.classList.toggle("dark-mode", isDarkMode);
+  }, [isDarkMode]);
 
-  const fetchRecentMessages = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/contact/contacts");
-
-      // Ensure the response data is an array before setting state
-      if (Array.isArray(response.data)) {
-        setMessages(response.data);
-      } else {
-        setMessages([]); // Fallback to an empty array
-      }
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-      setError("Failed to load messages");
-      setMessages([]); // Ensure it's an empty array in case of error
-    } finally {
-      setLoading(false);
-    }
+  // Toggle Dark Mode
+  const handleThemeToggle = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      document.body.classList.toggle("dark-mode", newMode);
+      return newMode;
+    });
   };
 
-  const handleMessageToggle = () => {
-    setShowMessages(!showMessages);
-  };
-
-  // Popover for Messages (Shows name & subject)
-  const messagePopover = (
-    <Popover id="message-popover" className="message-popover">
+  const settingsPopover = (
+    <Popover id="settings-popover">
       <Popover.Body>
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
           <p style={{ color: "red" }}>{error}</p>
-        ) : messages.length === 0 ? (
-          <p>No new messages</p>
         ) : (
-          messages.map((msg, index) => (
-            <div key={index} className="message-item">
-              <strong>{msg.name}</strong>: <p>{msg.subject}</p>
-            </div>
-          ))
+          <div>
+            <h6>Admin Settings</h6>
+            {settings && (
+              <>
+                <p><strong>Name:</strong> {settings.adminName}</p>
+                <p><strong>Email:</strong> {settings.email}</p>
+                <p><strong>Role:</strong> {settings.role}</p>
+              </>
+            )}
+            <hr />
+            {/* Theme Toggle */}
+            <FormCheck 
+              type="switch"
+              id="theme-switch"
+              label={isDarkMode ? "Dark Mode" : "Light Mode"}
+              checked={isDarkMode}
+              onChange={handleThemeToggle}
+            />
+          </div>
         )}
       </Popover.Body>
     </Popover>
   );
 
   return (
-    <Navbar bg="white" expand="lg" className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`} style={{ width: "100%" }}>
+    <Navbar bg={isDarkMode ? "dark" : "white"} expand="lg" className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`} style={{ width: "100%" }}>
       {/* Search Input */}
       <Form className={`d-flex me-auto ${isCollapsed ? "collapsed-search" : ""}`}>
         <div className="input-group">
@@ -70,31 +87,10 @@ const AdminNavbar = ({ isCollapsed }) => {
         </div>
       </Form>
 
-      {/* Icons & Profile */}
-      <Nav className="ms-auto align-items-center">
-        {/* Envelope Icon with Message Popover */}
-        <Nav.Link href="#" onClick={handleMessageToggle} className="position-relative">
-          <FaEnvelope size={18} />
-          <OverlayTrigger trigger="click" placement="bottom" overlay={messagePopover} show={showMessages}>
-            <Badge bg="success" pill className="position-absolute top-0 start-100 translate-middle">
-              {messages.length}
-            </Badge>
-          </OverlayTrigger>
-        </Nav.Link>
-
-        {/* Bell Icon */}
-        <Nav.Link href="#" className="position-relative">
-          <FaBell size={18} />
-          <Badge bg="success" pill className="position-absolute top-0 start-100 translate-middle">
-            4
-          </Badge>
-        </Nav.Link>
-
-        {/* Other Icons */}
-        <Nav.Link href="#">
-          <FaLayerGroup size={18} />
-        </Nav.Link>
-      </Nav>
+      {/* Theme Toggle Button */}
+      <Button variant="link" onClick={handleThemeToggle} className="text-dark">
+        {isDarkMode ? <FaSun size={24} color="yellow" /> : <FaMoon size={24} />}
+      </Button>
     </Navbar>
   );
 };

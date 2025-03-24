@@ -1,6 +1,5 @@
 .dash{
-  background-color: rgb(248, 248, 248);
-  width: 78.4rem;
+  width: 78.5rem;
   margin-left: auto;
   height: auto;
   align-items: center;
@@ -53,6 +52,7 @@
 .dark-mode .board-item {
   background-color: #333;
   border: 1px solid #444;
+  color: white;
 }
 
 .dark-mode .mode-btn {
@@ -61,4 +61,13 @@
   padding: 8px 16px;
   border: none;
   cursor: pointer;
+}
+.dark-mode .dash{
+  border-bottom: none;
+}
+.dark-mode .sidebar{
+  border: 1px solid white;
+}
+.dark-mode .navbar{
+  background-color: #444;
 }

@@ -71,7 +71,7 @@ const Inde = () => {
                                         <span className="ion-ios-play"></span>
                                     </div>
                                     <div className="heading-title ml-5">
-                                    <h1>Welcome, {userName ? userName : "Guest"}!</h1>
+                                    {/* <h1>Welcome, {userName ? userName : "Guest"}!</h1> */}
                                         <span><font color="white">Easy steps for repairing  a car</font></span>
                                     </div>
                                 </a>
@@ -248,7 +248,7 @@ const Inde = () => {
                                         <span className="flaticon-rent"><BsTools /></span>
                                     </div>
                                     <h3 style={{ color: 'white' }}>Choose A Mechanic</h3>
-                                    <p style={{ color: 'white' }}>choose a mechanic near you and call him or wait patiently for him to call</p>
+                                    <p style={{ color: 'white' }}>choose a garage near you and call him or wait patiently for him to call</p>
                                 </div>
                             </div>
                         </div>

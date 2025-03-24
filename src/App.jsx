@@ -46,7 +46,7 @@ function App() {
       <Routes>
         {/* Wrap routes with Layout to include Navbar and Footer */}
         <Route path="/" element={<Layout />}>
-          <Route path="home" element={<Inde/>} /> {/* Default home route */}
+          <Route index element={<Inde/>} /> {/* Default home route */}
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<Contact />} />
           <Route path="request" element={<Requests />} />
@@ -67,6 +67,7 @@ function App() {
           {/* Nested route for Dashboard inside Layout */}
           <Route path='Dashboard' element={<Dashboard />} />
           <Route path='DashboardRequests' element={<DashboardRequests/>}/>
+          {/* <Route path='/garage/:garageId/requests' element={<DashboardRequests />} /> */}
           <Route path='Older-requests' element={<Older_requests/>}/>
           <Route path='Earnings' element={<Earnings/>}/>
           <Route path='Communication' element={<Communication/>}/>

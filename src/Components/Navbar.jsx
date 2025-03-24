@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse justify-content-end" id="customNavMenu">
           <ul className="navbar-nav custom-nav-list d-flex gap-3">
             <li className="nav-item custom-nav-item">
-              <Link to="/home" className={`nav-link text-dark ${getActiveClass("/home")}`}>Home</Link>
+              <Link to="/" className={`nav-link text-dark ${getActiveClass("/home")}`}>Home</Link>
             </li>
             <li className="nav-item custom-nav-item">
               <Link to="/about" className={`nav-link text-dark ${getActiveClass("/about")}`}>About</Link>

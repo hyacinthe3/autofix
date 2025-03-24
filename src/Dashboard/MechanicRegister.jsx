@@ -10,93 +10,76 @@ const MechanicRegister = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
 
-  // Clear form fields on component mount
   useEffect(() => {
     reset();
   }, [reset]);
 
   const onSubmit = async (data) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      Notify.failure('Authentication error. Please log in.');
+      return;
+    }
+
     try {
-      const { fullName, phoneNumber, specialisation } = data;
-
-      // Send POST request to backend with the registration data
-      await axios.post('http://localhost:5000/mechanic/register', {
-        fullName,
-        phoneNumber,
-        specialisation,
-      });
-
-      Notify.success('Registered successfully');
-      reset(); // Clears input fields after submission
-      navigate('/MechanicList'); // Redirect to view mechanics page after successful registration
+      await axios.post(
+        'http://localhost:5000/mechanic/register',
+        data,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      Notify.success('Mechanic registered successfully!');
+      reset();
+      navigate('/MechanicList');
     } catch (error) {
-      console.error(error);
-      Notify.failure('Registration failed. Please try again.');
+      console.error(error.response?.data || error);
+      Notify.failure(error.response?.data?.message || 'Registration failed.');
     }
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center vh-150">
-      <Row className="w-100" style={{ marginRight: "120px" }}><br />
-        <center><br /><h2 className='mechanic'>Register A New Mechanic</h2></center>
-        <Col md={8} lg={6} className="mx-auto"><br />
-          <Card className="shadow-lg p-4 rounded-4" style={{ backgroundColor: '#f4f4f4' }}>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Row className="w-100">
+        <Col md={8} lg={6} className="mx-auto">
+          <Card className="shadow-lg p-4 rounded-4">
             <Card.Body>
-              <h3 className="text-center text-dark">
+              <h3 className="text-center">
                 <FaWrench className="me-2" /> Mechanic Registration
               </h3>
-              <p className="text-center text-muted">
-                Register a new mechanic for your garage.
-              </p>
+              <p className="text-center text-muted">Register a new mechanic for your garage.</p>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                {/* Mechanic Full Name */}
-                <Form.Group className="mb-3" controlId="formMechanicName">
-                  <Form.Label className="text-dark">Full Name</Form.Label>
+                <Form.Group className="mb-3">
+                  <Form.Label>Full Name</Form.Label>
                   <Form.Control
                     type="text"
-                    name="fullName"
-                    placeholder="Enter mechanic's full name"
                     {...register('fullName', { required: true })}
-                    style={{ backgroundColor: '#e9ecef', color: '#495057' }}
+                    placeholder="Enter full name"
                   />
                 </Form.Group>
 
-                {/* Phone Number */}
-                <Form.Group className="mb-3" controlId="formMechanicPhone">
-                  <Form.Label className="text-dark">Phone Number</Form.Label>
+                <Form.Group className="mb-3">
+                  <Form.Label>Phone Number</Form.Label>
                   <Form.Control
                     type="tel"
-                    name="phoneNumber"
-                    placeholder="Enter mechanic's phone number"
                     {...register('phoneNumber', { required: true })}
-                    style={{ backgroundColor: '#e9ecef', color: '#495057' }}
+                    placeholder="Enter phone number"
                   />
                 </Form.Group>
 
-                {/* Specialization Select */}
-                <Form.Group className="mb-3" controlId="formMechanicSpecialization">
-                  <Form.Label className="text-dark">Specialization</Form.Label>
-                  <Form.Control
-                    as="select"
-                    name="specialisation"
-                    {...register('specialisation', { required: true })}
-                    style={{ backgroundColor: '#e9ecef', color: '#495057' }}
-                  >
+                <Form.Group className="mb-3">
+                  <Form.Label>Specialization</Form.Label>
+                  <Form.Select {...register('specialisation', { required: true })}>
                     <option value="">Select Specialization</option>
                     <option value="engine">Engine Repair</option>
                     <option value="transmission">Transmission Repair</option>
                     <option value="brakes">Brake Repair</option>
                     <option value="electrical">Electrical Systems</option>
                     <option value="bodywork">Bodywork and Painting</option>
-                  </Form.Control>
+                  </Form.Select>
                 </Form.Group>
 
-                {/* Submit Button */}
-                <div className="text-center">
-                  <Button variant="secondary" type="submit" className="w-100">
-                    Register Mechanic
-                  </Button>
-                </div>
+                <Button variant="primary" type="submit" className="w-100">
+                  Register Mechanic
+                </Button>
               </Form>
             </Card.Body>
           </Card>

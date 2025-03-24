@@ -105,3 +105,73 @@
 .navbar.collapsed {
   width: calc(100% - 80px); /* Adjust based on sidebar width */
 }
+.dark-mode .navbar{
+  border-bottom: 1px solid white;
+}
+/* Dark Mode */
+.dark-mode {
+  background-color: #222;
+  color: white;
+}
+
+.dark-mode .navbar {
+  background-color: #222 !important;
+}
+
+.dark-mode .nav-link {
+  color: white !important;
+}
+
+.dark-mode .btn-danger {
+  background-color: red !important;
+  border: none;
+}
+
+/* Smooth Theme Toggle */
+.dark-mode .fa-sun {
+  transform: rotate(180deg);
+}
+
+.dark-mode .fa-moon {
+  transform: rotate(0deg);
+}
+/* Dark Mode */
+.dark-mode {
+  background-color: #222;
+  color: white;
+}
+
+.dark-mode .navbar {
+  background-color: #222 !important;
+}
+
+.dark-mode .nav-link {
+  color: white !important;
+}
+
+.dark-mode .btn-danger {
+  background-color: red !important;
+  border: none;
+}
+
+/* Smooth Theme Toggle */
+.dark-mode .fa-sun {
+  transform: rotate(180deg);
+}
+
+.dark-mode .fa-moon {
+  transform: rotate(0deg);
+}
+
+/* Logout Modal Customization */
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background: #f8f9fa;
+}
+
+.modal-footer {
+  border-top: none;
+}

@@ -49,7 +49,7 @@ const AdminSidebar = () => {
           {/* User Management */}
           <li className="nav-item">
             <a href="#" className="nav-link text-white d-flex align-items-center" onClick={() => toggleSubmenu('user-management')}>
-              <GrUserManager className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "User Management"}
+              <GrUserManager className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Garage Management"}
               <span className={`submenu-arrow ms-auto ${activeSubmenu === 'user-management' ? 'open' : ''}`}>
                 {activeSubmenu === 'user-management' ? <FaChevronUp /> : <FaChevronDown />}
               </span>
@@ -62,45 +62,10 @@ const AdminSidebar = () => {
                 <li className="nav-item">
                   <Link to="/ApprovedGarages" className="nav-link text-white">Approved Garages</Link>
                 </li>
-                <li className="nav-item">
-                  <Link to="/manage-users" className="nav-link text-white">Manage Users</Link>
-                </li>
               </ul>
             </div>
           </li>
 
-          {/* Service Request Management */}
-          <li className="nav-item">
-            <a href="#" className="nav-link text-white d-flex align-items-center" onClick={() => toggleSubmenu('service-requests')}>
-              <IoGitPullRequestSharp className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Requests Management"}
-              <span className={`submenu-arrow ms-auto ${activeSubmenu === 'service-requests' ? 'open' : ''}`}>
-                {activeSubmenu === 'service-requests' ? <FaChevronUp /> : <FaChevronDown />}
-              </span>
-            </a>
-            <div className={`submenu ${activeSubmenu === 'service-requests' ? 'open' : ''} ${isCollapsed ? "collapsed-submenu" : ""}`}>
-              <ul className="nav flex-column ms-4">
-                <li className="nav-item">
-                  <Link to="/new-requests" className="nav-link text-white">New Requests</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/in-progress" className="nav-link text-white">In Progress</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/completed-requests" className="nav-link text-white">Completed</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/canceled-requests" className="nav-link text-white">Canceled</Link>
-                </li>
-              </ul>
-            </div>
-          </li>
-
-          {/* Location & Tracking */}
-          <li className="nav-item">
-            <Link to="/Adminlocation-tracking" className="nav-link text-white d-flex align-items-center">
-              <FaMapMarkerAlt className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Location & Tracking"}
-            </Link>
-          </li>
 
           {/* Reports & Analytics */}
           <li className="nav-item">

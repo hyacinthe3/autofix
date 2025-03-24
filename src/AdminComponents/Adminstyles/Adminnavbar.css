@@ -96,3 +96,6 @@
 .notification-item:last-child, .message-item:last-child {
   border-bottom: none;
 }
+.dark-mode .navbar{
+  background-color: #444;
+}

@@ -1,93 +1,113 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Form, Button, Card, Container, Row, Col, Spinner } from "react-bootstrap";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios for API calls
-import "bootstrap/dist/css/bootstrap.min.css";
-import { GiMechanicGarage } from "react-icons/gi";
-import { Alert } from "react-bootstrap";
+import { Notify } from "notiflix";
 import { Link } from "react-router-dom";
 
 const GarageLogin = () => {
+  const [GaragetinNumber, setGaragetinNumber] = useState("");
+  const [GaragePassword, setGaragePassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ GaragetinNumber: "", GaragePassword: "" });
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState(""); // 'success' or 'danger'
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // Check if the user is already logged in
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      Notify.info("You are already logged in.");
+      navigate("/Dashboard");
+    }
+  }, [navigate]);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/garages/login", formData); // Direct API call
+      const response = await axios.post("http://localhost:5000/garages/login", {
+        GaragetinNumber,
+        GaragePassword,
+      });
 
-      if (response.data.garage) {
-        localStorage.setItem("garageToken", response.data.token); // Store token in localStorage
+      if (response.data.success) {
+        // Store garage details in localStorage
+        localStorage.setItem("token", response.data.token); 
+        localStorage.setItem("garage", JSON.stringify(response.data.garage));
+        localStorage.setItem("garageId", response.data.garage.id); // Store garageId separately
 
-        setMessage("Login successful! Redirecting to dashboard...");
-        setMessageType("success");
-
-        setTimeout(() => {
-          navigate("/Dashboard");
-        }, 3000);
+        Notify.success("Login successful!");
+        navigate("/Dashboard"); // Redirect to dashboard
       }
     } catch (error) {
-      setMessage(error.response?.data?.message || "Login failed. Please check your credentials.");
-      setMessageType("danger");
+      console.error("Login error:", error.response?.data || error.message);
+
+      if (error.response?.status === 401) {
+        Notify.failure("Invalid TIN Number or Password.");
+      } else if (error.response?.status === 403) {
+        Notify.failure("Your account is not approved. Contact support.");
+      } else {
+        Notify.failure(error.response?.data?.message || "Login failed.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow-lg p-4" style={{ width: "400px" }}>
-        <h2 className="text-center mb-4">
-          <GiMechanicGarage /> Garage Login
-        </h2>
+    <div className="garage-register-container">
+      <div className="overlaygarageregister"></div>
+      <Container className="d-flex justify-content-center align-items-center vh-100">
+        <Row className="w-100">
+          <Col md={6} className="welcome-text text-white text-center">
+            <h1 style={{ fontSize: "70px" }}>Welcome to AutoFix</h1>
+            <p>Login to manage your garage and connect with car owners in need.</p>
+          </Col>
+          <Col md={6} lg={5} className="mx-auto">
+            <Card className="shadow-lg p-4 rounded-4 form-card">
+              <Card.Body>
+                <h3 className="text-center" style={{ color: "orange" }}>GARAGE LOGIN</h3>
+                <Form onSubmit={handleLogin} autoComplete="off">
+                  <Form.Group>
+                    <Form.Label>TIN Number</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={GaragetinNumber}
+                      onChange={(e) => setGaragetinNumber(e.target.value)}
+                      placeholder="Enter TIN Number"
+                      autoComplete="new-password"
+                      required
+                    />
+                  </Form.Group>
 
-        {message && (
-          <Alert variant={messageType} className="text-center">
-            {message}
-          </Alert>
-        )}
+                  <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      value={GaragePassword}
+                      onChange={(e) => setGaragePassword(e.target.value)}
+                      placeholder="Enter Password"
+                      autoComplete="new-password"
+                      required
+                    />
+                  </Form.Group>
 
-        <form onSubmit={handleSubmit} autoComplete="off">
-          <div className="mb-3">
-            <label className="form-label">TIN Number</label>
-            <input
-              type="text"
-              name="GaragetinNumber"
-              className="form-control"
-              placeholder="Enter your TIN number"
-              value={formData.GaragetinNumber}
-              onChange={handleChange}
-              required
-              autoComplete="new-password" // Prevent autofill
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              name="GaragePassword"
-              className="form-control"
-              placeholder="Enter your password"
-              value={formData.GaragePassword}
-              onChange={handleChange}
-              required
-              autoComplete="new-password" // Prevent autofill
-            />
-          </div>
-
-          <button type="submit" className="btn btn-success w-100">Login</button>
-        </form>
-
-        <center>
-          Not a member? <Link to="/GarageRegistrationForm">Register</Link>
-        </center>
-      </div>
+                  <center>
+                    <br />
+                    <Button type="submit" className="btn btn-warning btn-lg" disabled={loading}>
+                      {loading ? <Spinner as="span" animation="border" size="sm" /> : "Login"}
+                    </Button>
+                  </center>
+                </Form>
+                <br />
+                <center>
+                  Not A Member? <Link to="/GarageRegistrationForm">Register Here</Link>
+                </center>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
