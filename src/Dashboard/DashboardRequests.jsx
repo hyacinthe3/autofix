@@ -10,20 +10,25 @@ const GarageRequests = () => {
 
   useEffect(() => {
     const fetchRequests = async () => {
+      const garageId = localStorage.getItem("garageId");
+  
+      if (!garageId) {
+        Notify.failure("Garage not found. Please log in again.");
+        setError("Garage ID not found. Please log in.");
+        setLoading(false);
+        return;
+      }
+  
+      console.log("Fetching requests for garage ID:", garageId); // Debugging: Ensure garageId is correct
+  
       try {
-        // Get the garageId from localStorage
-        const garageId = localStorage.getItem("garageId");
-
-        if (!garageId) {
-          Notify.failure("Garage not found. Please log in again.");
-          return;
-        }
-
-        // Fetch requests from the backend for the logged-in garage
         const response = await axios.get(`http://localhost:5000/requests/garages/${garageId}/requests`);
         
         if (response.data.success) {
-          setRequests(response.data.requests); // Set the retrieved requests to state
+          console.log("Requests received:", response.data.requests); // Debugging: Log the received requests
+          setRequests(response.data.requests);
+        } else {
+          throw new Error(response.data.message || "Failed to fetch requests");
         }
       } catch (error) {
         console.error("Error fetching requests:", error);
@@ -33,7 +38,7 @@ const GarageRequests = () => {
         setLoading(false);
       }
     };
-
+  
     fetchRequests();
   }, []);
 
@@ -60,12 +65,12 @@ const GarageRequests = () => {
                     <strong>Car Issue:</strong> {request.carIssue}
                   </Card.Text>
                   <Card.Text>
-                    <strong>Location:</strong> {request.location.address || "Unknown"}
+                    <strong>Location:</strong> {request.location?.address || "Address not available"}
                   </Card.Text>
                   <Card.Text>
                     <strong>Contact:</strong> {request.contact}
                   </Card.Text>
-                  <Button variant="primary" onClick={() => {/* Handle request action, e.g. accept/reject */}}>
+                  <Button variant="primary" onClick={() => alert(`Viewing details for request ${request._id}`)}>
                     View Details
                   </Button>
                 </Card.Body>

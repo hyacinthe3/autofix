@@ -1,178 +1,192 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { FaCar, FaPhoneAlt, FaMapMarkerAlt, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 
 const RequestForm = () => {
-  const [carIssue, setCarIssue] = useState("");
-  const [carModel, setCarModel] = useState("");
-  const [contact, setContact] = useState("");
-  const [location, setLocation] = useState(null);
-  const [nearestGarages, setNearestGarages] = useState([]);
+  const [formData, setFormData] = useState({
+    carIssue: "",
+    carModel: "",
+    contact: "",
+    location: {
+      type: "Point",
+      coordinates: [],
+      address: "",
+    },
+  });
+
+  const [garages, setGarages] = useState([]);
   const [selectedGarage, setSelectedGarage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [requestSent, setRequestSent] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState(null);
 
-  // Get user's live location
+  // Get current location using Geolocation API
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        // Reverse Geocode API to get address (Optional, replace with actual API if needed)
+        const address = `Lat: ${latitude}, Lng: ${longitude}`;
+
+        setFormData((prev) => ({
+          ...prev,
+          location: {
             type: "Point",
-            coordinates: [position.coords.longitude, position.coords.latitude],
-          });
-        },
-        (error) => {
-          setError("Location access denied. Please enable location services.");
-        }
-      );
-    } else {
-      setError("Geolocation is not supported by this browser.");
-    }
+            coordinates: [longitude, latitude], // MongoDB uses [lng, lat]
+            address: address, // Required field in backend
+          },
+        }));
+      },
+      (error) => console.error("Error getting location:", error),
+      { enableHighAccuracy: true }
+    );
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!location) {
-      setError("Failed to get location. Please allow location access.");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-
-    try {
-      const response = await axios.post("http://localhost:5000/requests/send", {
-        carIssue,
-        carModel,
-        location,
-        contact,
-      });
-
-      if (response.data.success) {
-        // ✅ Filter only approved garages
-        const approvedGarages = response.data.nearestGarages.filter(
-          (garage) => garage.approvalStatus === "approved"
-        );
-        setNearestGarages(approvedGarages);
-      } else {
-        setError(response.data.message);
-      }
-    } catch (err) {
-      setError("Error sending request. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSelectGarage = async (garageId) => {
+  // Fetch nearby garages
+  const fetchGarages = async () => {
+    if (!formData.location.coordinates.length) {
+      alert("Location not available yet");
+      return;
+    }
     setLoading(true);
-    setRequestSent(false);
-
     try {
-      const response = await axios.post("http://localhost:5000/requests/assign", {
-        garageId,
-        carIssue,
-        carModel,
-        location,
-        contact,
-      });
+      console.log("Sending request data:", formData);
+      const response = await axios.post("http://localhost:5000/requests/send", formData);
+      setGarages(response.data.nearestGarages);
+    } catch (error) {
+      console.error("Error fetching garages:", error.response?.data || error.message);
+    }
+    setLoading(false);
+  };
 
-      if (response.data.success) {
-        setRequestSent(true);
-        setSelectedGarage(garageId);
-      } else {
-        setError(response.data.message);
-      }
-    } catch (err) {
-      setError("Error assigning request. Please try again.");
-    } finally {
-      setLoading(false);
+  // Send the request to the selected garage
+  const sendRequest = async () => {
+    if (!selectedGarage) {
+      alert("Please select a garage");
+      return;
+    }
+    try {
+      await axios.post("http://localhost:5000/requests/assign", {
+        ...formData,
+        garageId: selectedGarage,
+      });
+      setConfirmationMessage({
+        success: true,
+        message: "Request sent successfully! We'll contact you soon.",
+      });
+    } catch (error) {
+      setConfirmationMessage({
+        success: false,
+        message: `Error sending request: ${error.response?.data || error.message}`,
+      });
     }
   };
 
   return (
-    <div className="container mt-5" style={{ width: "50%" }}>
-      <br /><br /><br />
-      <h2>Request Emergency Assistance</h2>
+    <div className="container mt-5"><br /><br /><br /><br />
+      <h2 className="text-center">Car Repair Request</h2>
 
-      {error && <div className="alert alert-danger">{error}</div>}
+      {/* Form Wrapper with Grid */}
+      <div className="row justify-content-center">
+        <div className="col-md-6"> {/* Form is now 50% width on medium and larger screens */}
+          {/* Form Inputs */}
+          <div className="form-group">
+            <label>Car Issue</label>
+            <input
+              type="text"
+              name="carIssue"
+              placeholder="Enter the issue with your car"
+              value={formData.carIssue}
+              onChange={handleChange}
+              className="form-control mb-3"
+            />
+          </div>
+          <div className="form-group">
+            <label>Car Model</label>
+            <input
+              type="text"
+              name="carModel"
+              placeholder="Enter your car model"
+              value={formData.carModel}
+              onChange={handleChange}
+              className="form-control mb-3"
+            />
+          </div>
+          <div className="form-group">
+            <label>Contact Information</label>
+            <input
+              type="text"
+              name="contact"
+              placeholder="Enter your contact details"
+              value={formData.contact}
+              onChange={handleChange}
+              className="form-control mb-3"
+            />
+          </div>
 
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label>Car Issue</label>
-          <input
-            type="text"
-            className="form-control"
-            value={carIssue}
-            onChange={(e) => setCarIssue(e.target.value)}
-            required
-          />
+          {/* Button to find nearby garages */}
+          <button onClick={fetchGarages} className="btn btn-primary w-100 mb-4">
+            <FaMapMarkerAlt /> Find Nearby Garages
+          </button>
+
+          {/* Loading and Garage List */}
+          {loading && <p className="text-center">Loading garages...</p>}
+          {garages.length > 0 && (
+            <div>
+              <h3 className="text-center">Select a Garage</h3>
+              <div>
+                {garages.map((garage) => (
+                  <div key={garage._id} className="mb-4">
+                    <div className="card shadow-sm">
+                      <div className="card-body">
+                        <h5 className="card-title d-flex justify-content-between">
+                          <span>{garage.GarageName}</span>
+                          <span>{garage.distance.toFixed(2)} km</span>
+                        </h5>
+                        <p className="card-text">
+                          <FaPhoneAlt /> {garage.Garagephone}
+                        </p>
+                        <div className="d-flex justify-content-between">
+                          <button
+                            className={`btn ${selectedGarage === garage._id ? "btn-success" : "btn-outline-primary"}`}
+                            onClick={() => setSelectedGarage(garage._id)}
+                          >
+                            Select
+                          </button>
+                          <span>
+                            <FaCar /> {garage.GarageName}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button onClick={sendRequest} className="btn btn-warning btn-lg">
+                <FaCheckCircle /> Send Request
+              </button>
+            </div>
+          )}
+
+          {/* Confirmation Message */}
+          {confirmationMessage && (
+            <div
+              className={`alert mt-4 ${confirmationMessage.success ? "alert-success" : "alert-danger"}`}
+              role="alert"
+            >
+              {confirmationMessage.success ? <FaCheckCircle /> : <FaExclamationCircle />}{" "}
+              {confirmationMessage.message}
+            </div>
+          )}
         </div>
-
-        <div className="mb-3">
-          <label>Car Model</label>
-          <input
-            type="text"
-            className="form-control"
-            value={carModel}
-            onChange={(e) => setCarModel(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Contact</label>
-          <input
-            type="text"
-            className="form-control"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit" className="btn btn-warning btn-lg" disabled={loading}>
-          {loading ? "Sending..." : "Request Assistance"}
-        </button>
-      </form>
-
-      <br />
-
-      {nearestGarages.length > 0 && (
-        <div className="mt-4">
-          <h4>Nearest Approved Garages</h4>
-          <p>Select a garage to send your request:</p>
-          <ul className="list-group">
-            {nearestGarages.map((garage) => (
-              <li key={garage._id} className="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <strong>{garage.GarageName}</strong>
-                  <p>📍 {garage.location.address}</p>
-                  <p>📞 {garage.Garagephone}</p>
-                  <p>🚗 Distance: {garage.distance.toFixed(2)} km</p>
-                </div>
-                <button
-                  className={`btn btn-${selectedGarage === garage._id ? "success" : "primary"}`}
-                  onClick={() => handleSelectGarage(garage._id)}
-                  disabled={loading || selectedGarage === garage._id}
-                >
-                  {selectedGarage === garage._id ? "Request Sent ✅" : "Select & Send Request"}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {requestSent && (
-        <div className="alert alert-success mt-3">
-          Request sent successfully to the selected garage! 🚗🔧
-        </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default RequestForm;  
+export default RequestForm;
