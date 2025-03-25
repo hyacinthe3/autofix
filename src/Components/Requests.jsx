@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaCar, FaPhoneAlt, FaMapMarkerAlt, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import bgImage from "../assets/bg_2.jpg"; // Import your background image
 
 const RequestForm = () => {
   const [formData, setFormData] = useState({
@@ -24,16 +25,14 @@ const RequestForm = () => {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
-
-        // Reverse Geocode API to get address (Optional, replace with actual API if needed)
         const address = `Lat: ${latitude}, Lng: ${longitude}`;
 
         setFormData((prev) => ({
           ...prev,
           location: {
             type: "Point",
-            coordinates: [longitude, latitude], // MongoDB uses [lng, lat]
-            address: address, // Required field in backend
+            coordinates: [longitude, latitude],
+            address: address,
           },
         }));
       },
@@ -55,7 +54,6 @@ const RequestForm = () => {
     }
     setLoading(true);
     try {
-      console.log("Sending request data:", formData);
       const response = await axios.post("http://localhost:5000/requests/send", formData);
       setGarages(response.data.nearestGarages);
     } catch (error) {
@@ -88,103 +86,127 @@ const RequestForm = () => {
   };
 
   return (
-    <div className="container mt-5"><br /><br /><br /><br />
-      <h2 className="text-center">Car Repair Request</h2>
-
-      {/* Form Wrapper with Grid */}
-      <div className="row justify-content-center">
-        <div className="col-md-6"> {/* Form is now 50% width on medium and larger screens */}
-          {/* Form Inputs */}
-          <div className="form-group">
-            <label>Car Issue</label>
-            <input
-              type="text"
-              name="carIssue"
-              placeholder="Enter the issue with your car"
-              value={formData.carIssue}
-              onChange={handleChange}
-              className="form-control mb-3"
-            />
+    <div>
+      {/* Hero Section with Image and Overlay */}
+      <section
+        className="hero-wrap hero-wrap-2 js-fullheight"
+        style={{ backgroundImage: `url(${bgImage})` }}
+        data-stellar-background-ratio="0.5"
+      >
+        <div className="overlayindex d-flex align-items-end">
+          <div className="container">
+            <div className="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+              <div className="col-md-9 ftco-animate pb-5">
+              </div>
+            </div>
           </div>
-          <div className="form-group">
-            <label>Car Model</label>
-            <input
-              type="text"
-              name="carModel"
-              placeholder="Enter your car model"
-              value={formData.carModel}
-              onChange={handleChange}
-              className="form-control mb-3"
-            />
-          </div>
-          <div className="form-group">
-            <label>Contact Information</label>
-            <input
-              type="text"
-              name="contact"
-              placeholder="Enter your contact details"
-              value={formData.contact}
-              onChange={handleChange}
-              className="form-control mb-3"
-            />
-          </div>
+        </div>
+      </section>
 
-          {/* Button to find nearby garages */}
-          <button onClick={fetchGarages} className="btn btn-primary w-100 mb-4">
-            <FaMapMarkerAlt /> Find Nearby Garages
-          </button>
+      {/* Request Form */}
+      <section className="ftco-section py-5">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+            <h1 className="mb-1  text-black">Car Repair Request</h1>
 
-          {/* Loading and Garage List */}
-          {loading && <p className="text-center">Loading garages...</p>}
-          {garages.length > 0 && (
-            <div>
-              <h3 className="text-center">Select a Garage</h3>
-              <div>
-                {garages.map((garage) => (
-                  <div key={garage._id} className="mb-4">
-                    <div className="card shadow-sm">
-                      <div className="card-body">
-                        <h5 className="card-title d-flex justify-content-between">
-                          <span>{garage.GarageName}</span>
-                          <span>{garage.distance.toFixed(2)} km</span>
-                        </h5>
-                        <p className="card-text">
-                          <FaPhoneAlt /> {garage.Garagephone}
-                        </p>
-                        <div className="d-flex justify-content-between">
-                          <button
-                            className={`btn ${selectedGarage === garage._id ? "btn-success" : "btn-outline-primary"}`}
-                            onClick={() => setSelectedGarage(garage._id)}
-                          >
-                            Select
-                          </button>
-                          <span>
-                            <FaCar /> {garage.GarageName}
-                          </span>
+              <div className="bg-light p-5 contact-form border rounded shadow-lg">
+
+                {/* Form Fields */}
+                <div className="form-group">
+                  
+                  <label>Car Issue</label>
+                  <input
+                    type="text"
+                    name="carIssue"
+                    placeholder="Enter the issue with your car"
+                    value={formData.carIssue}
+                    onChange={handleChange}
+                    className="form-control mb-3"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Car Model</label>
+                  <input
+                    type="text"
+                    name="carModel"
+                    placeholder="Enter your car model"
+                    value={formData.carModel}
+                    onChange={handleChange}
+                    className="form-control mb-3"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Contact Information</label>
+                  <input
+                    type="text"
+                    name="contact"
+                    placeholder="Enter your contact details"
+                    value={formData.contact}
+                    onChange={handleChange}
+                    className="form-control mb-3"
+                  />
+                </div>
+
+                {/* Button to find nearby garages */}
+                <button onClick={fetchGarages} className="btn btn-primary w-100 mb-4">
+                  <FaMapMarkerAlt /> Find Nearby Garages
+                </button>
+
+                {/* Loading and Garage List */}
+                {loading && <p className="text-center">Loading garages...</p>}
+                {garages.length > 0 && (
+                  <div>
+                    <h3 className="text-center">Select a Garage</h3>
+                    {garages.map((garage) => (
+                      <div key={garage._id} className="mb-4">
+                        <div className="card shadow-sm">
+                          <div className="card-body">
+                            <h5 className="card-title d-flex justify-content-between">
+                              <span>{garage.GarageName}</span>
+                              <span>{garage.distance.toFixed(2)} km</span>
+                            </h5>
+                            <p className="card-text">
+                              <FaPhoneAlt /> {garage.Garagephone}
+                            </p>
+                            <div className="d-flex justify-content-between">
+                              <button
+                                className={`btn ${
+                                  selectedGarage === garage._id ? "btn-success" : "btn-outline-primary"
+                                }`}
+                                onClick={() => setSelectedGarage(garage._id)}
+                              >
+                                Select
+                              </button>
+                              <span>
+                                <FaCar /> {garage.GarageName}
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ))}
+                    <button onClick={sendRequest} className="btn btn-warning btn-lg">
+                      <FaCheckCircle /> Send Request
+                    </button>
                   </div>
-                ))}
-              </div>
-              <button onClick={sendRequest} className="btn btn-warning btn-lg">
-                <FaCheckCircle /> Send Request
-              </button>
-            </div>
-          )}
+                )}
 
-          {/* Confirmation Message */}
-          {confirmationMessage && (
-            <div
-              className={`alert mt-4 ${confirmationMessage.success ? "alert-success" : "alert-danger"}`}
-              role="alert"
-            >
-              {confirmationMessage.success ? <FaCheckCircle /> : <FaExclamationCircle />}{" "}
-              {confirmationMessage.message}
+                {/* Confirmation Message */}
+                {confirmationMessage && (
+                  <div
+                    className={`alert mt-4 ${confirmationMessage.success ? "alert-success" : "alert-danger"}`}
+                    role="alert"
+                  >
+                    {confirmationMessage.success ? <FaCheckCircle /> : <FaExclamationCircle />}{" "}
+                    {confirmationMessage.message}
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
