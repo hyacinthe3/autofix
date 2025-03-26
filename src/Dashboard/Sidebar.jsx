@@ -47,18 +47,19 @@ const Sidebar = () => {
           <div className="d-flex justify-content-between align-items-center">
             {!isCollapsed && <h5 className="fw-bold">AUT FIX</h5>}
             <button className="btn btn-outline-light" onClick={handleCollapseToggle}>
-              {isCollapsed ? <FaEllipsisH /> : <FaBars />}
+              {isCollapsed ? <FaEllipsisH style={{ color: "#343a40" }} /> : <FaBars style={{ color: "#343a40" }} />}
             </button>
+
           </div>
           <hr className="styled-hr" />
 
-          
-{/* Display the garage name below "AUT FIX" */}
-{!isCollapsed && garageName && (
-  <big className="text-muted">
-    <font color="white"> <b>{garageName.toUpperCase()}</b></font>
-  </big>
-)}
+
+          {/* Display the garage name below "AUT FIX" */}
+          {!isCollapsed && garageName && (
+            <big className="text-muted">
+              <font color="white"> <b>{garageName.toUpperCase()}</b></font>
+            </big>
+          )}
 
         </div>
 
@@ -75,7 +76,7 @@ const Sidebar = () => {
               <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "View Requests"}
             </Link>
           </li>
-          
+
 
           <li className="nav-item">
             <Link to="/MechanicRegister" className="nav-link text-white d-flex align-items-center">

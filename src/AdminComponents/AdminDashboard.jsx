@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./Adminstyles/Admindashboard.css"; // Ensure you have the necessary styles
 import "./AdminCharts"; // Assuming you have the chart component for future use
+// import charts from "./DashCharts.jsx";
 
 const AdminDashboard = ({ isCollapsed }) => {
   const [totalGarages, setTotalGarages] = useState(0);
@@ -10,15 +11,13 @@ const AdminDashboard = ({ isCollapsed }) => {
 
   useEffect(() => {
     // Fetch the garages data from the API
-    axios.get("http://localhost:5000/garage/garages")
-      .then(response => {
-        const garages = response.data;
+    axios.get("http://localhost:5000/garages/garages/all")
+  .then(response => {
+    setTotalGarages(response.data.totalGarages);
+    setApprovedGarages(response.data.approvedGarages);
+    setPendingGarages(response.data.pendingGarages);
+  })
 
-        // Count total garages, approved, and pending
-        setTotalGarages(garages.length);
-        setApprovedGarages(garages.filter(garage => garage.approvalStatus === "approved").length);
-        setPendingGarages(garages.filter(garage => garage.approvalStatus === "pending").length);
-      })
       .catch(error => {
         console.error("Error fetching garages:", error);
         // Handle error if necessary, for example, showing a notification
@@ -49,7 +48,7 @@ const AdminDashboard = ({ isCollapsed }) => {
           ))}
         </div>
       </center>
-      {/* <AdminCharts/> */} {/* You can uncomment this if you add charts later */}
+      {/* <DashCharts/>  */}
     </div>
   );
 };
