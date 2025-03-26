@@ -57,7 +57,7 @@ const Contact = () => {
               <div className="col-md-9 ftco-animate pb-5">
                 <p className="breadcrumbs text-white d-flex align-items-center">
                   <span className="mb-0">
-                    <Link to="/home" className="nav-link text-orange" style={{ textDecoration: "none" }}>
+                    <Link to="/" className="nav-link text-orange" style={{ textDecoration: "none" }}>
                       Home
                     </Link>
                   </span>

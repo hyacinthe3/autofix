@@ -5,11 +5,10 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import "./GarageRegister.css";
 
 const GarageRegister = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
   const [certification, setCertification] = useState(null);
   const [loadingLocation, setLoadingLocation] = useState(false);
 
@@ -72,9 +71,15 @@ const GarageRegister = () => {
     }
   };
 
+  // Regex for Rwanda phone number validation
+  const phoneRegex = /^(?:\+2507\d{8}|07\d{8})$/;
+
   return (
     <div className="garage-register-container">
       <div className="overlaygarageregister"></div>
+      <div className="position-absolute top-0 start-0 p-3">
+        <Link to="/" className="btn btn-outline-light">Home</Link>
+      </div>
       <Container className="d-flex justify-content-center align-items-center vh-100">
         <Row className="w-100">
           <Col md={6} className="welcome-text text-white text-center">
@@ -88,7 +93,7 @@ const GarageRegister = () => {
                 <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                   <Form.Group>
                     <Form.Label>Garage Name</Form.Label>
-                    <Form.Control type="text" {...register("GarageName", { required: true })} placeholder="Enter Garage Name" />
+                    <Form.Control type="text" {...register("GarageName", { required: "Garage Name is required" })} placeholder="Enter Garage Name" />
                   </Form.Group>
 
                   <Form.Group>
@@ -96,13 +101,16 @@ const GarageRegister = () => {
                     <Form.Control 
                       type="text"
                       {...register("GaragetinNumber", {
-                        required: true,
-                        pattern: /^(10|11|12|13)\d{7}$/
+                        required: "TIN Number is required",
+                        pattern: {
+                          value: /^(10|11|12|13)\d{7}$/,
+                          message: "TIN Number must be 9 digits, starting with 10, 11, 12, or 13."
+                        }
                       })}
                       placeholder="Enter TIN Number" 
                       autoComplete="new-password"
                     />
-                    {errors.GaragetinNumber && <small className="text-danger">TIN Number must be 9 digits, starting with 10, 11, 12, or 13.</small>}
+                    {errors.GaragetinNumber && <small className="text-danger">{errors.GaragetinNumber.message}</small>}
                   </Form.Group>
 
                   <Form.Group>
@@ -110,18 +118,32 @@ const GarageRegister = () => {
                     <Form.Control 
                       type="password" 
                       {...register("GaragePassword", {
-                        required: true,
-                        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/
+                        required: "Password is required",
+                        pattern: {
+                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/,
+                          message: "Password must be 8+ characters with uppercase, lowercase, number, and symbol."
+                        }
                       })} 
                       placeholder="Enter Password" 
                       autoComplete="new-password"
                     />
-                    {errors.GaragePassword && <small className="text-danger">Password must be 8+ characters with uppercase, lowercase, number, and symbol.</small>}
+                    {errors.GaragePassword && <small className="text-danger">{errors.GaragePassword.message}</small>}
                   </Form.Group>
 
                   <Form.Group>
                     <Form.Label>Garage Phone Number</Form.Label>
-                    <Form.Control type="text" {...register("Garagephone", { required: true })} placeholder="Enter Phone Number" />
+                    <Form.Control 
+                      type="text" 
+                      {...register("Garagephone", { 
+                        required: "Phone number is required", 
+                        pattern: {
+                          value: phoneRegex,
+                          message: "Please enter a valid phone number (e.g., +250XXXXXXXX or 07XXXXXXXX)"
+                        }
+                      })} 
+                      placeholder="Enter Phone Number" 
+                    />
+                    {errors.Garagephone && <small className="text-danger">{errors.Garagephone.message}</small>}
                   </Form.Group>
 
                   <Form.Group>
@@ -134,7 +156,7 @@ const GarageRegister = () => {
                     <Form.Label>Certification </Form.Label>
                     <Form.Control type="file" onChange={(e) => setCertification(e.target.files[0])} required />
                   </Form.Group>
-<br />
+                  <br />
                   <center><Button type="submit" className="btn btn-warning btn-lg">Register Garage</Button></center>
                 </Form>
                 <center>Already a member? <Link to="/GarageLogin">Login Here</Link></center>

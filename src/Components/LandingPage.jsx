@@ -7,44 +7,43 @@ import bgImage from '../assets/bg_2.jpg';
 const LandingPage = () => {
   return (
     <div className="landing-container">
-     <div className="hero-section" style={{ backgroundImage: `url(${bgImage})` }}>
-      <div className="hero-overlay position-absolute w-100 h-100 top-0 start-0"></div>
-      <div className="container text-center text-white position-relative"><br /><br /><br /><br /><br /><br /><br />
-        <h1 className="display-4 fw-bold"><i className="fas fa-car-crash"></i> AUT FIX - Your Roadside Savior</h1>
-        <p className="lead">
-          Stranded due to a car breakdown? Our platform connects you with professional mechanics nearby <br />
-          Get immediate car repair assistance anywhere, anytime! Quick, reliable, and hassle-free.
-        </p>
-        <div className="d-flex justify-content-center mt-4">
-            <Link to="/register" className="btn btn-warning me-3">
-              <i className="fas fa-car"></i> Register as Driver
-            </Link>
+      <div className="hero-section" style={{ backgroundImage: `url(${bgImage})` }}>
+        <div className="hero-overlay position-absolute w-100 h-100 top-0 start-0"></div>
+        <div className="container text-center text-white position-relative">
+          <br /><br /><br /><br /><br /><br /><br />
+          <h1 className="display-4 fw-bold"><i className="fas fa-car-crash"></i> AUT FIX - Your Roadside Savior</h1>
+          <p className="lead">
+            Looking for more customers for your garage? Join our platform and connect with car owners in need of immediate repair assistance. 
+            We help you expand your reach and grow your business, all while offering quick, reliable, and hassle-free service.
+          </p>
+          <div className="d-flex justify-content-center mt-4">
             <Link to="/GarageRegistrationForm" className="btn btn-outline-light">
-              <i className="fas fa-tools"></i> Register as Mechanic
+              <i className="fas fa-tools"></i> Register Your Garage Today
             </Link>
           </div>
+        </div>
       </div>
-    </div>
+
       {/* Features Section */}
       <div className="container features-section">
-        <h2 className="text-center mb-4 fw-bold">Why Choose AUT FIX?</h2>
+        <h2 className="text-center mb-4 fw-bold">Why Partner with AUT FIX?</h2>
         <div className="row">
           <div className="col-md-4">
             <div className="feature-card">
-              <h3><i className="fas fa-tools"></i> Instant Repair Assistance</h3>
-              <p>Find the nearest available mechanic and get help in **minutes**.</p>
+              <h3><i className="fas fa-tools"></i> Instant Customer Leads</h3>
+              <p>Get connected with car owners in need of immediate repair assistance. Increase your customer base within minutes!</p>
             </div>
           </div>
           <div className="col-md-4">
             <div className="feature-card">
-              <h3><i className="fas fa-user-shield"></i> Verified & Trusted Mechanics</h3>
-              <p>All mechanics are **certified professionals** with a high rating.</p>
+              <h3><i className="fas fa-user-shield"></i> Verified & Trusted Platform</h3>
+              <p>Our platform is trusted by thousands of car owners. By partnering with AUT FIX, you gain credibility and visibility with verified users.</p>
             </div>
           </div>
           <div className="col-md-4">
             <div className="feature-card">
               <h3><i className="fas fa-map-marker-alt"></i> GPS-Based Service</h3>
-              <p>We use **real-time GPS tracking** to match you with the **nearest mechanic**.</p>
+              <p>Our real-time GPS system ensures that you get service requests from nearby car owners, reducing response time and increasing customer satisfaction.</p>
             </div>
           </div>
         </div>
@@ -53,41 +52,29 @@ const LandingPage = () => {
       {/* Testimonials Section */}
       <div className="testimonials-section">
         <div className="container text-center text-white">
-          <h2 className="mb-4"><i className="fas fa-star"></i> What Our Customers Say</h2>
+          <h2 className="mb-4"><i className="fas fa-star"></i> What Our Partner Garages Say</h2>
           <p className="testimonial-text">
-            <i className="fas fa-quote-left"></i> "I was stranded in the middle of nowhere, but AUT FIX connected me with a mechanic **in just 10 minutes**! 
-            Best service ever!" – <strong>Sarah M.</strong>
+            <i className="fas fa-quote-left"></i> "Joining AUT FIX has helped me grow my customer base and expand my business. 
+            The leads I get are high-quality and always in need of urgent repair!" – <strong>Joe's Garage</strong>
           </p>
           <p className="testimonial-text">
-            <i className="fas fa-quote-left"></i> "Super fast response time! The mechanic arrived **within 15 minutes** and fixed my car on the spot. 
-            Highly recommend!" – <strong>James D.</strong>
+            <i className="fas fa-quote-left"></i> "I’ve never had so many clients in a short time. AUT FIX helped me get more work, and my reputation grew through their platform." – <strong>Smith's Auto Repair</strong>
           </p>
         </div>
       </div>
 
       {/* Call-to-Action Section */}
       <div className="cta-section text-center">
-        <h2 className="fw-bold"><i className="fas fa-road"></i> Join Thousands of Happy Drivers</h2>
-        <p className="lead">Sign up now and never worry about breakdowns again!</p>
+        <h2 className="fw-bold"><i className="fas fa-road"></i> Join Thousands of Successful Garages</h2>
+        <p className="lead">Partner with us and start receiving more customer requests! Grow your business, boost your reputation, and increase your revenue.</p>
         <div className="d-flex justify-content-center mt-4">
-            <Link to="/GarageRegistrationForm" className="btn btn-warning me-3">
-              <i className="fas fa-car"></i> Register as Driver
-            </Link>
-            <Link to="/GarageRegister" className="btn btn-warning me-3">
-              <i className="fas fa-car"></i> Register as Mechanic
-            </Link>
-            
-          </div>
+          <Link to="/GarageRegister" className="btn btn-warning me-3">
+            <i className="fas fa-car"></i> Register Your Garage Now
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
 
 export default LandingPage;
-
-
-
-
-
-
-

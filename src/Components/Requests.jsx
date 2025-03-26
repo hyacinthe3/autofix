@@ -19,11 +19,12 @@ const RequestForm = () => {
   const [selectedGarage, setSelectedGarage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(""); // State for phone validation error
 
   // Get current location using Geolocation API
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
-      async (position) => {
+      (position) => {
         const { latitude, longitude } = position.coords;
         const address = `Lat: ${latitude}, Lng: ${longitude}`;
 
@@ -44,6 +45,20 @@ const RequestForm = () => {
   // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    if (e.target.name === "contact") {
+      validatePhoneNumber(e.target.value);
+    }
+  };
+
+  // Validate phone number (Rwandan format)
+  const validatePhoneNumber = (number) => {
+    const phoneRegex = /^(?:\+2507\d{8}|07\d{8})$/; // Supports both +2507XXXXXXXX and 07XXXXXXXX
+    if (!phoneRegex.test(number)) {
+      setErrorMessage("Invalid phone number! Use +2507XXXXXXXX or 07XXXXXXXX.");
+    } else {
+      setErrorMessage(""); // Clear error if valid
+    }
   };
 
   // Fetch nearby garages
@@ -64,6 +79,11 @@ const RequestForm = () => {
 
   // Send the request to the selected garage
   const sendRequest = async () => {
+    if (errorMessage) {
+      alert("Please correct the errors before submitting.");
+      return;
+    }
+
     if (!selectedGarage) {
       alert("Please select a garage");
       return;
@@ -75,7 +95,7 @@ const RequestForm = () => {
       });
       setConfirmationMessage({
         success: true,
-        message: "Request sent successfully! We'll contact you soon.",
+        message: "Request sent successfully! You'll get contacted soon.",
       });
     } catch (error) {
       setConfirmationMessage({
@@ -96,8 +116,7 @@ const RequestForm = () => {
         <div className="overlayindex d-flex align-items-end">
           <div className="container">
             <div className="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-              <div className="col-md-9 ftco-animate pb-5">
-              </div>
+              <div className="col-md-9 ftco-animate pb-5"></div>
             </div>
           </div>
         </div>
@@ -108,13 +127,11 @@ const RequestForm = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-6">
-            <h1 className="mb-1  text-black">Car Repair Request</h1>
+              <h1 className="mb-1 text-black">Car Repair Request</h1>
 
               <div className="bg-light p-5 contact-form border rounded shadow-lg">
-
                 {/* Form Fields */}
                 <div className="form-group">
-                  
                   <label>Car Issue</label>
                   <input
                     type="text"
@@ -144,12 +161,13 @@ const RequestForm = () => {
                     placeholder="Enter your contact details"
                     value={formData.contact}
                     onChange={handleChange}
-                    className="form-control mb-3"
+                    className={`form-control mb-3 ${errorMessage ? "is-invalid" : ""}`}
                   />
+                  {errorMessage && <div className="text-danger">{errorMessage}</div>} {/* Show error */}
                 </div>
 
                 {/* Button to find nearby garages */}
-                <button onClick={fetchGarages} className="btn btn-primary w-100 mb-4">
+                <button onClick={fetchGarages} className="btn btn-warning w-100 mb-4">
                   <FaMapMarkerAlt /> Find Nearby Garages
                 </button>
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Container, Row, Col, Card, Button, Spinner, Modal, Alert } from "react-bootstrap";
 import { Notify } from "notiflix";
 
-const GarageRequests = () => {
+const GarageRequests = ({ isCollapsed }) => {
   const [requests, setRequests] = useState([]);
   const [mechanics, setMechanics] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -72,9 +72,23 @@ const GarageRequests = () => {
     }
   };
 
+  // Debugging: Log the current value of isCollapsed
+  console.log("Sidebar Collapsed:", isCollapsed);
+
   return (
-    <Container className="mt-5">
-      <h3 className="text-center mb-4">Requests Assigned to Your Garage</h3>
+    <Container
+      className="mt-5"
+      style={{
+        paddingLeft: isCollapsed ? "10px" : "20px", // Adjust padding based on collapse state
+        paddingRight: isCollapsed ? "10px" : "20px", // Adjust padding based on collapse state
+        transition: "padding 0.3s ease", // Smooth transition for padding changes
+        marginLeft: "250px ",
+      }}
+    >
+      <h3 className={`text-center mb-4 ${isCollapsed ? 'collapsed-title' : ''}`} style={{
+       
+        marginLeft: "-250px ",
+      }}>Requests Assigned to Your Garage</h3>
 
       {error && <Alert variant="danger">{error}</Alert>}
       {loading ? (
@@ -86,7 +100,12 @@ const GarageRequests = () => {
       ) : (
         <Row>
           {requests.map((request) => (
-            <Col key={request._id} md={6} lg={4} className="mb-4">
+            <Col
+              key={request._id}
+              md={isCollapsed ? 6 : 4} // Adjust column size based on collapse state
+              lg={isCollapsed ? 4 : 3} // Adjust column size based on collapse state
+              className="mb-4"
+            >
               <Card>
                 <Card.Body>
                   <Card.Title>{request.carModel}</Card.Title>
@@ -111,31 +130,34 @@ const GarageRequests = () => {
 
       {/* Modal for Selecting a Mechanic */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Select a Mechanic</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {mechanics.length === 0 ? (
-            <p>No mechanics available.</p>
-          ) : (
-            mechanics.map((mechanic) => (
-              <div key={mechanic._id} className="p-2 border rounded mb-2">
-                <p className="mb-1"><strong>Full Name:</strong> {mechanic.fullName}</p>
-                <p className="mb-1"><strong>Phone Number:</strong> {mechanic.phoneNumber}</p>
-                <p className="mb-1"><strong>Specialisation:</strong> {mechanic.specialisation}</p>
-                <Button variant="dark" className="w-100" onClick={() => handleSelectMechanic(mechanic)}>
-                  Assign Mechanic
-                </Button>
-              </div>
-            ))
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
+  <Modal.Header closeButton>
+    <Modal.Title>Select a Mechanic</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    {mechanics.length === 0 ? (
+      <p>No mechanics available.</p>
+    ) : (
+      mechanics.map((mechanic) => (
+        <div key={mechanic._id} className="p-2 border rounded mb-2">
+          <p className="mb-1"><strong>Full Name:</strong> {mechanic.fullName}</p>
+          <p className="mb-1"><strong>Phone Number:</strong> {mechanic.phoneNumber}</p>
+          <p className="mb-1"><strong>Specialisation:</strong> {mechanic.specialisation}</p>
+          {/* Changed button color to blue */}
+          <Button variant="primary" className="w-100" onClick={() => handleSelectMechanic(mechanic)}>
+            Assign Mechanic
           </Button>
-        </Modal.Footer>
-      </Modal>
+        </div>
+      ))
+    )}
+  </Modal.Body>
+  <Modal.Footer>
+    {/* Changed Close button to blue */}
+    <Button variant="primary" onClick={() => setShowModal(false)}>
+      Close
+    </Button>
+  </Modal.Footer>
+</Modal>
+
     </Container>
   );
 };

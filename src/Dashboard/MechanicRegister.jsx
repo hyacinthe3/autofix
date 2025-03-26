@@ -37,9 +37,11 @@ const MechanicRegister = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
+    <Container className="d-flex justify-content-center align-items-center vh-96">
+      
       <Row className="w-100">
         <Col md={8} lg={6} className="mx-auto">
+        <h2 className="text-center mt-3">Register Mechanics </h2><br />
           <Card className="shadow-lg p-4 rounded-4">
             <Card.Body>
               <h3 className="text-center">

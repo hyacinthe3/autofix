@@ -89,11 +89,11 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/FeedBack" className="nav-link text-white d-flex align-items-center">
               <RiFeedbackFill className="me-2 fs-5" /> {!isCollapsed && "Ratings & Feedback"}
             </Link>
-          </li>
+          </li> */}
 
           <li className="nav-item">
             <Link to="/support" className="nav-link text-white d-flex align-items-center">

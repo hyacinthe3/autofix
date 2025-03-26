@@ -38,7 +38,7 @@ const AdminNavbar = ({ isCollapsed }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("garage");
-    navigate("/GarageLogin"); // Redirect to login page
+    navigate("/"); // Redirect to login page
   };
 
   return (

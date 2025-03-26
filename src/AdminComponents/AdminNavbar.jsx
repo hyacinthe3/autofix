@@ -89,7 +89,7 @@ const AdminNavbar = ({ isCollapsed }) => {
 
       {/* Theme Toggle Button */}
       <Button variant="link" onClick={handleThemeToggle} className="text-dark">
-        {isDarkMode ? <FaSun size={24} color="yellow" /> : <FaMoon size={24} />}
+        {isDarkMode ? <FaSun size={24} color="gray" /> : <FaMoon size={24} />}
       </Button>
     </Navbar>
   );

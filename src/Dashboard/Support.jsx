@@ -26,8 +26,8 @@ const Support = () => {
         <Card className="p-3 mb-4">
           <h4>Frequently Asked Questions</h4>
           <ul>
-            <li><strong>How do I update my profile?</strong> - Go to your dashboard and click on 'Edit Profile'.</li>
-            <li><strong>How do I accept a service request?</strong> - Navigate to 'Pending Requests' and click 'Accept'.</li>
+            {/* <li><strong>How do I update my profile?</strong> - Go to your dashboard and click on 'Edit Profile'.</li> */}
+            <li><strong>How do I check a service request?</strong> - Navigate to 'view Requests' and  you will see requests sent to yoy and the location and contact info.</li>
             <li><strong>How do I contact the admin?</strong> - Use the support form below or email  hyacintheihimbazwe98@gmail.com</li>
           </ul>
         </Card>

@@ -56,6 +56,27 @@ const GarageList = () => {
         });
     };
 
+    const handleUpdateAndApprove = (id) => {
+        Swal.fire({
+            title: "Approve Garage Again?",
+            text: "Are you sure you want to approve this rejected garage?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Approve",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(`http://localhost:5000/garages/approve/${id}`)
+                    .then(() => {
+                        setGarages(prev => prev.map(g => g._id === id ? { ...g, approvalStatus: "approved" } : g));
+                        Swal.fire("Approved!", "The garage has been approved.", "success");
+                    })
+                    .catch(error => console.error("Error updating and approving garage:", error));
+            }
+        });
+    };
+
     return (
         <div className="container mt-4">
             <h2 className="text-center mb-4">Pending & Rejected Garages</h2>
@@ -71,28 +92,33 @@ const GarageList = () => {
                     </tr>
                 </thead>
                 <tbody>
-        {garages.filter(garage => garage.approvalStatus !== "approved").map((garage, index) => (
-            <tr key={garage._id} className="align-middle text-center">
-                <td>{index + 1}</td>
-                <td>{garage.GarageName}</td>  {/* ✅ Fixed field name */}
-                <td>{garage.GaragetinNumber}</td>
-                <td>{garage.location.coordinates?.join(", ")}</td> {/* ✅ Fixed location */}
-                <td>{garage.approvalStatus}</td>
-                <td>
-                    {garage.approvalStatus === "pending" && (
-                        <>
-                            <button className="btn btn-success btn-sm me-2" onClick={() => handleApprove(garage._id)}>
-                                Approve
-                            </button>
-                            <button className="btn btn-danger btn-sm" onClick={() => handleReject(garage._id)}>
-                                Reject
-                            </button>
-                        </>
-                    )}
-                </td>
-            </tr>
-        ))}
-    </tbody>
+                    {garages.filter(garage => garage.approvalStatus !== "approved").map((garage, index) => (
+                        <tr key={garage._id} className="align-middle text-center">
+                            <td>{index + 1}</td>
+                            <td>{garage.GarageName}</td>
+                            <td>{garage.GaragetinNumber}</td>
+                            <td>{garage.location.address || "Address not available"}</td> {/* Show the address here */}
+                            <td>{garage.approvalStatus}</td>
+                            <td>
+                                {garage.approvalStatus === "pending" && (
+                                    <>
+                                        <button className="btn btn-success btn-sm me-2" onClick={() => handleApprove(garage._id)}>
+                                            Approve
+                                        </button>
+                                        <button className="btn btn-danger btn-sm" onClick={() => handleReject(garage._id)}>
+                                            Reject
+                                        </button>
+                                    </>
+                                )}
+                                {garage.approvalStatus === "rejected" && (
+                                    <button className="btn btn-info btn-sm" onClick={() => handleUpdateAndApprove(garage._id)}>
+                                        Update & Approve
+                                    </button>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
         </div>
     );

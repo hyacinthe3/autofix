@@ -270,74 +270,7 @@ const Inde = () => {
 
 
 
-            <section className="ftco-section testimony-section">
-                <div className="container">
-                    <div className="row justify-content-center mb-5">
-                        <div className="col-md-7 text-center heading-section ftco-animate">
-                            <span className="subheading">Testimonial</span>
-                            <h2 className="mb-3">Happy Clients</h2>
-                        </div>
-                    </div>
-                    <div className="row ftco-animate">
-                        <div className="col-md-12">
-                            <div className="carousel-testimony owl-carousel ftco-owl">
-                                <div className="item">
-                                    <div className="testimony-wrap text-center py-4 pb-5">
-                                        <div
-                                            className="user-img mb-4"
-                                            style={{ backgroundImage: `url(${person_1})` }}
-                                        ></div>
-                                        <div className="text pt-4">
-                                            <p className="mb-4">
-                                                Far far away, behind the word mountains, far from the
-                                                countries Vokalia and Consonantia, there live the blind
-                                                texts.
-                                            </p>
-                                            <p className="name">Roger Scott</p>
-                                            <span className="position">Marketing Manager</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="testimony-wrap text-center py-4 pb-5">
-                                        <div
-                                            className="user-img mb-4"
-                                            style={{ backgroundImage: `url(${person_2})` }}
-                                        ></div>
-                                        <div className="text pt-4">
-                                            <p className="mb-4">
-                                                Far far away, behind the word mountains, far from the
-                                                countries Vokalia and Consonantia, there live the blind
-                                                texts.
-                                            </p>
-                                            <p className="name">Roger Scott</p>
-                                            <span className="position">Interface Designer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="testimony-wrap text-center py-4 pb-5">
-                                        <div
-                                            className="user-img mb-4"
-                                            style={{ backgroundImage: `url(${person_3})` }}
-                                        ></div>
-                                        <div className="text pt-4">
-                                            <p className="mb-4">
-                                                Far far away, behind the word mountains, far from the
-                                                countries Vokalia and Consonantia, there live the blind
-                                                texts.
-                                            </p>
-                                            <p className="name">Roger Scott</p>
-                                            <span className="position">UI Designer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* Add more items if needed */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            
 
             <section className="container my-5">
         <div className="row align-items-center">
@@ -366,19 +299,19 @@ const Inde = () => {
             <div className="col-md-4">
               <div className="p-4 shadow rounded bg-white">
                 <h4>User Registration</h4>
-                <p>Both drivers and mechanics can create accounts to access our services.</p>
+                <p>The Garages  can create accounts to access our services fully.</p>
               </div>
             </div>
             <div className="col-md-4">
               <div className="p-4 shadow rounded bg-white">
                 <h4>Location-Based Matching</h4>
-                <p>Get connected with the nearest available mechanic for quick assistance.</p>
+                <p>Get connected with the nearest available Garage for quick assistance.</p>
               </div>
             </div>
             <div className="col-md-4">
               <div className="p-4 shadow rounded bg-white">
                 <h4>Emergency Assistance</h4>
-                <p>Instantly request help and get real-time responses from available mechanics.</p>
+                <p>Instantly request help and get real-time responses from available Garage.</p>
               </div>
             </div>
           </div>

@@ -61,13 +61,13 @@ const Navbar = () => {
             </li>
 
 
-            <li className="nav-item custom-nav-item">
+            {/* <li className="nav-item custom-nav-item">
               <Link to="/ViewRequests" className={`nav-link text-dark ${getActiveClass("/ViewRequests")}`}>ViewRequests</Link>
-            </li>
+            </li> */}
 
             
             <li className="nav-item custom-nav-item">
-              <Link to="/LandingPage" className={`nav-link text-dark ${getActiveClass("/LandingPage")}`}>Landing</Link>
+              <Link to="/LandingPage" className={`nav-link text-dark ${getActiveClass("/LandingPage")}`}>My Garage</Link>
             </li>
           </ul>
         </div>

@@ -51,3 +51,16 @@
   border: none;
   cursor: pointer;
 }
+.content-container {
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+/* Adjust when collapsed */
+.content-container.expanded {
+  margin-left: 80px; /* Sidebar collapsed width */
+}
+
+/* Add this rule to the dashboard for smooth transition */
+
+

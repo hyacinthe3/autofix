@@ -8,7 +8,8 @@ import { IoGitPullRequestSharp } from "react-icons/io5";
 import { GiSatelliteCommunication } from "react-icons/gi";
 import { RiFeedbackFill } from "react-icons/ri";
 import { GrUserManager } from "react-icons/gr";
-import admin from "../assets/admin.jpg";  
+import admin from "../assets/admin.jpg"; 
+import { GiMechanicGarage } from "react-icons/gi"; 
 import { LuMessageSquareText } from "react-icons/lu";
 
 const AdminSidebar = () => {
@@ -49,7 +50,7 @@ const AdminSidebar = () => {
           {/* User Management */}
           <li className="nav-item">
             <a href="#" className="nav-link text-white d-flex align-items-center" onClick={() => toggleSubmenu('user-management')}>
-              <GrUserManager className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Garage Management"}
+            <GiMechanicGarage className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Garage Management"}
               <span className={`submenu-arrow ms-auto ${activeSubmenu === 'user-management' ? 'open' : ''}`}>
                 {activeSubmenu === 'user-management' ? <FaChevronUp /> : <FaChevronDown />}
               </span>
@@ -68,11 +69,11 @@ const AdminSidebar = () => {
 
 
           {/* Reports & Analytics */}
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/Adminreports" className="nav-link text-white d-flex align-items-center">
               <FaChartBar className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Reports & Analytics"}
             </Link>
-          </li>
+          </li> */}
 
           {/* Notifications & Alerts */}
           <li className="nav-item">
@@ -82,11 +83,11 @@ const AdminSidebar = () => {
           </li>
 
           {/* Customer Support */}
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/Adminsupport" className="nav-link text-white d-flex align-items-center">
               <RiFeedbackFill className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Customer Support"}
             </Link>
-          </li>
+          </li> */}
         </ul>
 
         <button className="btn btn-dark toggle-btn" onClick={handleCollapseToggle}>

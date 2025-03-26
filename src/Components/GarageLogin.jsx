@@ -57,6 +57,9 @@ const GarageLogin = () => {
   return (
     <div className="garage-register-container">
       <div className="overlaygarageregister"></div>
+      <div className="position-absolute top-0 start-0 p-3">
+              <Link to="/" className="btn btn-outline-light">Home</Link>
+            </div>
       <Container className="d-flex justify-content-center align-items-center vh-100">
         <Row className="w-100">
           <Col md={6} className="welcome-text text-white text-center">
