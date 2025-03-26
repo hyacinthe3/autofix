@@ -14,24 +14,7 @@ const AdminNavbar = ({ isCollapsed }) => {
   const [error, setError] = useState(null);
 
   // Fetch settings from backend
-  const fetchAdminSettings = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get("http://localhost:5000/admin/settings");
-      setSettings(response.data);
-      setError(null);
-    } catch (error) {
-      console.error("Error fetching admin settings:", error);
-      setError("Failed to load settings");
-      setSettings(null);
-    }
-    setLoading(false);
-  };
 
-  useEffect(() => {
-    fetchAdminSettings();
-    document.body.classList.toggle("dark-mode", isDarkMode);
-  }, [isDarkMode]);
 
   // Toggle Dark Mode
   const handleThemeToggle = () => {

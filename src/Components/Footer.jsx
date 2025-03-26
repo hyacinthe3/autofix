@@ -71,23 +71,23 @@ export default function Footer() {
                 <h2 className="ftco-heading-2">Information</h2>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#" className="py-2 d-block">
-                      About
+                    <a href="/" className="py-2 d-block">
+                      Home
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
-                      Services
+                    <a href="about" className="py-2 d-block">
+                    About
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
-                      Terms and Conditions
+                    <a href="request" className="py-2 d-block">
+                      Request
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
-                      Privacy & Cookies Policy
+                    <a href="contact" className="py-2 d-block">
+                      Contact
                     </a>
                   </li>
                 </ul>

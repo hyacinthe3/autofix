@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./Adminstyles/Admindashboard.css"; // Ensure you have the necessary styles
 import "./AdminCharts"; // Assuming you have the chart component for future use
-// import charts from "./DashCharts.jsx";
-
+import Areas from './DashCharts';
 const AdminDashboard = ({ isCollapsed }) => {
   const [totalGarages, setTotalGarages] = useState(0);
   const [approvedGarages, setApprovedGarages] = useState(0);
@@ -34,10 +33,10 @@ const AdminDashboard = ({ isCollapsed }) => {
     <div className={`dash ${isCollapsed ? 'collapsed' : ''}`} style={{ width: '83.2%' }}>
       <br />
       <center>
-        <p>
+       
           <h2 style={{ color: isCollapsed ? 'lightgray' : 'lightviolet', marginLeft: '1%' }}>Dashboard Overview</h2>
           <p style={{ color: isCollapsed ? 'lightgray' : 'black' }}>View statistics, Garages, and updates</p>
-        </p>
+        
 
         <div className="board-container">
           {dashboardItems.map((item) => (
@@ -47,8 +46,8 @@ const AdminDashboard = ({ isCollapsed }) => {
             </div>
           ))}
         </div>
-      </center>
-      {/* <DashCharts/>  */}
+      </center><br /><br />
+      <Areas/>
     </div>
   );
 };

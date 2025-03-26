@@ -62,5 +62,62 @@
 }
 
 /* Add this rule to the dashboard for smooth transition */
+/* dashboard.css */
+
+/* Card Styles */
+.custom-card {
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card .card-body {
+  background-color: white;
+}
+
+.custom-card .badge {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+/* Button Styles */
+button {
+  background-color: #333;  /* Dark background */
+  color: white;
+  border: none;
+}
+
+button:hover {
+  background-color: #555; /* Slightly lighter on hover */
+}
+
+/* Modal Styles */
+.modal-content {
+  background-color: white;
+}
+
+.modal-header {
+  background-color: #333;
+  color: white;
+}
+
+.modal-footer {
+  background-color: #f0f0f0;
+}
+
+/* Spinner */
+.spinner-border {
+  color: #333;
+}
+
+/* Alerts */
+.alert {
+  color: white;
+  background-color: #333;
+}
+
+.alert-danger {
+  background-color: #f44336;
+}
 
 

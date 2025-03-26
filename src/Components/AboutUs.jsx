@@ -29,7 +29,7 @@ const AboutUs = () => {
           <div className="col-md-6">
             <h2 className="mb-4">Who We Are</h2>
             <p>
-              Our system is dedicated to helping car drivers connect with trusted mechanics in times of emergency. 
+              Our system is dedicated to helping car drivers connect with trusted Grages in times of emergency. 
               Whether you're stranded on the road or need a quick repair, we ensure fast and reliable assistance.
             </p>
             <p>
@@ -48,19 +48,19 @@ const AboutUs = () => {
             <div className="col-md-4">
               <div className="p-4 shadow rounded bg-white">
                 <h4>User Registration</h4>
-                <p>Both drivers and mechanics can create accounts to access our services.</p>
+                <p>The  Grages can create accounts to access our services.</p>
               </div>
             </div>
             <div className="col-md-4">
               <div className="p-4 shadow rounded bg-white">
                 <h4>Location-Based Matching</h4>
-                <p>Get connected with the nearest available mechanic for quick assistance.</p>
+                <p>Get connected with the nearest available Garage for quick assistance.</p>
               </div>
             </div>
             <div className="col-md-4">
               <div className="p-4 shadow rounded bg-white">
                 <h4>Emergency Assistance</h4>
-                <p>Instantly request help and get real-time responses from available mechanics.</p>
+                <p>Instantly request help and get real-time responses from available Garages.</p>
               </div>
             </div>
           </div>

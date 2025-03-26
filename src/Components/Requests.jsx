@@ -88,15 +88,26 @@ const RequestForm = () => {
       alert("Please select a garage");
       return;
     }
+
     try {
-      await axios.post("http://localhost:5000/requests/assign", {
+      const response = await axios.post("http://localhost:5000/requests/assign", {
         ...formData,
         garageId: selectedGarage,
       });
-      setConfirmationMessage({
-        success: true,
-        message: "Request sent successfully! You'll get contacted soon.",
-      });
+
+      if (response.data.success) {
+        const requestId = response.data.requestId; // Ensure backend sends this
+        localStorage.setItem("requestId", requestId); // ✅ Store request ID
+        setConfirmationMessage({
+          success: true,
+          message: "Request sent successfully! You'll get contacted soon.",
+        });
+      } else {
+        setConfirmationMessage({
+          success: false,
+          message: "Request was not successful. Please try again.",
+        });
+      }
     } catch (error) {
       setConfirmationMessage({
         success: false,
@@ -115,6 +126,8 @@ const RequestForm = () => {
       >
         <div className="overlayindex d-flex align-items-end">
           <div className="container">
+          <h1 className="display-4">Requests</h1>
+          <p className="lead" style={{color:'white'}}>Send Your Request And Wait for Your Repairs</p>
             <div className="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
               <div className="col-md-9 ftco-animate pb-5"></div>
             </div>
