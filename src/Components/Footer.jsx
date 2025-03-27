@@ -41,21 +41,15 @@ export default function Footer() {
                   className="ftco-footer-social list-unstyled float-md-left float-lft mt-5"
                   style={{ display: 'flex', gap: '20px', justifyContent: 'flex-start', alignItems: 'center' }}
                 >                  <li className="ftco-animate">
-                    <a href="#">
-                      <span className="icon-twitter">
+                    <a href="https://www.twitter.com/">
+                      <span className="icon-twitter" title="Follow us on X @xinthae">
                         <FaTwitter style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }} />
                       </span>
                     </a>
                   </li>
-                  <li className="ftco-animate">
-                    <a href="#">
-                      <span className="icon-facebook">
-                        <TiSocialFacebook style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }} />
-                      </span>
-                    </a>
-                  </li>
-                  <li className="ftco-animate">
-                    <a href="#">
+                 
+                  <li className="ftco-animate" title="Follow us on instagram @xinthae">
+                    <a href="https://www.instagram.com/">
                       <span className="icon-instagram">
                         <FaInstagramSquare style={{ fontSize: '2rem', color: 'white', transition: 'color 0.3s ease' }} />
                       </span>
@@ -94,31 +88,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Customer Support Section */}
-            <div className="col-md">
-              <div className="ftco-footer-widget mb-4">
-                <h2 className="ftco-heading-2">Customer Support</h2>
-                <ul className="list-unstyled">
-                 
-                 
-                  <li>
-                    <a href="#" className="py-2 d-block">
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="py-2 d-block">
-                      How it Works
-                    </a>
-                  </li>
-                  <li>
-                    <a href="contact" className="py-2 d-block">
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
+           
             {/* Contact Section */}
             <div className="col-md">
               <div className="ftco-footer-widget mb-4">
@@ -135,7 +105,7 @@ export default function Footer() {
                   {/* </li>
 
                     <li> */}
-                  <a href="#">
+                  <a href="https://mail.google.com/mail">
                     <span className="icon icon-envelope">
                       <MdEmail />
                     </span>

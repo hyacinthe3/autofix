@@ -68,7 +68,7 @@ const Navbar = () => {
             <div style={{ width: "2px", height: "70px", backgroundColor: "gray", margin: "0 10px" }}></div>
 
             <li className="nav-item custom-nav-item">
-              <Link to="/LandingPage" className={`nav-link text-dark ${getActiveClass("/LandingPage")}`}>My Garage</Link>
+              <Link to="/LandingPage" className={`nav-link text-dark ${getActiveClass("/LandingPage")}`}>My Dashboard</Link>
             </li>
           </ul>
         </div>
