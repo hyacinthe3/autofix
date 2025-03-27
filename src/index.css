@@ -1,7 +1,7 @@
 :root {
     --sidebar-bg-color: #343a40;
-    --navbar-bg-color: #ffffff;
     --sidebar-font-color: white;
+    --navbar-bg-color: #ffffff;  
     --sidebar-font-color: rgb(10, 10, 10);
     --sidebar-hover-color: #ddd;
     --navbar-font-color: rgb(70, 67, 67);
@@ -20,7 +20,10 @@
 .sidebar .nav-link:hover {
     color: var(--sidebar--color);
 }
-
+.navbar .dark-mode{
+    background-color: #343a40;
+    color: white;
+}
 /* Navbar Styles */
 .mechanic-navbar {
     background-color: var(--navbar-bg-color);

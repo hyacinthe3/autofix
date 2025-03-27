@@ -10,6 +10,7 @@ import LoginForm from './Components/LoginForm';
 import GarageLogin from './Components/GarageLogin';
 import GarageRegistrationForm from './Components/GarageRegister';
 import ViewRequests from './Components/ViewRequests';
+import AdminLogin from './Components/AdminLogin';
 
 
 import DashboardLayout from './Dashboard/DashboardLayout'; // Layout will wrap other pages
@@ -24,6 +25,7 @@ import MechanicRegister from './Dashboard/MechanicRegister';
 import MechanicList from './Dashboard/MechanicList';
 import MechanicUpdate from './Dashboard/MechanicUpdates';
 import GarageList from './AdminComponents/ViewGarages';
+import CompletedRequests from './Dashboard/CompletedRequests';
 
 
 
@@ -59,6 +61,7 @@ function App() {
         <Route path="LoginForm" element={<LoginForm/>}/>
         <Route path='GarageRegistrationForm'  element={<GarageRegistrationForm/>}/>
         <Route path='GarageLogin' element={<GarageLogin/>}/>
+        <Route path="/AdminLogin" element={<AdminLogin />} />
 
 
 
@@ -77,6 +80,8 @@ function App() {
           <Route path='MechanicRegister' element={<MechanicRegister/>}/>
           <Route path='MechanicList' element={<MechanicList/>}/>
           <Route path="/edit-mechanic/:id" element={<MechanicUpdate />} /> 
+          <Route path='completed' element={<CompletedRequests/>}/>
+
         </Route>
 
 

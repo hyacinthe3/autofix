@@ -46,7 +46,7 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse justify-content-end" id="customNavMenu">
-          <ul className="navbar-nav custom-nav-list d-flex gap-3">
+          <ul className="navbar-nav custom-nav-list d-flex gap-3 align-items-center">
             <li className="nav-item custom-nav-item">
               <Link to="/" className={`nav-link text-dark ${getActiveClass("/home")}`}>Home</Link>
             </li>
@@ -60,12 +60,13 @@ const Navbar = () => {
               <Link to="/contact" className={`nav-link text-dark ${getActiveClass("/contact")}`}>Contact</Link>
             </li>
 
-
             <li className="nav-item custom-nav-item">
-              <Link to="/ViewRequests" className={`nav-link text-dark ${getActiveClass("/ViewRequests")}`}>ViewRequests</Link>
+              <Link to="/ViewRequests" className={`nav-link text-dark ${getActiveClass("/ViewRequests")}`}>View Requests</Link>
             </li>
 
-            
+            {/* Orange Vertical Line */}
+            <div style={{ width: "2px", height: "70px", backgroundColor: "gray", margin: "0 10px" }}></div>
+
             <li className="nav-item custom-nav-item">
               <Link to="/LandingPage" className={`nav-link text-dark ${getActiveClass("/LandingPage")}`}>My Garage</Link>
             </li>

@@ -11,11 +11,11 @@ const AdminDashboard = ({ isCollapsed }) => {
   useEffect(() => {
     // Fetch the garages data from the API
     axios.get("http://localhost:5000/garages/garages/all")
-  .then(response => {
-    setTotalGarages(response.data.totalGarages);
-    setApprovedGarages(response.data.approvedGarages);
-    setPendingGarages(response.data.pendingGarages);
-  })
+      .then(response => {
+        setTotalGarages(response.data.totalGarages);
+        setApprovedGarages(response.data.approvedGarages);
+        setPendingGarages(response.data.pendingGarages);
+      })
 
       .catch(error => {
         console.error("Error fetching garages:", error);
@@ -33,11 +33,11 @@ const AdminDashboard = ({ isCollapsed }) => {
     <div className={`dash ${isCollapsed ? 'collapsed' : ''}`} style={{ width: '83.2%' }}>
       <br />
       <center>
-       
-          <h2 style={{ color: isCollapsed ? 'lightgray' : 'lightviolet', marginLeft: '1%' }}>Dashboard Overview</h2>
-          <p style={{ color: isCollapsed ? 'lightgray' : 'black' }}>View statistics, Garages, and updates</p>
-        
 
+        <h2 style={{ color: isCollapsed ? 'lightgray' : 'lightviolet', marginLeft: '1%' }}>Dashboard Overview</h2>
+        <p style={{ color: isCollapsed ? 'lightgray' : 'black' }}>View statistics, Garages, and updates</p>
+
+        <br /><br />
         <div className="board-container">
           {dashboardItems.map((item) => (
             <div key={item.id} className="board-item">
@@ -47,7 +47,7 @@ const AdminDashboard = ({ isCollapsed }) => {
           ))}
         </div>
       </center><br /><br />
-      <Areas/>
+      <Areas />
     </div>
   );
 };

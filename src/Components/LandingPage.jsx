@@ -6,10 +6,19 @@ import bgImage from '../assets/bg_2.jpg';
 
 const LandingPage = () => {
   return (
+    <div>
+      <div className="position-absolute top-0 start-0 p-3">
+              <Link to="/" className="btn btn-outline-light">Home</Link>
+            </div>
     <div className="landing-container">
+      
       <div className="hero-section" style={{ backgroundImage: `url(${bgImage})` }}>
+        
         <div className="hero-overlay position-absolute w-100 h-100 top-0 start-0"></div>
         <div className="container text-center text-white position-relative">
+          <div className="position-absolute top-0 start-0 p-3">
+                  <Link to="/" className="btn btn-outline-light" style={{marginTop:'-350px',marginLeft:'-100px'}}>Home</Link>
+                </div>
           <br /><br /><br /><br /><br /><br /><br />
           <h1 className="display-4 fw-bold"><i className="fas fa-car-crash"></i> AUT FIX - Your Roadside Savior</h1>
           <p className="lead">
@@ -73,6 +82,7 @@ const LandingPage = () => {
           </Link>
         </div>
       </div>
+    </div>
     </div>
   );
 };

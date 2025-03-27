@@ -15,6 +15,7 @@
     "bootstrap": "^5.3.3",
     "framer-motion": "^12.5.0",
     "geolib": "^3.3.4",
+    "moment": "^2.30.1",
     "notiflix": "^3.2.8",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.9",

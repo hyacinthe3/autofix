@@ -73,9 +73,16 @@ const Sidebar = () => {
 
           <li className="nav-item">
             <Link to="/DashboardRequests" className="nav-link text-white d-flex align-items-center">
-              <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "View Requests"}
+              <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "Active Requests"}
             </Link>
           </li>
+
+          {/* <li className="nav-item">
+            <Link to="/Completed" className="nav-link text-white d-flex align-items-center">
+              <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "Completed Requests"}
+            </Link>
+          </li> */}
+
 
 
           <li className="nav-item">

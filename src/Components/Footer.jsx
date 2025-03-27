@@ -99,16 +99,8 @@ export default function Footer() {
               <div className="ftco-footer-widget mb-4">
                 <h2 className="ftco-heading-2">Customer Support</h2>
                 <ul className="list-unstyled">
-                  <li>
-                    <a href="#" className="py-2 d-block">
-                      FAQ
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="py-2 d-block">
-                      Payment Option
-                    </a>
-                  </li>
+                 
+                 
                   <li>
                     <a href="#" className="py-2 d-block">
                     </a>
@@ -119,7 +111,7 @@ export default function Footer() {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="contact" className="py-2 d-block">
                       Contact Us
                     </a>
                   </li>
