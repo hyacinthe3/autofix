@@ -16,7 +16,7 @@ const LandingPage = () => {
         
         <div className="hero-overlay position-absolute w-100 h-100 top-0 start-0"></div>
         <div className="container text-center text-white position-relative">
-          <div className="position-absolute top-0 start-0 p-3">
+          <div className="position-absolute top-0 start-0 p-3" style={{marginTop:"40px"}}>
                   <Link to="/" className="btn btn-outline-light" style={{marginTop:'-350px',marginLeft:'-100px'}}>Home</Link>
                 </div>
           <br /><br /><br /><br /><br /><br /><br />
@@ -28,6 +28,12 @@ const LandingPage = () => {
           <div className="d-flex justify-content-center mt-4">
             <Link to="/GarageRegistrationForm" className="btn btn-outline-light">
               <i className="fas fa-tools"></i> Register Your Garage Today
+            </Link><br /><br />
+           
+          </div>
+          <div className="d-flex justify-content-center mt-4">
+          <Link to="/AdminLogin" className="btn btn-outline-light">
+              <i className="fas fa-tools"></i> ADMIN
             </Link>
           </div>
         </div>
@@ -80,7 +86,15 @@ const LandingPage = () => {
           <Link to="/GarageRegister" className="btn btn-warning me-3">
             <i className="fas fa-car"></i> Register Your Garage Now
           </Link>
-        </div>
+         
+        </div><br />
+        <div className="d-flex justify-content-center mt-4">
+
+        <Link to="/AdminLogin" className="btn btn-warning me-3">
+            <i className="fas fa-car"></i> ADMIN
+          </Link>
+          </div>
+
       </div>
     </div>
     </div>

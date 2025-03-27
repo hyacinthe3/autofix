@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Form, FormControl, OverlayTrigger, Popover, Button, FormCheck } from "react-bootstrap";
-import { FaSearch, FaSun, FaMoon } from "react-icons/fa";
-import axios from "axios";
+import {
+  Navbar,
+  Form,
+  FormControl,
+  Button,
+  Modal,
+} from "react-bootstrap";
+import { FaSearch, FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const AdminNavbar = ({ isCollapsed }) => {
+  const navigate = useNavigate();
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
 
-  const [settings, setSettings] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  // Fetch settings from backend
-
+  // Check if user is logged in
+  const isLoggedIn = !!localStorage.getItem("token");
 
   // Toggle Dark Mode
   const handleThemeToggle = () => {
@@ -26,55 +31,79 @@ const AdminNavbar = ({ isCollapsed }) => {
     });
   };
 
-  const settingsPopover = (
-    <Popover id="settings-popover">
-      <Popover.Body>
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p style={{ color: "red" }}>{error}</p>
-        ) : (
-          <div>
-            <h6>Admin Settings</h6>
-            {settings && (
-              <>
-                <p><strong>Name:</strong> {settings.adminName}</p>
-                <p><strong>Email:</strong> {settings.email}</p>
-                <p><strong>Role:</strong> {settings.role}</p>
-              </>
-            )}
-            <hr />
-            {/* Theme Toggle */}
-            <FormCheck 
-              type="switch"
-              id="theme-switch"
-              label={isDarkMode ? "Dark Mode" : "Light Mode"}
-              checked={isDarkMode}
-              onChange={handleThemeToggle}
-            />
-          </div>
-        )}
-      </Popover.Body>
-    </Popover>
-  );
+  // Show Logout Confirmation Modal
+  const handleShowLogoutModal = () => setShowLogoutModal(true);
+
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("garage");
+    navigate("/"); // Redirect to login page
+  };
 
   return (
-    <Navbar bg={isDarkMode ? "dark" : "white"} expand="lg" className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`} style={{ width: "100%" }}>
-      {/* Search Input */}
-      <Form className={`d-flex me-auto ${isCollapsed ? "collapsed-search" : ""}`}>
-        <div className="input-group">
-          <span className="input-group-text bg-light">
-            <FaSearch />
-          </span>
-          <FormControl type="search" placeholder="Search ..." className="border-0 bg-light" />
-        </div>
-      </Form>
+    <>
+      <Navbar
+        bg={isDarkMode ? "dark" : "white"}
+        expand="lg"
+        className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`}
+        style={{ width: "100%" }}
+      >
+        {/* Search Input */}
+        <Form className={`d-flex me-auto ${isCollapsed ? "collapsed-search" : ""}`}>
+          <div className="input-group">
+            <span className="input-group-text bg-light">
+              <FaSearch />
+            </span>
+            <FormControl type="search" placeholder="Search ..." className="border-0 bg-light" />
+          </div>
+        </Form>
 
-      {/* Theme Toggle Button */}
-      <Button variant="link" onClick={handleThemeToggle} className="text-dark">
-        {isDarkMode ? <FaSun size={24} color="gray" /> : <FaMoon size={24} />}
-      </Button>
-    </Navbar>
+        {/* Theme Toggle Button */}
+        <Button
+          variant="link"
+          onClick={handleThemeToggle}
+          className="text-dark"
+          style={{ transition: "transform 0.3s ease" }}
+        >
+          {isDarkMode ? (
+            <FaSun size={24} color="gray" style={{ transform: "rotate(180deg)" }} />
+          ) : (
+            <FaMoon size={24} style={{ transform: "rotate(0deg)" }} />
+          )}
+        </Button>
+
+        {/* Logout Button (Only visible if logged in) */}
+        {isLoggedIn && (
+          <Button
+            variant="danger"
+            className="ms-2 d-flex align-items-center gap-2"
+            onClick={handleShowLogoutModal}
+            style={{ transition: "background 0.3s ease" }}
+          >
+            <FaSignOutAlt /> Logout
+          </Button>
+        )}
+      </Navbar>
+
+      {/* Logout Confirmation Modal */}
+      <Modal show={showLogoutModal} onHide={() => setShowLogoutModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title><font color="black"> Confirm Logout</font></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Are you sure you want to log out?</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowLogoutModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleLogout}>
+            Yes, Logout
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 
