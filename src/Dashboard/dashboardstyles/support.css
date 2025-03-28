@@ -1,0 +1,14 @@
+/* Dark mode styles */
+body.dark-mode .custom-card {
+    background-color: #333; /* Dark background */
+    color: white; /* White text */
+  }
+  
+  body.dark-mode .custom-card h4 {
+    color: white; /* White heading text */
+  }
+  
+  body.dark-mode .custom-card ul li {
+    color: white; /* White text for list items */
+  }
+  

@@ -14,3 +14,49 @@
 .mechaniclisthead2{
     margin-left: 10%;
 }
+
+/* Dark mode table styles */
+body.dark-mode table {
+    background-color: #333; /* Dark background */
+    color: white; /* White text */
+    border-color: #555; /* Slightly lighter border for contrast */
+  }
+  
+  /* Table header */
+  body.dark-mode thead {
+    background-color: #222; /* Even darker header */
+    color: white;
+  }
+  
+  /* Table rows */
+  body.dark-mode tbody tr {
+    background-color: #444; /* Medium-dark row background */
+    border-bottom: 1px solid #666; /* Border for separation */
+  }
+  
+  body.dark-mode tbody tr:hover {
+    background-color: #555; /* Slightly lighter on hover */
+  }
+  
+  /* Table cells */
+  body.dark-mode td,
+  body.dark-mode th {
+    color: white; /* Ensure text stays white */
+    border-color: #666; /* Border contrast */
+  }
+  
+  /* Buttons inside the table */
+  body.dark-mode .btn {
+    color: white;
+    border: 1px solid white;
+  }
+  
+  body.dark-mode .btn-danger {
+    background-color: #bb2d3b;
+    border-color: #bb2d3b;
+  }
+  
+  body.dark-mode .btn:hover {
+    opacity: 0.8;
+  }
+  

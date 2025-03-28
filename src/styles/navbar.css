@@ -65,3 +65,12 @@
 .custom-navbar {
   background-color: white !important;
 }
+.custom-navbar {
+  min-height: 80px;
+}
+
+.logo-img {
+  width: 110px; /* Set the desired logo width */
+  height: 110px;
+  max-height: 80px; /* Ensures logo does not exceed navbar height */
+}

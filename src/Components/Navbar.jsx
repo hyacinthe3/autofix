@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Link, useLocation } from "react-router-dom";
 import { GiFlatTire } from "react-icons/gi";
 import "../styles/Navbar.css"; // Import the custom CSS file
+import AutoFixLogo from "../assets/AutoFixLogo.png"
 
 const Navbar = () => {
   const location = useLocation();
@@ -28,9 +29,10 @@ const Navbar = () => {
       <div className="container-fluid custom-container d-flex justify-content-between align-items-center">
         {/* Logo */}
         <Link to="/" className="navbar-brand d-flex align-items-center custom-logo">
-          <h2 className="mb-0 text-dark">AUT</h2>
+          {/* <h2 className="mb-0 text-dark">AUT</h2>
           <GiFlatTire className="mx-1 custom-tire-icon" style={{ fontSize: "2rem", color: "black" }} />
-          <h2 className="mb-0 text-dark">FIX</h2>
+          <h2 className="mb-0 text-dark">FIX</h2> */}
+          <img src={AutoFixLogo} alt="" width={90} height={90}/>
         </Link>
 
         <button

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Card, Button, Form } from "react-bootstrap";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import axios from "axios";
-
+import "./dashboardstyles/support.css"
 const Support = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -36,19 +36,20 @@ const Support = () => {
     <div className="dash mt-4 d-flex justify-content-center">
       <div style={{ maxWidth: "600px", width: "100%" }}>
         <h2 className="text-center">Mechanic Support</h2>
-        <Card className="p-3 mb-4">
-          <h4>Frequently Asked Questions</h4>
-          <ul>
-            <li><strong>How do I check a service request?</strong> - Navigate to 'View Requests' to see requests sent to you, including location and contact info.</li>
-            <li><strong>How do I contact the admin?</strong> - Use the support form below or email hyacintheihimbazwe98@gmail.com</li>
-          </ul>
-        </Card>
-        
-        <Card className="p-3 mb-4">
-          <h4>Contact Admin</h4>
-          <p>If you need further assistance, you can reach out to the admin via email or by filling out the form below.</p>
-          <p><strong>Email:</strong> hyacintheihimbazwe98@gmail.com</p>
-        </Card>
+        <Card className="p-3 mb-4 custom-card">
+  <h4>Frequently Asked Questions</h4>
+  <ul>
+    <li><strong>How do I check a service request?</strong> - Navigate to 'View Requests' to see requests sent to you, including location and contact info.</li>
+    <li><strong>How do I contact the admin?</strong> - Use the support form below or email hyacintheihimbazwe98@gmail.com</li>
+  </ul>
+</Card>
+
+<Card className="p-3 mb-4 custom-card">
+  <h4>Contact Admin</h4>
+  <p>If you need further assistance, you can reach out to the admin via email or by filling out the form below.</p>
+  <p><strong>Email:</strong> hyacintheihimbazwe98@gmail.com</p>
+</Card>
+
         
         {/* <Card className="p-3">
           <h4>Support Form</h4>

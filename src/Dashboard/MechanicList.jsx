@@ -116,7 +116,7 @@ const MechanicList = () => {
       {/* Edit Mechanic Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Mechanic</Modal.Title>
+          <Modal.Title><font color="black"> Edit Mechanic</font></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -152,7 +152,7 @@ const MechanicList = () => {
       {/* Delete Mechanic Confirmation Modal */}
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
+          <Modal.Title><font color="black">Confirm Deletion</font></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>Are you sure you want to delete this mechanic?</p>
