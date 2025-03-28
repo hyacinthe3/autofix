@@ -49,7 +49,13 @@ const AdminNavbar = ({ isCollapsed }) => {
         className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`}
         style={{ width: "100%" }}
       >
-       
+        <Form className={`d-flex me-auto ${isCollapsed ? "collapsed-search" : ""}`}>
+                 <div className="">
+                   <span className="">
+                     
+                   </span>
+                 </div>
+               </Form>
 
         {/* Theme Toggle Button */}
         <Button

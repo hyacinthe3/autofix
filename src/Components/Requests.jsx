@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaCar, FaPhoneAlt, FaMapMarkerAlt, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import bgImage from "../assets/bg_2.jpg"; // Import your background image
+import { PiRoadHorizonFill } from "react-icons/pi";
 
 const RequestForm = () => {
   const [formData, setFormData] = useState({
@@ -187,41 +188,45 @@ const RequestForm = () => {
                 {/* Loading and Garage List */}
                 {loading && <p className="text-center">Loading garages...</p>}
                 {garages.length > 0 && (
-                  <div>
-                    <h3 className="text-center">Select a Garage</h3>
-                    {garages.map((garage) => (
-                      <div key={garage._id} className="mb-4">
-                        <div className="card shadow-sm">
-                          <div className="card-body">
-                            <h5 className="card-title d-flex justify-content-between">
-                              <span>{garage.GarageName}</span>
-                              <span>{garage.distance.toFixed(2)} km</span>
-                            </h5>
-                            <p className="card-text">
-                              <FaPhoneAlt /> {garage.Garagephone}
-                            </p>
-                            <div className="d-flex justify-content-between">
-                              <button
-                                className={`btn ${
-                                  selectedGarage === garage._id ? "btn-success" : "btn-outline-primary"
-                                }`}
-                                onClick={() => setSelectedGarage(garage._id)}
-                              >
-                                Select
-                              </button>
-                              <span>
-                                <FaCar /> {garage.GarageName}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    <button onClick={sendRequest} className="btn btn-warning btn-lg">
-                      <FaCheckCircle /> Send Request
-                    </button>
-                  </div>
-                )}
+  <div>
+    <h3 className="text-center">Select a Garage</h3>
+    {garages.map((garage) => (
+      <div key={garage._id} className="mb-4">
+        <div className="card shadow-sm">
+          <div className="card-body">
+            <h5 className="card-title d-flex justify-content-between">
+              <span>{garage.GarageName}</span>
+              <span><PiRoadHorizonFill />{garage.distance.toFixed(2)} km</span>
+            </h5>
+            <p className="card-text">
+              <FaMapMarkerAlt /> {garage.address} {/* Show address */}
+            </p>
+            <p className="card-text">
+              <FaPhoneAlt /> {garage.Garagephone}
+            </p>
+
+            <div className="d-flex justify-content-between">
+              <button
+                className={`btn ${
+                  selectedGarage === garage._id ? "btn-success" : "btn-outline-primary"
+                }`}
+                onClick={() => setSelectedGarage(garage._id)}
+              >
+                Select
+              </button>
+              <span>
+                <FaCar /> {garage.GarageName}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+    <button onClick={sendRequest} className="btn btn-warning btn-lg">
+      <FaCheckCircle /> Send Request
+    </button>
+  </div>
+)}
 
                 {/* Confirmation Message */}
                 {confirmationMessage && (

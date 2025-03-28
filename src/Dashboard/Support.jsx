@@ -50,7 +50,7 @@ const Support = () => {
           <p><strong>Email:</strong> hyacintheihimbazwe98@gmail.com</p>
         </Card>
         
-        <Card className="p-3">
+        {/* <Card className="p-3">
           <h4>Support Form</h4>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
@@ -67,7 +67,7 @@ const Support = () => {
             </Form.Group>
             <Button variant="primary" type="submit">Submit</Button>
           </Form>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );
