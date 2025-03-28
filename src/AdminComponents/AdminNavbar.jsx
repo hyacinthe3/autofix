@@ -49,15 +49,7 @@ const AdminNavbar = ({ isCollapsed }) => {
         className={`shadow-sm px-3 navbar ${isCollapsed ? "collapsed" : ""}`}
         style={{ width: "100%" }}
       >
-        {/* Search Input */}
-        <Form className={`d-flex me-auto ${isCollapsed ? "collapsed-search" : ""}`}>
-          <div className="input-group">
-            <span className="input-group-text bg-light">
-              <FaSearch />
-            </span>
-            <FormControl type="search" placeholder="Search ..." className="border-0 bg-light" />
-          </div>
-        </Form>
+       
 
         {/* Theme Toggle Button */}
         <Button

@@ -100,7 +100,7 @@ const RequestForm = () => {
         localStorage.setItem("requestId", requestId); // ✅ Store request ID
         setConfirmationMessage({
           success: true,
-          message: "Request sent successfully! You'll get contacted soon.",
+          message: "Request sent successfully! You'll get contacted soon But first save the  phoneNumber of a selected garage.you may need it",
         });
       } else {
         setConfirmationMessage({

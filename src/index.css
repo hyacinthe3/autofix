@@ -6,8 +6,10 @@
     --sidebar-hover-color: #ddd;
     --navbar-font-color: rgb(70, 67, 67);
     --navbar-hover-color: #161616;
+    --dark-navbar-bg-color: #d9534f; /* Red background for dark mode */
 }
 
+/* Sidebar */
 .sidebar {
     background-color: var(--sidebar-bg-color);
     color: var(--sidebar-font-color);
@@ -18,12 +20,9 @@
 }
 
 .sidebar .nav-link:hover {
-    color: var(--sidebar--color);
+    color: var(--sidebar-hover-color);
 }
-.navbar .dark-mode{
-    background-color: #343a40;
-    color: white;
-}
+
 /* Navbar Styles */
 .mechanic-navbar {
     background-color: var(--navbar-bg-color);
@@ -36,6 +35,20 @@
 
 .mechanic-navbar .nav-link:hover {
     color: var(--navbar-hover-color);
+}
+
+/* Dark mode Navbar */
+.mechanic-navbar.dark-mode {
+    background-color: var(--dark-navbar-bg-color); /* Red background in dark mode */
+    color: white; /* Ensure text is white for readability */
+}
+
+.mechanic-navbar.dark-mode .nav-link {
+    color: white; /* White text for links */
+}
+
+.mechanic-navbar.dark-mode .nav-link:hover {
+    color: #f8f9fa; /* Slightly lighter color for link hover */
 }
 
 /* Search Form */
@@ -59,11 +72,10 @@
     border: 1px solid var(--navbar-font-color);
 }
 
-
-
 /* Notifications and Messages */
 .nav-icon {
     position: relative;
 }
-
-
+.dark-mode Navbar{
+    background-color: #343a40;
+}

@@ -175,3 +175,6 @@
 .modal-footer {
   border-top: none;
 }
+.dark-mode .mynav {
+  background-color: #222;
+}

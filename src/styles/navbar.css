@@ -62,3 +62,6 @@
 .navbar{
   background-color: white;
 }
+.custom-navbar {
+  background-color: white !important;
+}

@@ -73,7 +73,7 @@ const Sidebar = () => {
 
           <li className="nav-item">
             <Link to="/DashboardRequests" className="nav-link text-white d-flex align-items-center">
-              <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "Active Requests"}
+              <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "Your Requests"}
             </Link>
           </li>
 

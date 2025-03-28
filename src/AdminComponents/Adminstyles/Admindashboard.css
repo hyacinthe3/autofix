@@ -71,3 +71,6 @@
 .dark-mode .navbar{
   background-color: #444;
 }
+.dark-mode p{
+  color: white;
+}

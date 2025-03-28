@@ -115,10 +115,10 @@ button:hover {
   color: white;
   background-color: #333;
 }
-
+/* 
 .alert-danger {
   background-color: #f44336;
-}
+} */
 .board-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

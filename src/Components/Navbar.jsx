@@ -61,7 +61,7 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item custom-nav-item">
-              <Link to="/ViewRequests" className={`nav-link text-dark ${getActiveClass("/ViewRequests")}`}>View Requests</Link>
+              <Link to="/ViewRequests" className={`nav-link text-dark ${getActiveClass("/ViewRequests")}`}>Your Mechanic</Link>
             </li>
 
             {/* Orange Vertical Line */}
