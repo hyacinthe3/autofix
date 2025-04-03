@@ -5,7 +5,7 @@ import { Notify } from 'notiflix';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import "./dashboardstyles/mechanic.css"; // Ensure Dark Mode styles are imported
+import "./dashboardstyles/mechanic.css"; 
 
 const MechanicRegister = () => {
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ const MechanicRegister = () => {
   useEffect(() => {
     reset();
 
-    // Apply dark mode on initial load
     if (localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark-mode");
     } else {
@@ -45,16 +44,17 @@ const MechanicRegister = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
-      <Row className="w-100">
-        <Col md={8} lg={6} className="mx-auto">
-          <h2 className="text-center mt-3">Register Mechanics</h2><br />
-          <Card className="shadow-lg p-4 rounded-4">
+    <Container fluid className="register-container">
+      <Row className="align-items-start vh-100">
+        <center>
+        <Col md={6} lg={4} className="register-card-container">
+        <h2 style={{color: "#FF6A00"}}>Register A Mechanic</h2><br />
+          <Card className="register-card shadow-lg p-4 rounded-4">
             <Card.Body>
-              <h3 className="text-center">
+              <h3 className="register-title">
                 <FaWrench className="me-2" /> Mechanic Registration
               </h3>
-              <p className="text-center text-muted">Register a new mechanic for your garage.</p>
+              <p className="text-muted">Register a new mechanic for your garage.</p>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">
                   <Form.Label>Full Name</Form.Label>
@@ -86,13 +86,14 @@ const MechanicRegister = () => {
                   </Form.Select>
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="custom-btn w-100 mt-3">
                   Register Mechanic
                 </Button>
               </Form>
             </Card.Body>
           </Card>
         </Col>
+        </center>
       </Row>
     </Container>
   );

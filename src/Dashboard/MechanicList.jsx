@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Modal, Button, Form, Table, Container, Alert } from 'react-bootstrap';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { Notify } from 'notiflix';
+import './dashboardstyles/mechaniclist.css';
 
 const MechanicList = () => {
   const [mechanics, setMechanics] = useState([]);
@@ -36,7 +39,7 @@ const MechanicList = () => {
 
   const handleDeleteConfirm = (id) => {
     setDeleteMechanicId(id);
-    setShowDeleteModal(true); // Show confirmation modal before deletion
+    setShowDeleteModal(true);
   };
 
   const handleDelete = async () => {
@@ -46,10 +49,12 @@ const MechanicList = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMechanics(mechanics.filter((m) => m._id !== deleteMechanicId));
-      setShowDeleteModal(false); // Close delete confirmation modal
+      setShowDeleteModal(false);
+      Notify.success('Record deleted successfully!');
     } catch (error) {
       setError('Error deleting mechanic: ' + error.message);
       console.error('Error deleting mechanic:', error);
+      Notify.failure('Failed to delete record.');
     }
   };
 
@@ -57,17 +62,11 @@ const MechanicList = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put(
-        `http://localhost:5000/mechanic/${currentMechanic._id}`,
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await axios.put(`http://localhost:5000/mechanic/${currentMechanic._id}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setMechanics(
-        mechanics.map((m) =>
-          m._id === currentMechanic._id ? { ...m, ...formData } : m
-        )
+        mechanics.map((m) => (m._id === currentMechanic._id ? { ...m, ...formData } : m))
       );
       setShowModal(false);
     } catch (error) {
@@ -77,43 +76,39 @@ const MechanicList = () => {
   };
 
   return (
-    <Container>
-      <h2 className="text-center mt-4">Mechanics List</h2>
+    <Container className="mechanic-list-container">
+      <h2 className="text-center mt-4 mb-4" style={{marginLeft:'-55%',color: "#FF6A00"}}>Mechanics List</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Full Name</th>
-            <th>Phone Number</th>
-            <th>Specialization</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {mechanics.map((mechanic, index) => (
-            <tr key={mechanic._id}>
-              <td>{index + 1}</td>
-              <td>{mechanic.fullName}</td>
-              <td>{mechanic.phoneNumber}</td>
-              <td>{mechanic.specialisation}</td>
-              <td>
-                <Button onClick={() => handleEdit(mechanic)} className="me-2">
-                  Edit
-                </Button>
-                <Button
-                  variant="danger"
-                  onClick={() => handleDeleteConfirm(mechanic._id)}
-                >
-                  Delete
-                </Button>
-              </td>
+        <table bordered hover className="custom-table shadow-lg" style={{marginLeft:'15%',width:'80%'}}>
+          <thead className="table-dark text-white text-center">
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              <th>Specialization</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-
-      {/* Edit Mechanic Modal */}
+          </thead>
+          <tbody className="text-center">
+            {mechanics.map((mechanic, index) => (
+              <tr key={mechanic._id} className="table-row">
+                <td>{index + 1}</td>
+                <td>{mechanic.fullName}</td>
+                <td>{mechanic.phoneNumber}</td>
+                <td>{mechanic.specialisation}</td>
+                <td>
+                  <Button variant="outline-primary" className="me-2" onClick={() => handleEdit(mechanic)}>
+                    <FaEdit />
+                  </Button>
+                  <Button variant="outline-danger" onClick={() => handleDeleteConfirm(mechanic._id)}>
+                    <FaTrashAlt />
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title><font color="black"> Edit Mechanic</font></Modal.Title>
@@ -144,15 +139,14 @@ const MechanicList = () => {
                 onChange={(e) => setFormData({ ...formData, specialisation: e.target.value })}
               />
             </Form.Group>
-            <Button type="submit">Save Changes</Button>
+            <Button type="submit" variant="success" style={{backgroundColor:'#cc5d00'}}>Save Changes</Button>
           </Form>
         </Modal.Body>
       </Modal>
 
-      {/* Delete Mechanic Confirmation Modal */}
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} style={{marginTop:'100px'}}>
         <Modal.Header closeButton>
-          <Modal.Title><font color="black">Confirm Deletion</font></Modal.Title>
+          <Modal.Title><font color="black">Confirm Deletion </font></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>Are you sure you want to delete this mechanic?</p>

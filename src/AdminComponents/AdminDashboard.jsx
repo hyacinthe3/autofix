@@ -34,8 +34,8 @@ const AdminDashboard = ({ isCollapsed }) => {
       <br />
       <center>
 
-        <h2 style={{ color: isCollapsed ? 'lightgray' : 'lightviolet', marginLeft: '1%' }}>Dashboard Overview</h2>
-        <p style={{ color: isCollapsed ? 'lightgray' : 'black' }}>View statistics, Garages, and updates</p>
+        <h2 style={{ color: isCollapsed ? 'lightgray' : 'lightviolet', marginRight: '70%' }}>Dashboard Overview</h2>
+        <p style={{ color: isCollapsed ? 'lightgray' : 'black',marginRight: '70%' }}>View statistics, Garages, and updates</p>
 
         <br /><br />
         <div className="board-container">

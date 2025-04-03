@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./Adminstyles/approve.css"
 
 const ApprovedGarages = () => {
     const [approvedGarages, setApprovedGarages] = useState([]);
@@ -39,37 +40,39 @@ const ApprovedGarages = () => {
 
     return (
         <div className="container mt-4">
-            <h2 className="text-center mb-4">Approved Garages</h2>
-            <table className="table table-hover table-bordered" style={{ width: "70%", tableLayout: "fixed" }}>
-                <thead className="table-dark text-center">
-                    <tr>
-                        <th style={{ width: "5%" }}>#</th>
-                        <th style={{ width: "20%" }}>Garage Name</th>
-                        <th style={{ width: "20%" }}>TIN Number</th>
-                        <th style={{ width: "20%" }}>Location</th>
-                        <th style={{ width: "20%" }}>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {approvedGarages.length > 0 ? (
-                        approvedGarages.map((garage, index) => (
-                            <tr key={garage._id} className="align-middle text-center">
-                                <td>{index + 1}</td>
-                                <td>{garage.GarageName}</td>  
-                                <td>{garage.GaragetinNumber}</td>
-                                <td>{garage.address}</td> {/* ✅ Displays Address Instead of Coordinates */}
-                                <td>{garage.Garagephone}</td>
-                            </tr>
-                        ))
-                    ) : (
+            <h2 className="text-center mb-4" style={{ color: "#FF6A00", fontWeight: "bold",marginRight:'50%' }}>
+                Approved Garages
+            </h2>
+            <div className="table-container" style={{marginLeft:'21%',width:'75%' }}>
+                <table className="custom-table">
+                    <thead>
                         <tr>
-                            <td colSpan="5" className="text-center text-muted">
-                                No approved garages found.
-                            </td>
+                            <th>#</th>
+                            <th>Garage Name</th>
+                            <th>TIN Number</th>
+                            <th>Location</th>
+                            <th>Phone</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {approvedGarages.length > 0 ? (
+                            approvedGarages.map((garage, index) => (
+                                <tr key={garage._id}>
+                                    <td>{index + 1}</td>
+                                    <td>{garage.GarageName}</td>
+                                    <td>{garage.GaragetinNumber}</td>
+                                    <td>{garage.address}</td> {/* ✅ Displays Address Instead of Coordinates */}
+                                    <td>{garage.Garagephone}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="5" className="no-data">No approved garages found.</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

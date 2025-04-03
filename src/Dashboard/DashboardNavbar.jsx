@@ -89,7 +89,7 @@ const AdminNavbar = ({ isCollapsed }) => {
       {/* Logout Confirmation Modal */}
       <Modal show={showLogoutModal} onHide={() => setShowLogoutModal(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Logout</Modal.Title>
+          <Modal.Title><font color="black">Confirm Logout</font></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>Are you sure you want to log out?</p>

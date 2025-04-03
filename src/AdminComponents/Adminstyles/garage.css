@@ -1,0 +1,99 @@
+/* Garage List Container */
+.garage-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Title Styling */
+.garage-list-title {
+    color: #FF6A00;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Table Container */
+.table-container {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Custom Table Styling */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Header */
+.custom-table thead {
+    background-color: #000;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Table Cells */
+.custom-table th, .custom-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #FF6A00; /* 🔥 Orange Horizontal Borders */
+}
+
+/* Hover Effect */
+.custom-table tbody tr:hover {
+    background-color: rgba(255, 106, 0, 0.1);
+}
+
+/* Status Colors */
+.status {
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.status.pending {
+    color: orange;
+}
+
+.status.rejected {
+    color: red;
+}
+
+.status.approved {
+    color: green;
+}
+
+/* Action Buttons */
+.action-buttons button {
+    padding: 8px 12px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.approve-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #d33;
+    color: white;
+}
+
+.update-approve-btn {
+    background-color: #17a2b8;
+    color: white;
+}
+

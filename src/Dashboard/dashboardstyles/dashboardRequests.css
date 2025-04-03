@@ -1,21 +1,148 @@
 .table-container {
-    width: 50%;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-  }
-  
-  .table th {
-    background-color: #6f42c1;
-    color: white;
-  }
-  
-  .table td {
-    text-align: center;
-  }
-  
-  .modal-footer button {
-    width: 100px;
-  }
-  
+  width: 50%;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.table th {
+  background-color: #6f42c1;
+  color: white;
+}
+
+.table td {
+  text-align: center;
+}
+
+.modal-footer button {
+  width: 100px;
+}
+/* Dark Mode Global Styles */
+.dark-mode {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+/* Styling the Container */
+.dark-mode .container {
+  background-color: #1a1a1a;
+  color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Card Styles */
+.dark-mode .card {
+  background-color: #222;
+  border: 1px solid #444;
+  color: #f8f9fa;
+}
+
+.dark-mode .card-title {
+  color: #FF6A00; /* Orange for contrast */
+}
+
+.dark-mode .card-text {
+  color: #ddd;
+}
+
+.dark-mode .card-body {
+  background-color: #222;
+}
+
+/* Buttons */
+.dark-mode .btn {
+  color: #f8f9fa;
+  transition: 0.3s;
+}
+
+.dark-mode .btn-success {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.dark-mode .btn-success:hover {
+  background-color: #1e7e34;
+  border-color: #1e7e34;
+}
+
+.dark-mode .btn-danger {
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.dark-mode .btn-danger:hover {
+  background-color: #bd2130;
+}
+
+.dark-mode .btn-info {
+  background-color: #17a2b8;
+  border: 1px solid #17a2b8;
+}
+
+.dark-mode .btn-info:hover {
+  background-color: #117a8b;
+}
+
+/* Badges */
+.dark-mode .badge {
+  background-color: #555;
+  color: #f8f9fa;
+}
+
+.dark-mode .badge-success {
+  background-color: green;
+}
+
+.dark-mode .badge-warning {
+  background-color: orange;
+  color: black;
+}
+
+/* Table Styles (if applicable) */
+.dark-mode table {
+  background-color: #222;
+  color: #f8f9fa;
+}
+
+.dark-mode th,
+.dark-mode td {
+  border-bottom: 1px solid #444;
+}
+
+/* Modals */
+.dark-mode .modal-content {
+  background-color: #222;
+  color: #f8f9fa;
+  border: 1px solid #444;
+}
+
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+  border-bottom: 1px solid #444;
+  border-top: 1px solid #444;
+}
+
+/* Alerts */
+.dark-mode .alert {
+  background-color: #333;
+  color: #ff6a00;
+  border: 1px solid #ff6a00;
+}
+
+/* Spinner */
+.dark-mode .spinner-border {
+  color: #ff6a00;
+}
+
+/* Overlay Tooltip */
+.dark-mode .tooltip-inner {
+  background-color: #333;
+  color: #f8f9fa;
+}
+
+.dark-mode .tooltip-arrow {
+  border-top-color: #333;
+}
+

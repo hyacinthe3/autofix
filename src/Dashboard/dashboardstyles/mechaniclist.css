@@ -59,4 +59,10 @@ body.dark-mode table {
   body.dark-mode .btn:hover {
     opacity: 0.8;
   }
+  .table-container {
+    position: absolute;
+    left: -2%;
+    width: 80%;
+  }
+
   

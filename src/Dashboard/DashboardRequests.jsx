@@ -6,6 +6,7 @@ import {
   OverlayTrigger, Tooltip
 } from "react-bootstrap";
 import { Notify } from "notiflix";
+import "./dashboardstyles/dashboardRequests.css"
 
 const GarageRequests = ({ isCollapsed }) => {
   const [requests, setRequests] = useState([]);
@@ -20,7 +21,12 @@ const GarageRequests = ({ isCollapsed }) => {
   useEffect(() => {
     fetchRequests();
   }, []);
-
+  
+  useEffect(() => {
+    const isDark = localStorage.getItem("theme") === "dark";
+    document.body.classList.toggle("dark-mode", isDark);
+  }, []);
+  
   const fetchRequests = async () => {
     const garageId = localStorage.getItem("garageId");
     if (!garageId) {
@@ -39,6 +45,7 @@ const GarageRequests = ({ isCollapsed }) => {
       setLoading(false);
     }
   };
+  
 
   const fetchMechanics = async () => {
     try {
@@ -97,8 +104,15 @@ const GarageRequests = ({ isCollapsed }) => {
   };
 
   return (
-    <Container className="mt-5" style={{ transition: "padding 0.3s ease", marginLeft: "250px" }}>
-      <h3 className="text-center mb-4">Requests Assigned to Your Garage</h3>
+    <Container
+      className="mt-5"
+      style={{
+        transition: "padding 0.3s ease",
+        marginLeft: isCollapsed ? "80px" : "250px",  // Adjust left margin based on isCollapsed
+        marginRight:'20%'
+      }}
+    >
+      <h3 className="text-center mb-4" style={{marginRight:'65%',color: "#FF6A00"}}>Requests Assigned to Your Garage</h3>
 
       {error && <Alert variant="danger">{error}</Alert>}
       {loading ? (
@@ -106,12 +120,12 @@ const GarageRequests = ({ isCollapsed }) => {
           <Spinner animation="border" />
         </div>
       ) : requests.length === 0 ? (
-        <div className="text-center">No requests found.</div>
+        <div className="text-center" style={{color: "#FF6A00"}}>No requests found.</div>
       ) : (
-        <Row>
+        <Row >
           {requests.map((request) => (
             <Col key={request._id} md={isCollapsed ? 6 : 4} lg={isCollapsed ? 4 : 3} className="mb-4">
-              <Card className="shadow-sm border-light rounded h-100">
+              <Card className="shadow-sm border-light rounded h-100" style={{marginRight:'-20%'}}>
                 <OverlayTrigger
                   placement="top"
                   overlay={<Tooltip>Sent: {moment(request.createdAt).format("MMMM Do YYYY, h:mm A")}</Tooltip>}

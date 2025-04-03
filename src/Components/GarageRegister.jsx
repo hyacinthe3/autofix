@@ -5,6 +5,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { IoIosWarning } from "react-icons/io";
 
 const GarageRegister = () => {
   const navigate = useNavigate();
@@ -85,11 +86,14 @@ const GarageRegister = () => {
           <Col md={6} className="welcome-text text-white text-center">
             <h1 style={{fontSize:'70px',marginTop:'200px'}}>Welcome To AutoFix</h1>
             <p>Register your garage and join our network of trusted car repair professionals.</p>
+            
           </Col>
+          
           <Col md={6} lg={5} className="mx-auto">
             <Card className="shadow-lg p-4 rounded-4 form-card">
               <Card.Body>
                 <h3 className="text-center" style={{color:'orange'}}>Garage Registration</h3>
+                <p><IoIosWarning /> You must register your garage at the location where it is situated</p>
                 <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                   <Form.Group>
                     <Form.Label>Garage Name</Form.Label>

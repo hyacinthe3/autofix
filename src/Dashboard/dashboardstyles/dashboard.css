@@ -144,3 +144,225 @@ button:hover {
 }
 
 
+
+
+
+/* General Dashboard Styles */
+.dash {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  color: #343a40;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.dashboard-subheader {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.board-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.board-item {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.board-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.board-title {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.board-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.mechanic-section {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.section-header {
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.section-subheader {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-top: 10px;
+}
+
+/* General Dashboard Styles */
+.dash {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff; /* White background */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  color: #000; /* Black color for the title */
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.dashboard-subheader {
+  color: #6c757d; /* Light grey for subheading */
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.board-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.board-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  border: 2px solid #f57c00; /* Orange border */
+}
+
+.board-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.board-title {
+  font-size: 1.5rem;
+  color: #f57c00; /* Orange color for titles */
+}
+
+.board-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000; /* Black for values */
+}
+
+.mechanic-section {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.section-header {
+  font-size: 2rem;
+  color: #000;
+}
+
+.section-subheader {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-top: 10px;
+}
+
+.mechanic-card {
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border: 2px solid #f57c00; /* Orange border */
+}
+
+.mechanic-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mechanic-card .card-title {
+  color: #f57c00; /* Orange for titles */
+  font-size: 1.25rem;
+}
+
+.mechanic-card .card-subtitle {
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.mechanic-card .card-text {
+  font-size: 1rem;
+  color: #495057;
+}
+
+/* Button styles */
+button {
+  margin-top: 10px;
+}
+
+button.variant-warning {
+  background-color: #f57c00; /* Orange background for the button */
+  border-color: #f57c00; /* Orange border */
+}
+.custom {
+  width: 80%;
+  height: 100px;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border: 3px solid #FF6A00; /* 🔥 Orange Border */
+}
+
+.custom thead {
+  color: rgb(88, 88, 88);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.custom th, .custom-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd; 
+}
+.dark-mode .mechanic-section{
+  background-color: #343a40;
+}
+.dark-mode .b{
+  background-color: #343a40;
+}
+
+.b{
+  width: 75rem;
+  /* margin-left: -50%; */
+  margin-left: auto;
+  height: auto;
+  align-items: center;
+  background-color: none;
+}
+

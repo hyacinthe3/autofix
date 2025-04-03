@@ -1,35 +1,68 @@
-/* Global Dark Mode Styles */
-body.dark-mode {
-    background-color: #333;
-    color: white;
-  }
-  
-  /* Card Dark Mode */
-  body.dark-mode .card {
-    background-color: #1e1e1e;
-    color: white;
-    border: 1px solid #333;
-  }
-  
-  /* Form Dark Mode */
-  body.dark-mode .form-control,
-  body.dark-mode .form-select {
-    background-color:   #444;
-    color: white;
-    border: 1px solid #2b2b2b;
-  }
-  
-  body.dark-mode .form-control::placeholder {
-    color: #aaa;
-  }
-  
-  /* Buttons */
-  body.dark-mode .btn-primary {
-    background-color: #007bff;
-    border: none;
-  }
-  
-  body.dark-mode .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
+/* Move the card 40% to the left */
+.register-card-container {
+  margin-left: 33%;
+  margin-top: 30px;
+  transform: translateX(-40%);
+}
+
+/* Card styling */
+.register-card {
+  background: #fff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title alignment */
+.register-title {
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Button Styling */
+.custom-btn {
+  background: #ff7300;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.custom-btn:hover {
+  background: #cc5d00;
+}
+
+/* Dark mode styles */
+.dark-mode .register-container {
+  background-color: #292b2c;
+}
+
+.dark-mode .register-card {
+  background: #292b2c;
+  color: white;
+}
+
+.dark-mode .register-card .form-control {
+  background: #3a3b3c;
+  color: white;
+}
+
+.dark-mode .custom-btn {
+  background: #ff7300;
+}
+
+.dark-mode .custom-btn:hover {
+  background: #cc5d00;
+}
+.dark-mode h3{
+  color: #ffffff;
+}
+.dark-mode p{
+  color: #ffffff;
+}
+.dark-mode .table-container{
+  background-color: #292b2c;
+}

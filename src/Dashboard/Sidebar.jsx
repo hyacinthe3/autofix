@@ -8,6 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboardstyles/sidebar.css";
 import MechanicNavbar from "./DashboardNavbar";
 import axios from "axios";
+import GarageRequests from './DashboardRequests';
+// import { GiMechanicGarage } from "react-icons/gi";
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -41,43 +43,44 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="d-flex">
-      <div className={`sidebar bg-dark text-white ${isCollapsed ? "collapsed" : ""}`}>
-        <div className="sidebar-header d-flex flex-column p-3">
-          <div className="d-flex justify-content-between align-items-center">
-            {!isCollapsed && <h5 className="fw-bold">AUT FIX</h5>}
-            <button className="btn btn-outline-light" onClick={handleCollapseToggle}>
+    <div>
+      <div className="d-flex">
+        <div className={`sidebar bg-dark text-white ${isCollapsed ? "collapsed" : ""}`}>
+          <div className="sidebar-header d-flex flex-column p-3">
+            <div className="d-flex justify-content-between align-items-center">
+              {!isCollapsed && <h5 className="fw-bold">AUT FIX</h5>}
+              {/* <button className="btn btn-outline-light" onClick={handleCollapseToggle}>
               {isCollapsed ? <FaEllipsisH style={{ color: "#343a40" }} /> : <FaBars style={{ color: "#343a40" }} />}
-            </button>
+            </button> */}
 
+            </div>
+            <hr className="styled-hr" />
+
+
+            {/* Display the garage name below "AUT FIX" */}
+            {!isCollapsed && garageName && (
+              <big className="text-muted">
+                <p title="Click to Edit Garage Profile" style={{ cursor: 'pointer' }}><font color="white"><GiMechanicGarage style={{ fontSize: '28px' }} /> <b>{garageName.toUpperCase()}</b></font></p>
+              </big>
+            )}
+            <hr className="border-light" />
           </div>
-          <hr className="styled-hr" />
 
 
-          {/* Display the garage name below "AUT FIX" */}
-          {!isCollapsed && garageName && (
-            <big className="text-muted">
-              <font color="white"> <b>{garageName.toUpperCase()}</b></font>
-            </big>
-          )}
+          <ul className="nav flex-column">
+            <li className="nav-item">
+              <Link to="/dashboard" className="nav-link text-white d-flex align-items-center">
+                <FaHome className="me-2 fs-5" /> {!isCollapsed && "Dashboard Overview"}
+              </Link>
+            </li>
 
-        </div>
+            <li className="nav-item">
+              <Link to="/DashboardRequests" className="nav-link text-white d-flex align-items-center">
+                <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "Your Requests"}
+              </Link>
+            </li>
 
-        <hr className="border-light" />
-        <ul className="nav flex-column">
-          <li className="nav-item">
-            <Link to="/dashboard" className="nav-link text-white d-flex align-items-center">
-              <FaHome className="me-2 fs-5" /> {!isCollapsed && "Dashboard Overview"}
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/DashboardRequests" className="nav-link text-white d-flex align-items-center">
-              <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "Your Requests"}
-            </Link>
-          </li>
-
-          {/* <li className="nav-item">
+            {/* <li className="nav-item">
             <Link to="/Completed" className="nav-link text-white d-flex align-items-center">
               <IoGitPullRequestSharp className="me-2 fs-5" /> {!isCollapsed && "Completed Requests"}
             </Link>
@@ -85,35 +88,40 @@ const Sidebar = () => {
 
 
 
-          <li className="nav-item">
-            <Link to="/MechanicRegister" className="nav-link text-white d-flex align-items-center">
-              <GiMechanicGarage className="me-2 fs-5" /> {!isCollapsed && "Register Mechanic"}
-            </Link>
-          </li>
+            <li className="nav-item">
+              <Link to="/MechanicRegister" className="nav-link text-white d-flex align-items-center">
+                <GiMechanicGarage className="me-2 fs-5" /> {!isCollapsed && "Register Mechanic"}
+              </Link>
+            </li>
 
-          <li className="nav-item">
-            <Link to="/MechanicList" className="nav-link text-white d-flex align-items-center">
-              <GiMechanicGarage className="me-2 fs-5" /> {!isCollapsed && "View Mechanics"}
-            </Link>
-          </li>
+            <li className="nav-item">
+              <Link to="/MechanicList" className="nav-link text-white d-flex align-items-center">
+                <GiMechanicGarage className="me-2 fs-5" /> {!isCollapsed && "View Mechanics"}
+              </Link>
+            </li>
 
-          {/* <li className="nav-item">
+            {/* <li className="nav-item">
             <Link to="/FeedBack" className="nav-link text-white d-flex align-items-center">
               <RiFeedbackFill className="me-2 fs-5" /> {!isCollapsed && "Ratings & Feedback"}
             </Link>
           </li> */}
 
-          <li className="nav-item">
-            <Link to="/support" className="nav-link text-white d-flex align-items-center">
-              <RiFeedbackFill className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Get Support"}
-            </Link>
-          </li>
-        </ul>
-      </div>
+            <li className="nav-item">
+              <Link to="/support" className="nav-link text-white d-flex align-items-center">
+                <RiFeedbackFill className="me-2" style={{ fontSize: '25px' }} /> {!isCollapsed && "Get Support"}
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-      <div className={`content-container ${isCollapsed ? "expanded" : ""}`}>
-        <MechanicNavbar isCollapsed={isCollapsed} />
+        <div className={`content-container ${isCollapsed ? "expanded" : ""}`}>
+          <MechanicNavbar isCollapsed={isCollapsed} />
+        </div>
+
       </div>
+      {/* <div className={`content-container ${isCollapsed ? "expanded" : ""}`}>
+        <GarageRequests isCollapsed={isCollapsed} />
+      </div> */}
     </div>
   );
 };

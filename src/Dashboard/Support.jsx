@@ -35,7 +35,7 @@ const Support = () => {
   return (
     <div className="dash mt-4 d-flex justify-content-center">
       <div style={{ maxWidth: "600px", width: "100%" }}>
-        <h2 className="text-center">Mechanic Support</h2>
+        <h2 className="text-center" style={{color: "#FF6A00"}}>Mechanic Support</h2>
         <Card className="p-3 mb-4 custom-card">
   <h4>Frequently Asked Questions</h4>
   <ul>

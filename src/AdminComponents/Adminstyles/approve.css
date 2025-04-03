@@ -1,0 +1,81 @@
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+.no-data {
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #FF6A00;
+}
+
+/* Approved Garages Container */
+.approved-garages-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Title Styling */
+.approved-title {
+    color: #FF6A00;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Table Container */
+.table-container {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Custom Table Styling */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 3px solid #FF6A00; /* 🔥 Orange Border */
+}
+
+/* Table Header */
+.custom-table thead {
+    background-color: #000; /* Black Header */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Table Cells */
+.custom-table th, .custom-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid #FF6A00; /* 🔥 Orange Row Borders */
+}
+
+/* Hover Effect */
+.custom-table tbody tr:hover {
+    background-color: rgba(255, 106, 0, 0.1); /* 🔥 Subtle Orange Hover */
+}
+
+
+
+/* No Data Row */
+.no-data {
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #FF6A00;
+}

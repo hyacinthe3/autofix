@@ -53,62 +53,52 @@ const Dashboard = ({ isCollapsed }) => {
     marginLeft: isCollapsed ? "80px" : "250px", // Adjust the left margin dynamically
     transition: "margin-left 0.3s ease", // Smooth transition for the margin
     padding: "20px", // Add padding for spacing
-    backgroundColor: "#f8f9fa", // Background color for content area
+    backgroundColor: "#fff", // Background color for content area
     minHeight: "100vh", // Ensures content area takes up the full screen height
   };
 
   return (
-    <div className="dash" style={contentStyle}>
+    // <div className="dash" style={contentStyle}>
+      <div className="b">
       <br />
-      
-        <h2>Dashboard Overview</h2>
-        <p>View job statistics, earnings, and updates</p>
-        <center>
-        <div className="board-container">
-          {dashboardItems.map((item) => (
-            <div key={item.id} className="board-item">
-              <h3>{item.title}</h3>
-              <p>{item.value}</p>
-            </div>
-          ))}
-        </div>
-      </center>
+      <h2 className="dashboard-header" style={{ color: "#FF6A00" }}>Dashboard Overview</h2>
 
-      <br /><br /><br />
-      <Charts />
-      <div  style={{marginRight : '30%'}}>
-      
-        <h3>My Mechanics</h3>
-        <p>Here are the mechanics available:</p>
-        <center>
-        {/* Add margin-top to create more space between the dashboard cards and the mechanic cards */}
-        <Container style={{ marginTop: "40px" }}>
-          <Row>
-          
-            {mechanics.map((mechanic) => (
-              <Col key={mechanic._id} md={4} className="mb-4">
-                <Card>
-                  <Card.Body>
-                    <Card.Title>{mechanic.fullName}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {mechanic.specialisation}
-                    </Card.Subtitle>
-                    <Card.Text>
-                      <strong>Phone:</strong> {mechanic.phoneNumber}
-                    </Card.Text>
-                    {/* You can add a button or additional actions here */}
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-           
-          </Row>
-        </Container>
-      </center>
+      <div className="board-container">
+        {dashboardItems.map((item) => (
+          <div key={item.id} className="board-item" style={{ height: "10rem", marginTop: "4rem", marginLeft: "rem" }}>
+            <h3 className="board-title">{item.title}</h3>
+            <p className="board-value">{item.value}</p>
+          </div>
+        ))}
+        <div className="board-conta" style={{ width: "80vh", marginTop: "0rem", marginLeft: "3rem" }}> <h5>Request Statistics</h5 > <Charts /></div>
       </div>
-      <br />
-     
-    </div>
+
+
+      <div className="mechanic-section" style={{ marginRight: "30%", width: "98%" }}>
+        <h3 className="section-header" style={{ color: "#FF6A00" }}>My Mechanics</h3>
+        <p className="section-subheader">Here are the mechanics available:</p>
+        <table className="custom-table" style={{ backgroundColor: 'white' }}>
+          <thead>
+            <tr>
+              <th>Names</th>
+              <th>Phone Number</th>
+              <th>Specialisation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mechanics.map((mechanic) => (
+              <tr key={mechanic._id}>
+                <td>{mechanic.fullName}</td>
+                <td> {mechanic.phoneNumber}</td>
+                <td>{mechanic.specialisation}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+      </div>
+      </div>
+    // </div>
   );
 };
 
