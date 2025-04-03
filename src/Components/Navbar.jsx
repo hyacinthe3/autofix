@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Link, useLocation } from "react-router-dom";
 import { GiFlatTire } from "react-icons/gi";
 import "../styles/navbar.css"; // Import the custom CSS file
-import AutoFixLogo from "../assets/AutoFixLogo.png"
+import AutoFixLogo from "../assets/AutoFixlogo.png"
 
 const Navbar = () => {
   const location = useLocation();
