@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Link, useLocation } from "react-router-dom";
 import { GiFlatTire } from "react-icons/gi";
-import "../styles/Navbar.css"; // Import the custom CSS file
+import "../styles/navbar.css"; // Import the custom CSS file
 import AutoFixLogo from "../assets/AutoFixLogo.png"
 
 const Navbar = () => {
