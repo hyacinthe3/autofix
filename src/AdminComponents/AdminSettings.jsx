@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaCog } from 'react-icons/fa'; // Settings icon
-import './Adminstyles/AdminSettings.css'; // Importing styles
+import './Adminstyles/Adminsettings.css'; // Importing styles
 import { FaMoon, FaSun } from 'react-icons/fa'; // Icons for Dark and Light mode
 import { HiUserCircle } from "react-icons/hi2";
 const AdminSettings = ({ toggleDarkMode, isDarkMode }) => {
